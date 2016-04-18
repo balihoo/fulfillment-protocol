@@ -1,0 +1,2390 @@
+[
+  {
+    "locationId": "e0d1d18c-7408-4da8-b20b-4dd2633b0c18",
+    "locationKey": "DEMO02",
+    "brandUrl": null,
+    "name": "Boise Affiliate"
+  },
+  {
+    "locationId": "0c768621-a086-4e76-adca-1b83ffab50ef",
+    "locationKey": "Test-0004",
+    "brandUrl": null,
+    "name": "Matt's Balihoo East"
+  },
+  {
+    "locationId": "161fb039-8364-4d53-b8ff-5026b3bd45f6",
+    "locationKey": "Test-Frank Knapp Demo ID",
+    "brandUrl": null,
+    "name": "Frank's Store - Kansas City"
+  },
+  {
+    "locationId": "3eabca98-ad91-4d83-a49e-580ae419fa01",
+    "locationKey": "Test-V102",
+    "brandUrl": null,
+    "name": "BoiseVideo"
+  },
+  {
+    "locationId": "b91e3841-2b47-43b3-a8ec-e59747012fd7",
+    "locationKey": "Test-CJFK1",
+    "brandUrl": null,
+    "name": "NewYork"
+  },
+  {
+    "locationId": "4df8d0d3-a751-438f-8063-f6c1d78b1946",
+    "locationKey": "Test-0005",
+    "brandUrl": null,
+    "name": "Brain's Balihoo East"
+  },
+  {
+    "locationId": "119b23da-65fa-4534-9303-25c4760510fc",
+    "locationKey": "Key Bank 4",
+    "brandUrl": null,
+    "name": "Grand Island"
+  },
+  {
+    "locationId": "85813917-a2f3-4990-bdf8-56a25f95fe01",
+    "locationKey": "Test-1",
+    "brandUrl": null,
+    "name": "Denver"
+  },
+  {
+    "locationId": "0ac8bb90-b012-4eac-b85f-e33cfc5ab26e",
+    "locationKey": "Test-CSEA1",
+    "brandUrl": null,
+    "name": "Safeco"
+  },
+  {
+    "locationId": "89843098-ad1f-4e6c-9eba-78d5a3b79c54",
+    "locationKey": "Test-0006",
+    "brandUrl": null,
+    "name": "Balihoo East"
+  },
+  {
+    "locationId": "4b22d368-6cae-4dd4-ac30-eb21fd6f6f95",
+    "locationKey": "Test-0003",
+    "brandUrl": null,
+    "name": "Carolines's Balihoo East"
+  },
+  {
+    "locationId": "cdb15854-23f1-498f-8025-186357b10efe",
+    "locationKey": "Test-0002",
+    "brandUrl": null,
+    "name": "Harrison Boulevard"
+  },
+  {
+    "locationId": "e16a1989-f49c-426b-ab08-ffa1a9497770",
+    "locationKey": "Test-CBOI1",
+    "brandUrl": null,
+    "name": "Boise 1"
+  },
+  {
+    "locationId": "3cd82f71-c565-4c13-96c7-0b1bd6080577",
+    "locationKey": "Test-0001",
+    "brandUrl": null,
+    "name": "Ladd Family Pharmacy"
+  },
+  {
+    "locationId": "436b7f9b-2002-425a-a4ac-21b0e299af89",
+    "locationKey": "Test-13",
+    "brandUrl": null,
+    "name": "Coop Murray Location"
+  },
+  {
+    "locationId": "cedd90c5-1902-4de2-a6de-7de072d42c98",
+    "locationKey": "Test-GroupD",
+    "brandUrl": null,
+    "name": "GroupD"
+  },
+  {
+    "locationId": "f1e36b0e-231d-4784-b7f9-a461d03996ca",
+    "locationKey": "434123",
+    "brandUrl": null,
+    "name": "dave"
+  },
+  {
+    "locationId": "a74869ac-0f1e-42d0-b69c-335e34c363fb",
+    "locationKey": "CRIDER#2",
+    "brandUrl": null,
+    "name": "IJO - Crider Jewelers, INC # 2/Norwalk"
+  },
+  {
+    "locationId": "01414907-474c-4923-94bf-d516513ce48d",
+    "locationKey": "Test-1722",
+    "brandUrl": null,
+    "name": "Demo Company"
+  },
+  {
+    "locationId": "b13c6ae2-a453-4250-bfa8-06d2e8f272a6",
+    "locationKey": "Test-12",
+    "brandUrl": null,
+    "name": "Coop HQ"
+  },
+  {
+    "locationId": "09c8e3ca-2794-4e2c-ae37-30bc6f1ba91a",
+    "locationKey": "PANDORA/WEST",
+    "brandUrl": null,
+    "name": "Pandora @ Westchester / Westchester Avenue"
+  },
+  {
+    "locationId": "faf60965-f7c8-4313-8c6b-b60d1339f46c",
+    "locationKey": "Test-606",
+    "brandUrl": null,
+    "name": "Balihoo Training Sub Affiliate B"
+  },
+  {
+    "locationId": "9fa0d2e3-735f-4aa5-9571-c6b5dd832259",
+    "locationKey": "eleventy",
+    "brandUrl": null,
+    "name": "eleventy"
+  },
+  {
+    "locationId": "a83b38f8-b02e-4ca6-a902-fee908dd23ff",
+    "locationKey": "Test-DEMO01",
+    "brandUrl": null,
+    "name": "Harrison Blvd. Plumbing"
+  },
+  {
+    "locationId": "20eb130b-28e7-4388-bec1-c116e906060e",
+    "locationKey": "Test-Frank Knapp Demo ID CC",
+    "brandUrl": null,
+    "name": "Frank's Store"
+  },
+  {
+    "locationId": "485cf2c1-a81d-4f39-a3fd-322e33ca8e20",
+    "locationKey": "Test-CLAX1",
+    "brandUrl": null,
+    "name": "LA Kitchen Design"
+  },
+  {
+    "locationId": "da2c693b-e7ca-4cdc-94dc-18060cab3d49",
+    "locationKey": "12276",
+    "brandUrl": null,
+    "name": "Liberty Tax- Anchorage- Midtown"
+  },
+  {
+    "locationId": "4b2804f9-79e1-412f-a46e-3e5ac057cfa6",
+    "locationKey": "Key Bank 1",
+    "brandUrl": null,
+    "name": "City Creek"
+  },
+  {
+    "locationId": "dd8fba06-0bcd-4eab-9fbd-8e2f059c12ca",
+    "locationKey": "Key Bank 2",
+    "brandUrl": null,
+    "name": "Bethany"
+  },
+  {
+    "locationId": "4131fa09-bcd6-42cf-82bd-156e2039c15e",
+    "locationKey": "Key Bank 3",
+    "brandUrl": null,
+    "name": "Meridian Midtown"
+  },
+  {
+    "locationId": "47bd82f5-8932-447c-ab5d-2b7ce07152cd",
+    "locationKey": "BRANHA2",
+    "brandUrl": null,
+    "name": "CBG - Branham's Jewelry/Oscoda"
+  },
+  {
+    "locationId": "bee6f7cb-954e-4327-8942-86378eddda12",
+    "locationKey": "75fd78c1-337d-4c75-aaed-0564d5daec29-U5600",
+    "brandUrl": null,
+    "name": "Ruth Baggett"
+  },
+  {
+    "locationId": "14098c8e-3fb2-4241-809f-e63abfcede65",
+    "locationKey": "Creative Approval Affiliate",
+    "brandUrl": null,
+    "name": "Frank's Creative Approval Example"
+  },
+  {
+    "locationId": "e15b8a5b-6f7a-4996-b79d-ed3ba3c13fd8",
+    "locationKey": "Demo - Email Testing",
+    "brandUrl": null,
+    "name": "Demo - Email Testing (LIVE)"
+  },
+  {
+    "locationId": "8129d2fc-920e-4c1f-bf09-d8dd764c37e5",
+    "locationKey": "Test-Jill's Demo",
+    "brandUrl": null,
+    "name": "DISH Network - Denver"
+  },
+  {
+    "locationId": "86e674da-75e5-4525-a342-984a79eba821",
+    "locationKey": "Pandora-5",
+    "brandUrl": null,
+    "name": "CBG - Branham's Jewelry/West Branch"
+  },
+  {
+    "locationId": "dbfab11e-1f3c-4517-a90c-d9cddc2598fb",
+    "locationKey": "Pandora-1",
+    "brandUrl": null,
+    "name": "Michaels Jewelers / (Corporate Office)"
+  },
+  {
+    "locationId": "97d55198-f8a7-42ef-ae5a-c1c5647379fc",
+    "locationKey": "Pandora-2",
+    "brandUrl": null,
+    "name": "IJO - Bella Cosa Jewelers"
+  },
+  {
+    "locationId": "a187e347-ac1a-4c25-8678-5014ad16ab9a",
+    "locationKey": "Thermo King - 4 Locations",
+    "brandUrl": null,
+    "name": "Transport Refrigeration Inc - Green Bay"
+  },
+  {
+    "locationId": "e8350912-9a4c-435a-b6f5-475937007c20",
+    "locationKey": "Test-505",
+    "brandUrl": null,
+    "name": "Balihoo Training Sub Affiliate A"
+  },
+  {
+    "locationId": "a26eae32-a397-4332-972d-51f707cad217",
+    "locationKey": "CRIDER JEWELERS",
+    "brandUrl": null,
+    "name": "IJO - CRIDER JEWELERS/ SANDUSKY"
+  },
+  {
+    "locationId": "994bc2d9-64f9-4da1-b4b6-58b581a3a56e",
+    "locationKey": "PANDORA/MENLO",
+    "brandUrl": null,
+    "name": "Pandora @ Menlo Park Mall"
+  },
+  {
+    "locationId": "9de49637-a89b-4098-a238-64a738878d5e",
+    "locationKey": "Test-11111",
+    "brandUrl": null,
+    "name": "Milgard Testing"
+  },
+  {
+    "locationId": "658c83f3-bc4a-4195-b122-909b1ba6ef18",
+    "locationKey": "Pandora-6",
+    "brandUrl": null,
+    "name": "IJO - Crider Jewelers, INC # 2/Norwalk"
+  },
+  {
+    "locationId": "3400bf6e-2531-4593-b27e-aa4c4e546ba7",
+    "locationKey": "snap1",
+    "brandUrl": null,
+    "name": "test-snap"
+  },
+  {
+    "locationId": "f8a8f3dc-b03e-4be2-9655-5e36b09c67ce",
+    "locationKey": "3SISTER",
+    "brandUrl": null,
+    "name": "3 Sisters"
+  },
+  {
+    "locationId": "4d299f80-4bd5-486f-95eb-c0d560dfd629",
+    "locationKey": "MICHAELS/SIS",
+    "brandUrl": null,
+    "name": "Michaels Jewelers / (Shop in Shop Stores)"
+  },
+  {
+    "locationId": "793d7777-8e27-45a4-8603-e258ffd217b1",
+    "locationKey": "Test-TPN demo",
+    "brandUrl": null,
+    "name": "TPN-demo"
+  },
+  {
+    "locationId": "e1a1ff7a-df9b-4731-852d-df47050ab1d1",
+    "locationKey": "BRANHAM",
+    "brandUrl": null,
+    "name": "CBG - Branham's Jewelry/West Branch"
+  },
+  {
+    "locationId": "404894ff-30e5-4ef0-a675-eec95aba651f",
+    "locationKey": "BLUESTONE",
+    "brandUrl": null,
+    "name": "Bluestone"
+  },
+  {
+    "locationId": "eb50c938-e5ab-4f51-9ca9-c4fc2a4eda46",
+    "locationKey": "Pandora-4",
+    "brandUrl": null,
+    "name": "Bluestone"
+  },
+  {
+    "locationId": "ef5e11ca-4c04-4e22-a8b4-1c8db5870c43",
+    "locationKey": "Pandora-7",
+    "brandUrl": null,
+    "name": "Dasani Jewelers"
+  },
+  {
+    "locationId": "4ade781e-b338-4eac-afca-76e7bb858503",
+    "locationKey": "Pandora-3",
+    "brandUrl": null,
+    "name": "3 Sisters"
+  },
+  {
+    "locationId": "8942c9bc-2f81-4c03-b0f9-783a0f6cda7d",
+    "locationKey": "Thermo King - 1 Location",
+    "brandUrl": null,
+    "name": "Thermo King of Delphos"
+  },
+  {
+    "locationId": "4f2da449-f76c-4a6b-8f3c-54bc62a3536c",
+    "locationKey": "BELLA COSA",
+    "brandUrl": null,
+    "name": "IJO - Bella Cosa Jewelers"
+  },
+  {
+    "locationId": "5936b559-52c9-4db0-91f7-c0e2ab47f470",
+    "locationKey": "Test-CZ0012",
+    "brandUrl": null,
+    "name": "Mike's Cabinets"
+  },
+  {
+    "locationId": "52563c02-e0a7-4bb2-bb5d-17dbfdecacb3",
+    "locationKey": "1401989280-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/maybalihooofpanamacitybeach1-32408/panamacitybeach-fl",
+    "name": "May Balihoo of Panama City Beach"
+  },
+  {
+    "locationId": "7b70f259-2a28-4be4-a154-ac071847ec7b",
+    "locationKey": "786599035-2",
+    "brandUrl": null,
+    "name": "Jordan Balihoo of Draper"
+  },
+  {
+    "locationId": "28fb3ef5-1dd9-49b4-ae0b-2f64cee97009",
+    "locationKey": "1304853696-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/baileybalihooofhonululu2-96826/honululu-hi",
+    "name": "Bailey Balihoo of Honululu"
+  },
+  {
+    "locationId": "64e82f7d-15e3-48aa-84f9-3c5befe9ba3a",
+    "locationKey": "PANDORA/WAYNE",
+    "brandUrl": null,
+    "name": "Pandora @ Willowbrook Mall"
+  },
+  {
+    "locationId": "6d9290e9-b27f-490e-9cd1-8d2c782676ae",
+    "locationKey": "Key Bank 5",
+    "brandUrl": null,
+    "name": "Hollywood"
+  },
+  {
+    "locationId": "11d799a7-ea8a-46e4-8cd3-3cdd896386b9",
+    "locationKey": "Test-Ace1",
+    "brandUrl": null,
+    "name": "Ace- Canada Test"
+  },
+  {
+    "locationId": "6ce1d05c-91d7-47db-8ef5-ab770e6c795e",
+    "locationKey": "Test-fknapp1",
+    "brandUrl": null,
+    "name": "Kansas City"
+  },
+  {
+    "locationId": "bbea64b0-4892-4ad8-bcaa-cf5e60ee5f7b",
+    "locationKey": "PANDORA/PARAMUS",
+    "brandUrl": null,
+    "name": "Pandora @ Paramus Park"
+  },
+  {
+    "locationId": "dc4d8ba0-62d1-40a0-8772-e0a267876717",
+    "locationKey": "Test-C0963",
+    "brandUrl": null,
+    "name": "Boonville- Central States Thermoking"
+  },
+  {
+    "locationId": "9c794a12-050d-4e7d-bdf6-52485802f97d",
+    "locationKey": "Test-Ace Hardware",
+    "brandUrl": null,
+    "name": "Ave Hardware"
+  },
+  {
+    "locationId": "e67d4769-bac4-4ba3-b1e7-f884f6689b93",
+    "locationKey": "Test-bc",
+    "brandUrl": null,
+    "name": "Businesss Cards"
+  },
+  {
+    "locationId": "37ea2447-b1cb-494a-adfb-e26626a3e7a5",
+    "locationKey": "Test-C0966",
+    "brandUrl": null,
+    "name": "KANSAS CITY- CENTRAL STATES THERMOKING"
+  },
+  {
+    "locationId": "5f5b1a3b-d16d-41f3-8cb5-5dedb501cc63",
+    "locationKey": "PANDORA/WESTFAR",
+    "brandUrl": null,
+    "name": "Pandora Westfarms DBA Michaels Jewelers"
+  },
+  {
+    "locationId": "6422400e-b240-4060-96cb-0e1f1fce5299",
+    "locationKey": "Test-Oriola",
+    "brandUrl": null,
+    "name": "Test-Oriola"
+  },
+  {
+    "locationId": "45fdcc03-364b-41e6-a122-41c9b7a2e232",
+    "locationKey": "Test-GroupC",
+    "brandUrl": null,
+    "name": "GroupC"
+  },
+  {
+    "locationId": "35e755a1-ffb0-45cc-9511-86add9414a39",
+    "locationKey": "2595471123-2",
+    "brandUrl": null,
+    "name": "Simmmons Balihoo of Abbotsford"
+  },
+  {
+    "locationId": "24acc10c-cabb-41e0-b364-37629f7e3c33",
+    "locationKey": "PANDORA/DANBURY",
+    "brandUrl": null,
+    "name": "Pandora @ Danbury Fair Mall"
+  },
+  {
+    "locationId": "d44643d1-548a-4955-9432-53d766db8d3f",
+    "locationKey": "114",
+    "brandUrl": null,
+    "name": "Balihoo"
+  },
+  {
+    "locationId": "5a52bb42-229e-4086-bf90-60b8b1b7ba6d",
+    "locationKey": "3477033607-0",
+    "brandUrl": null,
+    "name": "Morgan Balihoo of St George"
+  },
+  {
+    "locationId": "48ae02de-c65e-4f42-b43d-2000dabe99c1",
+    "locationKey": "MICHAELS/CONCEP",
+    "brandUrl": null,
+    "name": "Pandora Michaels Jewelers"
+  },
+  {
+    "locationId": "cdeae8fd-26dd-4471-950e-8a0afe1753d6",
+    "locationKey": "BMW-5",
+    "brandUrl": null,
+    "name": "BMW Pacific Northwest"
+  },
+  {
+    "locationId": "3313382b-a039-428b-84ed-77aeddf1a0e8",
+    "locationKey": "dheneise@balihoo.com",
+    "brandUrl": null,
+    "name": "dheneise@balihoo.com"
+  },
+  {
+    "locationId": "20b9f3b1-196e-4163-a8b5-9b64e2099f6c",
+    "locationKey": "PANDORA/STAMFOR",
+    "brandUrl": null,
+    "name": "Pandora @ Stamford Town Center"
+  },
+  {
+    "locationId": "9c437538-b85c-4383-bc53-0b47e2667407",
+    "locationKey": "autotrader",
+    "brandUrl": null,
+    "name": "AutoTrader Test"
+  },
+  {
+    "locationId": "7e707162-71f5-448e-a725-492ec12ba4b1",
+    "locationKey": "Almond CB 1",
+    "brandUrl": null,
+    "name": "Matt Long"
+  },
+  {
+    "locationId": "6efd06dd-a08f-4d1f-90e2-f70a2e7a906e",
+    "locationKey": "Test-12345",
+    "brandUrl": null,
+    "name": "9th and Main"
+  },
+  {
+    "locationId": "0c06341e-9003-48bf-8a94-d49f7581e4a4",
+    "locationKey": "2489865679-2",
+    "brandUrl": null,
+    "name": "Pearson Balihoo of Polson"
+  },
+  {
+    "locationId": "c0fca2b1-8898-462b-a3f3-bd36f84aaa10",
+    "locationKey": "BRANHA3",
+    "brandUrl": null,
+    "name": "CBG - Branham's Jewelry/East T"
+  },
+  {
+    "locationId": "6ddf0f0f-fecb-4616-9d1d-b2256866c812",
+    "locationKey": "Test-pfizer001",
+    "brandUrl": null,
+    "name": "Pfizer - Kansas City"
+  },
+  {
+    "locationId": "204425d5-f4e0-419a-9c0d-691c2b64bce7",
+    "locationKey": "1046584644-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/dixonbalihooofpottstown1-19465/pottstown-pa",
+    "name": "Dixon Balihoo of Pottstown"
+  },
+  {
+    "locationId": "b4c901b5-b88b-46b5-9d94-7111fe537708",
+    "locationKey": "Thermo King - 2 Locations",
+    "brandUrl": null,
+    "name": "Illinois Auto Central, Inc."
+  },
+  {
+    "locationId": "507ae7b4-ef45-45db-ba30-a0de3d99ac82",
+    "locationKey": "Test-OBodnar",
+    "brandUrl": null,
+    "name": "Hollywood Location"
+  },
+  {
+    "locationId": "8cd1b933-7da2-4eed-83f6-9a73733442e1",
+    "locationKey": "Beta - 2",
+    "brandUrl": null,
+    "name": "Balihoo - Chicago"
+  },
+  {
+    "locationId": "025cb0e6-36c3-49fc-bd5d-aa7a1ded3760",
+    "locationKey": "Thermo King - 11 Locations",
+    "brandUrl": null,
+    "name": "CSTK Kansas City"
+  },
+  {
+    "locationId": "864ce5f9-0ff7-4036-8255-ec32988c88d9",
+    "locationKey": "725836812-1",
+    "brandUrl": null,
+    "name": "Diaz Balihoo of Miami"
+  },
+  {
+    "locationId": "1418a752-cef0-43af-a356-79743268a770",
+    "locationKey": "260504343-2",
+    "brandUrl": null,
+    "name": "Walker Balihoo of Clovis"
+  },
+  {
+    "locationId": "5a2b4ba4-36b5-43f2-9152-32b13712cbb1",
+    "locationKey": "2815977918-1",
+    "brandUrl": null,
+    "name": "Watts Balihoo of Columbus"
+  },
+  {
+    "locationId": "246c75ee-3252-41a3-8151-c01119c065da",
+    "locationKey": "Test-C0965",
+    "brandUrl": null,
+    "name": "Dodge City- Central States Thermoking"
+  },
+  {
+    "locationId": "b3ee9e13-ccca-4e25-ba76-0c1875b0e71c",
+    "locationKey": "1228531614-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/hoffmanbalihooofbeaver1-84713/beaver-ut",
+    "name": "Hoffman Balihoo of Beaver"
+  },
+  {
+    "locationId": "58e6579e-d8dc-474a-87b0-917c91c1a40f",
+    "locationKey": "2237220991-2",
+    "brandUrl": null,
+    "name": "Mitchell Balihoo of St-Nicolas"
+  },
+  {
+    "locationId": "fb079eec-d65c-4b5a-9cf7-35dbd9d7abd6",
+    "locationKey": "2218513958-3",
+    "brandUrl": null,
+    "name": "Coleman Balihoo of El Paso"
+  },
+  {
+    "locationId": "66789909-4c7c-4f7c-832e-4a93b21aca69",
+    "locationKey": "CRIDER QUALITY",
+    "brandUrl": null,
+    "name": "IJO - CRIDER QUALITY JEWELERS/Willard"
+  },
+  {
+    "locationId": "a5fed2d0-83dd-4d3c-943b-ba069c7a395e",
+    "locationKey": "MICHAELS JEW/AV",
+    "brandUrl": null,
+    "name": "Michaels Jewelers / (Corporate Office)"
+  },
+  {
+    "locationId": "acba9a83-d536-468a-81d7-c8376ba1ea74",
+    "locationKey": "Test-Century 21",
+    "brandUrl": null,
+    "name": "Century 21"
+  },
+  {
+    "locationId": "b45751fd-8e5a-4ea9-9e65-0c00838ea3d2",
+    "locationKey": "BMW-6",
+    "brandUrl": null,
+    "name": "BMW Gulf Coast"
+  },
+  {
+    "locationId": "c368be86-f197-476e-b657-3f27f53de304",
+    "locationKey": "356995956-1",
+    "brandUrl": null,
+    "name": "Carlson Balihoo of Glen Allen"
+  },
+  {
+    "locationId": "3ac6ece2-1ff1-44d9-91bc-50bf3d3c6b76",
+    "locationKey": "3705193617-2",
+    "brandUrl": null,
+    "name": "Soto Balihoo of Leander"
+  },
+  {
+    "locationId": "242e982a-7930-4c91-b267-ca225e2751d8",
+    "locationKey": "2115693901-3",
+    "brandUrl": null,
+    "name": "Stevens Balihoo of Allen"
+  },
+  {
+    "locationId": "d71ad17e-9eb6-413e-8f74-acf5e5435f54",
+    "locationKey": "BMW-4",
+    "brandUrl": null,
+    "name": "BMW West"
+  },
+  {
+    "locationId": "f96dbc86-3f6d-4f86-a615-46db46559542",
+    "locationKey": "SteveS-test",
+    "brandUrl": null,
+    "name": "SteveS-test"
+  },
+  {
+    "locationId": "23dc34bc-ac25-4c50-bd56-48ce1fa1b655",
+    "locationKey": "Test-hanover1",
+    "brandUrl": null,
+    "name": "Hanover Insurance Group"
+  },
+  {
+    "locationId": "09f73749-b78d-429c-a421-25acf19a8637",
+    "locationKey": "BMW-3",
+    "brandUrl": null,
+    "name": "BMW North"
+  },
+  {
+    "locationId": "c313be41-35b9-4a5a-afc7-2720471da6ea",
+    "locationKey": "Test-404",
+    "brandUrl": null,
+    "name": "Balihoo's Training Account"
+  },
+  {
+    "locationId": "c757912d-6c00-4619-9e3f-ac6142bab0ed",
+    "locationKey": "BMW-1",
+    "brandUrl": null,
+    "name": "BMW South"
+  },
+  {
+    "locationId": "c9c36e28-bdfb-4689-afbf-dae441ecedf8",
+    "locationKey": "BMW-9",
+    "brandUrl": null,
+    "name": "BMW SouthWest"
+  },
+  {
+    "locationId": "83d0504d-e672-4e40-96dd-9963249553cf",
+    "locationKey": "Test-DecemberTest",
+    "brandUrl": null,
+    "name": "DecemberTest"
+  },
+  {
+    "locationId": "86714341-2142-4b4a-9115-1cda172cdd71",
+    "locationKey": "Test-GroupA",
+    "brandUrl": null,
+    "name": "GroupA"
+  },
+  {
+    "locationId": "2c9dffc2-c728-4d04-96cc-e0fd29a36a45",
+    "locationKey": "BMW-10",
+    "brandUrl": null,
+    "name": "BMW Great Lakes"
+  },
+  {
+    "locationId": "82d3eb01-0a53-4407-be72-e825227279c3",
+    "locationKey": "Test-curves",
+    "brandUrl": null,
+    "name": "Curves Fitness"
+  },
+  {
+    "locationId": "ac2f6a2e-d3c8-45e6-bcaf-23ebea7e1f69",
+    "locationKey": "Test-00015",
+    "brandUrl": null,
+    "name": "Watkins Testing"
+  },
+  {
+    "locationId": "c9938d26-41f3-4547-b2bb-4ffe4b3439b2",
+    "locationKey": "Test-C0962",
+    "brandUrl": null,
+    "name": "Central States Thermoking- Allentown"
+  },
+  {
+    "locationId": "03dea629-2da7-4928-a15a-09a7faa79bc3",
+    "locationKey": "Test-Zumba",
+    "brandUrl": null,
+    "name": "Zumba Fitness, LLC"
+  },
+  {
+    "locationId": "3ca371c9-23e1-44a9-8d07-86567c1d9409",
+    "locationKey": "Test-C0960",
+    "brandUrl": null,
+    "name": "Garden City Thermoking"
+  },
+  {
+    "locationId": "d55fbec6-1eb0-43fe-825a-f26e7dc500da",
+    "locationKey": "Test-Demo - Auto Trader",
+    "brandUrl": null,
+    "name": "TEST - Auto Trader"
+  },
+  {
+    "locationId": "6367b8e1-3510-4eb6-aa84-0a9ac5166cd5",
+    "locationKey": "Test-SBenham",
+    "brandUrl": null,
+    "name": "Balihoo - Chicago Office"
+  },
+  {
+    "locationId": "245eb6a6-1522-44c0-aaad-5cb18aa15293",
+    "locationKey": "Test-democc17",
+    "brandUrl": null,
+    "name": "test-democc17"
+  },
+  {
+    "locationId": "edb73b79-dae0-457f-b65e-2504e9635cac",
+    "locationKey": "1210548761-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/colemanbalihoooftallahassee1-32301/tallahassee-fl",
+    "name": "Coleman Balihoo of Tallahassee"
+  },
+  {
+    "locationId": "01f0bff3-30bb-46a1-ac2c-9ab2b283fc00",
+    "locationKey": "1202170268-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/ruizbalihooofspringfield1-62711/springfield-il",
+    "name": "Ruiz Balihoo of Springfield"
+  },
+  {
+    "locationId": "1b817c60-17e5-416b-8c34-0cf3ca61b6d5",
+    "locationKey": "1592537132-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/parkerbalihooofelkgrovevillage1-60007/elkgrovevillage-il",
+    "name": "Parker Balihoo of Elk Grove Village"
+  },
+  {
+    "locationId": "a8b14ff4-d36e-4191-a418-115b2b989220",
+    "locationKey": "BMW-2",
+    "brandUrl": null,
+    "name": "BMW East"
+  },
+  {
+    "locationId": "e1dec492-c1de-4d6c-b933-e36cef63f7e0",
+    "locationKey": "Test-JLinsenberg",
+    "brandUrl": null,
+    "name": "Boston"
+  },
+  {
+    "locationId": "4e331df1-a210-4764-a91f-ac18cabc0c64",
+    "locationKey": "1138276249-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/arnoldbalihooofmetairie1-70003/metairie-la",
+    "name": "Arnold Balihoo of Metairie"
+  },
+  {
+    "locationId": "d6a3185a-49b7-4285-bcad-23d0dc6f218a",
+    "locationKey": "1783808886-6",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/castrobalihooofsouthlake6-76092/southlake-tx",
+    "name": "Castro Balihoo of Southlake"
+  },
+  {
+    "locationId": "dd8851e9-d14c-41a7-845d-437b138cb786",
+    "locationKey": "Test-Director of Sales Demo",
+    "brandUrl": null,
+    "name": "Director of Sales Demo"
+  },
+  {
+    "locationId": "c0ff1657-f24e-4e0f-8ce7-d1717a838a63",
+    "locationKey": "Test-1234",
+    "brandUrl": null,
+    "name": "Test1"
+  },
+  {
+    "locationId": "19872248-bc24-4d95-bbe9-296f9ec6b737",
+    "locationKey": "Test-SCCorp1",
+    "brandUrl": null,
+    "name": "Sam's Club Corporate"
+  },
+  {
+    "locationId": "5ff587bb-6835-4f5f-b58f-04f308aff295",
+    "locationKey": "3069389001-2",
+    "brandUrl": null,
+    "name": "Cooper Balihoo of Hagerstown"
+  },
+  {
+    "locationId": "30d25e59-11e8-47fc-9cec-a8e55a4fb813",
+    "locationKey": "Test-10001",
+    "brandUrl": null,
+    "name": "Macy's 34th Street"
+  },
+  {
+    "locationId": "48d1605d-e095-4b59-a20d-c760d3e13414",
+    "locationKey": "1183562941-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/marshallbalihooofduluth3-30096/duluth-ga",
+    "name": "Marshall Balihoo of Duluth"
+  },
+  {
+    "locationId": "b8190780-8a44-45af-9aa8-8d0bd1b7c12b",
+    "locationKey": "1287652943-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/graybalihooofwoodside3-94062/woodside-ca",
+    "name": "Gray Balihoo of Woodside"
+  },
+  {
+    "locationId": "a05088bb-7ce8-448b-abba-21f4971bf1cf",
+    "locationKey": "1157758194-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/olsonbalihoooflafayette1-47904/lafayette-in",
+    "name": "Olson Balihoo of Lafayette"
+  },
+  {
+    "locationId": "17a15ecf-d53b-4b60-be9b-a383256cc363",
+    "locationKey": "Test-epsilon1",
+    "brandUrl": null,
+    "name": "Epsilon Test Location"
+  },
+  {
+    "locationId": "e2aa13e0-ff28-4d2f-8613-01986e63019f",
+    "locationKey": "111",
+    "brandUrl": null,
+    "name": "Default Location"
+  },
+  {
+    "locationId": "f59d7c21-d6a9-4722-a1bb-f0c4a97c2b76",
+    "locationKey": "799890779-2",
+    "brandUrl": null,
+    "name": "Wallace Balihoo of Panama City"
+  },
+  {
+    "locationId": "bc2809d3-10d1-4e94-a0d2-ecd060efadb8",
+    "locationKey": "960982396-1",
+    "brandUrl": null,
+    "name": "Clark Balihoo of Aiken"
+  },
+  {
+    "locationId": "de27ce93-d791-435e-9d20-4df012854274",
+    "locationKey": "3263059984-1",
+    "brandUrl": null,
+    "name": "Wade Balihoo of Simi Valley"
+  },
+  {
+    "locationId": "b8450c35-ecc6-4a6c-9e7e-7e8c6081376b",
+    "locationKey": "Test-00123",
+    "brandUrl": null,
+    "name": "Health Mart - Downtown San Francisco"
+  },
+  {
+    "locationId": "350aeb9f-d47b-4c40-afbe-1550534e1149",
+    "locationKey": "3108020367-1",
+    "brandUrl": null,
+    "name": "Bishop Balihoo of Narberth"
+  },
+  {
+    "locationId": "822156a1-9e6e-4e73-89a8-8f8cc3daed32",
+    "locationKey": "3559084764-1",
+    "brandUrl": null,
+    "name": "Davidson Balihoo of Mechanicsburg"
+  },
+  {
+    "locationId": "7405c18d-3b38-4ec3-9d31-9176939b824e",
+    "locationKey": "3654430128-1",
+    "brandUrl": null,
+    "name": "Daniels Balihoo of Tulsa"
+  },
+  {
+    "locationId": "bf38dba1-2a2d-4673-9563-69db0c0f969f",
+    "locationKey": "Test-Bluewater",
+    "brandUrl": null,
+    "name": "Corporate"
+  },
+  {
+    "locationId": "2c5678f7-c2f6-4d70-b5ce-1e2eb97dfd0c",
+    "locationKey": "1048252728-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/hernandezbalihooofconestogo1-n0b1n0/conestogo-on",
+    "name": "Hernandez Balihoo of Conestogo"
+  },
+  {
+    "locationId": "df0bdbf7-f470-443f-bcd0-603b5d8e2712",
+    "locationKey": "2527971418-1",
+    "brandUrl": null,
+    "name": "Mitchelle Balihoo of Orange Park"
+  },
+  {
+    "locationId": "4dd0316a-bb37-4616-9161-bba297414389",
+    "locationKey": "1726689027-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/castrobalihoooffrisco2-80443/frisco-co",
+    "name": "Castro Balihoo of Frisco"
+  },
+  {
+    "locationId": "757f2ba1-8fff-42ac-ac3b-850bae7bacc6",
+    "locationKey": "Test-Stephens1",
+    "brandUrl": null,
+    "name": "Stephens Location"
+  },
+  {
+    "locationId": "7a8855e6-885f-413d-bf95-95bb5a97a0b0",
+    "locationKey": "113",
+    "brandUrl": null,
+    "name": "Balihoo"
+  },
+  {
+    "locationId": "dfeba012-4bd1-40a5-92d3-8caeecd932ec",
+    "locationKey": "3201071499-1",
+    "brandUrl": null,
+    "name": "Nguyen Balihoo of Tampa"
+  },
+  {
+    "locationId": "78582174-e802-4a80-90dd-07c4c504bde2",
+    "locationKey": "1210548761-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/raybalihooofkeylargo2-33037/keylargo-fl",
+    "name": "Ray Balihoo of Key Largo"
+  },
+  {
+    "locationId": "951bd144-dbc6-4560-96b3-5222c7404ce3",
+    "locationKey": "Test-Thermo King",
+    "brandUrl": null,
+    "name": "Test-Thermo King"
+  },
+  {
+    "locationId": "7268d170-2f46-4e23-939f-d6be0033a1c0",
+    "locationKey": "Test-PGombert",
+    "brandUrl": null,
+    "name": "Downtown"
+  },
+  {
+    "locationId": "9d1fb517-2069-458e-9347-a72e5a3d061b",
+    "locationKey": "1487564237-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/sandersbalihooofmelissa1-75454/melissa-tx",
+    "name": "Sanders Balihoo of Melissa"
+  },
+  {
+    "locationId": "1b492dac-be05-4569-ab4b-685df2f04296",
+    "locationKey": "2348053765-2",
+    "brandUrl": null,
+    "name": "Hoffman Balihoo of Whistler"
+  },
+  {
+    "locationId": "844e9e94-e859-4f25-8099-4fa2a4209506",
+    "locationKey": "Test-999",
+    "brandUrl": null,
+    "name": "Balihoo Employee"
+  },
+  {
+    "locationId": "e5bc0f48-c779-468e-af5c-e57b0231aa70",
+    "locationKey": "583360317-3",
+    "brandUrl": null,
+    "name": "Weaver Balihoo of Spotsylvania"
+  },
+  {
+    "locationId": "99b15057-ad3e-48d8-ab3b-55faa11f4201",
+    "locationKey": "1062667289-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/woodbalihooofindianrocksbeach1-33785/indianrocksbeach-fl",
+    "name": "Wood Balihoo of Indian Rocks Beach"
+  },
+  {
+    "locationId": "1294a259-b216-4b69-a8d6-fa56c3c54ca4",
+    "locationKey": "4207959950-2",
+    "brandUrl": null,
+    "name": "Hamilton Balihoo of Jersey City"
+  },
+  {
+    "locationId": "7d0be044-f4f4-4ab8-a144-ccd45183de93",
+    "locationKey": "Test-Marquette",
+    "brandUrl": null,
+    "name": "Corporate Headquarters"
+  },
+  {
+    "locationId": "36178e75-160d-436c-879e-ef3e10564973",
+    "locationKey": "Test-Marquette2",
+    "brandUrl": null,
+    "name": "Marquette Atlanta"
+  },
+  {
+    "locationId": "b503cb05-bc2e-4b6c-9520-a8dfdd2878df",
+    "locationKey": "Test-annaalton",
+    "brandUrl": null,
+    "name": "Anna's Test Location"
+  },
+  {
+    "locationId": "86cee049-d7c1-4527-aaa7-429b335453d2",
+    "locationKey": "BMW-7",
+    "brandUrl": null,
+    "name": "BMW New England"
+  },
+  {
+    "locationId": "9ef7c4b6-bc7d-459c-8397-9ff2dd0fec24",
+    "locationKey": "Test-fknapp",
+    "brandUrl": null,
+    "name": "Blue Springs"
+  },
+  {
+    "locationId": "d1b5fad6-b910-4d1f-967a-f5c0c381e772",
+    "locationKey": "3516905204-2",
+    "brandUrl": null,
+    "name": "Bailey Balihoo of Sandy"
+  },
+  {
+    "locationId": "f18fd22e-8cf3-43d8-a839-27aa8ea070d5",
+    "locationKey": "262891567-1",
+    "brandUrl": null,
+    "name": "Jensen Balihoo of Prospect Heights"
+  },
+  {
+    "locationId": "7b2a6fea-75fa-4ce7-8a85-9025e011cbe0",
+    "locationKey": "Test-Susan1",
+    "brandUrl": null,
+    "name": "Demo Location"
+  },
+  {
+    "locationId": "8f4ec0e4-cf22-4922-bb12-0b3d73d83173",
+    "locationKey": "Beta-3",
+    "brandUrl": null,
+    "name": "Balihoo - Boston"
+  },
+  {
+    "locationId": "29691671-2490-4198-973e-f9e6c10cc9b0",
+    "locationKey": "482342601-2",
+    "brandUrl": null,
+    "name": "Walters Balihoo of Woodbridge"
+  },
+  {
+    "locationId": "3c960eb1-b692-4cda-ae37-014fc5531d76",
+    "locationKey": "1866780075-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/kingbalihooofwaukesha1-53186/waukesha-wi",
+    "name": "King Balihoo of Waukesha"
+  },
+  {
+    "locationId": "f6d26948-46a1-448f-885a-87ab06b45de5",
+    "locationKey": "Test-112",
+    "brandUrl": null,
+    "name": "Test Location 2"
+  },
+  {
+    "locationId": "de3e861e-f657-41b4-b012-8d4e49ca8e32",
+    "locationKey": "Demo-Exxon",
+    "brandUrl": null,
+    "name": "Exxon Store"
+  },
+  {
+    "locationId": "f707edd1-779f-4955-bcbb-7ee7467aa231",
+    "locationKey": "3639552286-1",
+    "brandUrl": null,
+    "name": "Thompson Balihoo of Chagrin Falls"
+  },
+  {
+    "locationId": "ad46729d-40e6-4bef-a4f9-b1e8fcf62f90",
+    "locationKey": "1935978932-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/brownbalihooofbelair2-90077/belair-ca",
+    "name": "Brown Balihoo of Bel Air"
+  },
+  {
+    "locationId": "035a1f4d-9ff2-4e5e-83e6-a7642006e1bf",
+    "locationKey": "Demo-Shell",
+    "brandUrl": null,
+    "name": "Shell Store"
+  },
+  {
+    "locationId": "534c12b1-cc40-4e3b-b778-f6ed8d0e851c",
+    "locationKey": "1071989346-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/sanchezbalihooofchicago2-60654/chicago-il",
+    "name": "Sanchez Balihoo of Chicago"
+  },
+  {
+    "locationId": "b2a4f87b-04ae-440f-86a9-c52b33307ed9",
+    "locationKey": "2332153276-1",
+    "brandUrl": null,
+    "name": "Anderson Balihoo of Bozeman"
+  },
+  {
+    "locationId": "abf4f7fe-4fa5-4d06-998a-ac92e077075a",
+    "locationKey": "755103013-3",
+    "brandUrl": null,
+    "name": "Sanders Balihoo of Charlotte"
+  },
+  {
+    "locationId": "2e978948-09f1-41d4-ac96-aae2f6381e80",
+    "locationKey": "Demo-Citgo",
+    "brandUrl": null,
+    "name": "Citgo Store"
+  },
+  {
+    "locationId": "e3601c2b-f636-49a4-975a-a19b925777da",
+    "locationKey": "Test-GroupB",
+    "brandUrl": null,
+    "name": "GroupB"
+  },
+  {
+    "locationId": "73aa5b8f-2788-4872-81a5-74110a8eb62f",
+    "locationKey": "1183562941-4",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/douglasbalihooofatlanta4-30319/atlanta-ga",
+    "name": "Douglas Balihoo of Atlanta"
+  },
+  {
+    "locationId": "a6105658-0610-4e47-9515-faaca553d24d",
+    "locationKey": "584845208-2",
+    "brandUrl": null,
+    "name": "King Balihoo of Los Angeles"
+  },
+  {
+    "locationId": "b338c123-65ad-4e3d-adb0-28c73b8f4ca2",
+    "locationKey": "Test-1234A",
+    "brandUrl": null,
+    "name": "Test1"
+  },
+  {
+    "locationId": "b217fd8f-5d4a-42cc-8a2b-240e093b7375",
+    "locationKey": "1446936107-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/castrobalihooofwestvancouver1-v7v1j6/westvancouver-bc",
+    "name": "Castro Balihoo of West Vancouver"
+  },
+  {
+    "locationId": "c8be0d3e-38cb-454c-aac2-9b330cdbe578",
+    "locationKey": "3749899527-1",
+    "brandUrl": null,
+    "name": "Adams Balihoo of Belmont"
+  },
+  {
+    "locationId": "f9b603e1-1a52-417a-abf2-4f2f2347a84c",
+    "locationKey": "224461941-0",
+    "brandUrl": null,
+    "name": "Cook Balihoo of Dublin"
+  },
+  {
+    "locationId": "e6d08d74-c3d3-4eb2-a110-912e020642e9",
+    "locationKey": "2762332661-2",
+    "brandUrl": null,
+    "name": "Byrd Balihoo of Vaughan"
+  },
+  {
+    "locationId": "111438e7-2da2-4e36-b4a8-992ee3002edc",
+    "locationKey": "Test-BancVue",
+    "brandUrl": null,
+    "name": "BancVue Test"
+  },
+  {
+    "locationId": "40c6038b-1f73-412b-ad05-a7cedce7274f",
+    "locationKey": "2929666777-12",
+    "brandUrl": null,
+    "name": "Sullivan Balihoo of New York"
+  },
+  {
+    "locationId": "bb7f9d91-775e-40a1-a23f-770e1d4a7fe8",
+    "locationKey": "2830905540-4",
+    "brandUrl": null,
+    "name": "Nichols Balihoo of Naples"
+  },
+  {
+    "locationId": "b7fd355e-b345-4628-a110-88071cf57fec",
+    "locationKey": "660611193-2",
+    "brandUrl": null,
+    "name": "Gomez Balihoo of Sarasota"
+  },
+  {
+    "locationId": "562f8cc2-3eca-4237-ae92-9d8463a75ad9",
+    "locationKey": "1843803952-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/hortonbalihooofcalgary1-t2c1r7/calgary-ab",
+    "name": "Horton Balihoo of Calgary"
+  },
+  {
+    "locationId": "6689496e-6159-4be7-a899-a85b2342c69c",
+    "locationKey": "Test-Hanover",
+    "brandUrl": null,
+    "name": "Hanover Insurance"
+  },
+  {
+    "locationId": "3e0b9f0e-3ca6-48ca-bfe9-1676f825ab02",
+    "locationKey": "3467021572-2",
+    "brandUrl": null,
+    "name": "Torres Balihoo of Montgomery"
+  },
+  {
+    "locationId": "b89ad881-ff0c-4352-8389-7fa6c84957ac",
+    "locationKey": "4045428744-1",
+    "brandUrl": null,
+    "name": "Thompson Balihoo of Siloam Springs"
+  },
+  {
+    "locationId": "18718121-fca9-4f1f-9e2b-272584f728d1",
+    "locationKey": "73629986-1",
+    "brandUrl": null,
+    "name": "Davis Balihoo of Lethbridge"
+  },
+  {
+    "locationId": "993e1a4e-ad67-4d49-9ed9-5aa0662286b5",
+    "locationKey": "Test-CZenner",
+    "brandUrl": null,
+    "name": "8th Street Location"
+  },
+  {
+    "locationId": "4f4fb8d4-3e8a-40e4-a2ea-f66c8124d43d",
+    "locationKey": "1062667289-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/garzabalihooofislamorada3-33036/islamorada-fl",
+    "name": "Garza Balihoo of Islamorada"
+  },
+  {
+    "locationId": "02b89b28-b275-4151-bdcc-35ea1337b193",
+    "locationKey": "723385637-2",
+    "brandUrl": null,
+    "name": "Hill Balihoo of Louisville"
+  },
+  {
+    "locationId": "d945b999-8c14-4f7f-9790-4bb6c6d27c5a",
+    "locationKey": "2024560825-1",
+    "brandUrl": null,
+    "name": "Perkins Balihoo of San Jose"
+  },
+  {
+    "locationId": "104cf43a-9c14-4425-a725-4360f462205b",
+    "locationKey": "Test-123",
+    "brandUrl": null,
+    "name": "Test"
+  },
+  {
+    "locationId": "0ae87e39-24f8-4c6c-9e57-bafd26c65c41",
+    "locationKey": "2684684519-1",
+    "brandUrl": null,
+    "name": "Arnold Balihoo of Santa Monica"
+  },
+  {
+    "locationId": "34e3af68-f97d-4dfa-af96-70a646ca6c14",
+    "locationKey": "11244016-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/hallbalihooofkelowna1-v1x2b9/kelowna-bc",
+    "name": "Hall Balihoo of Kelowna"
+  },
+  {
+    "locationId": "cdc19373-a3aa-465e-a9ff-3483f19ab8bc",
+    "locationKey": "Test-GroupE",
+    "brandUrl": null,
+    "name": "GroupE"
+  },
+  {
+    "locationId": "36a32d31-0b4a-4f62-96bd-71a033114fb4",
+    "locationKey": "1998676424-1",
+    "brandUrl": null,
+    "name": "Richards Balihoo of Manahawkin"
+  },
+  {
+    "locationId": "0df018bf-63b6-4abf-9274-ac57a50b9b31",
+    "locationKey": "1349910880-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/rhodesbalihoooflewisville1-75057/lewisville-tx",
+    "name": "Rhodes Balihoo of Lewisville"
+  },
+  {
+    "locationId": "d8aca843-53ff-4fb5-ba24-1de8774b1267",
+    "locationKey": "2146442818-1",
+    "brandUrl": null,
+    "name": "Kelley Balihoo of Crawford Vine"
+  },
+  {
+    "locationId": "ffda1bc3-b2a7-4ec8-adff-6be6fd62aa45",
+    "locationKey": "Test-SCCorp2",
+    "brandUrl": null,
+    "name": "Via Agency"
+  },
+  {
+    "locationId": "1d2c7d58-f5d8-4c06-903d-5b1b8132948f",
+    "locationKey": "4243801491-2",
+    "brandUrl": null,
+    "name": "Adams Balihoo of Shreveport"
+  },
+  {
+    "locationId": "3fda46a1-9167-4dcd-821d-e3f8c5aa1d77",
+    "locationKey": "2408090166-4",
+    "brandUrl": null,
+    "name": "Hall Balihoo of Miami"
+  },
+  {
+    "locationId": "f7f04b47-5359-4630-9999-1a6ad35d396d",
+    "locationKey": "1781905162-5",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/wrightbalihooofredmond5-97756/redmond-or",
+    "name": "Wright Balihoo of Redmond"
+  },
+  {
+    "locationId": "23ab20e5-e9bc-41d6-a3ee-78be1c89b439",
+    "locationKey": "2546105393-2",
+    "brandUrl": null,
+    "name": "Jones Balihoo of Salt Lake City"
+  },
+  {
+    "locationId": "448d9858-35f4-4b1d-9c27-406266482a40",
+    "locationKey": "Beta-1",
+    "brandUrl": null,
+    "name": "Balihoo - Boise"
+  },
+  {
+    "locationId": "35f427dd-2ae5-4497-aa01-90584460fa97",
+    "locationKey": "667232305-1",
+    "brandUrl": null,
+    "name": "Washington Balihoo of Alamo"
+  },
+  {
+    "locationId": "723a81e5-3ced-42b1-82d7-6860e768a0e4",
+    "locationKey": "3957608242-1",
+    "brandUrl": null,
+    "name": "Garcia Balihoo of Savannah"
+  },
+  {
+    "locationId": "0c39ef17-c2db-4d39-9fcf-898855af8af0",
+    "locationKey": "198483543-0",
+    "brandUrl": null,
+    "name": "Price Balihoo of Los Angeles"
+  },
+  {
+    "locationId": "68c9cdfb-bf82-4cc7-856a-024e929d682d",
+    "locationKey": "1872409316-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/flemingbalihooofboucherville1-j4b8r1/boucherville-qc",
+    "name": "Fleming Balihoo of Boucherville"
+  },
+  {
+    "locationId": "6b5771aa-b066-44c6-a07b-ed6552330a33",
+    "locationKey": "3248700535-2",
+    "brandUrl": null,
+    "name": "Mitchell Balihoo of Miami"
+  },
+  {
+    "locationId": "eec5ff02-96f4-437f-b034-201890e20aff",
+    "locationKey": "2835922870-2",
+    "brandUrl": null,
+    "name": "Garrett Balihoo of Spartanburg"
+  },
+  {
+    "locationId": "e5ddb879-622b-449d-8f02-39bd23b773b2",
+    "locationKey": "3795531553-2",
+    "brandUrl": null,
+    "name": "Rice Balihoo of Kenner"
+  },
+  {
+    "locationId": "e6085031-8b38-4693-ae87-85d00c23349e",
+    "locationKey": "4076830323-25",
+    "brandUrl": null,
+    "name": "Kennedy Balihoo of Urbandale"
+  },
+  {
+    "locationId": "8868798d-677f-48e9-8003-441e4174ec40",
+    "locationKey": "1483087905-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/porterbalihooofwinterpark2-32789/winterpark-fl",
+    "name": "Porter Balihoo of Winter Park"
+  },
+  {
+    "locationId": "541f5302-5c6d-4439-91c3-588cd3c5d384",
+    "locationKey": "Test-JLawrence",
+    "brandUrl": null,
+    "name": "Orlando Location"
+  },
+  {
+    "locationId": "8eada7a4-af76-4e5f-a6ed-80216bf64bf6",
+    "locationKey": "Dasani",
+    "brandUrl": null,
+    "name": "Dasani Jewelers"
+  },
+  {
+    "locationId": "03471cd4-9d8d-47d1-b13f-ae3d929de6ad",
+    "locationKey": "4101201878-1",
+    "brandUrl": null,
+    "name": "Grant Balihoo of Edmonton"
+  },
+  {
+    "locationId": "473f258d-b61e-4d3b-9e14-86b5c22dc1a8",
+    "locationKey": "2401460942-1",
+    "brandUrl": null,
+    "name": "Curtis Balihoo of Orange"
+  },
+  {
+    "locationId": "892893d1-8857-4c64-9ddc-8966fefc4144",
+    "locationKey": "331472902-2",
+    "brandUrl": null,
+    "name": "Burns Balihoo of Richmond Hill"
+  },
+  {
+    "locationId": "a107cf27-0a61-4bac-9f45-c040a4adf6bb",
+    "locationKey": "1040146607-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/hughesbalihooofmississauga1-l4y2b8/mississauga-on",
+    "name": "Hughes Balihoo of Mississauga"
+  },
+  {
+    "locationId": "a910819f-fc76-4df9-9278-de005e82238f",
+    "locationKey": "3134401709-1",
+    "brandUrl": null,
+    "name": "Snyder Balihoo of Burbank"
+  },
+  {
+    "locationId": "3f6819f2-aa1a-4108-925d-003b83f49e17",
+    "locationKey": "1846939860-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/rodriguezbalihoooflakepark3-33403/lakepark-fl",
+    "name": "Rodriguez Balihoo of Lake Park"
+  },
+  {
+    "locationId": "cc964f3e-4b15-4410-b044-51706961acb6",
+    "locationKey": "642528600-2",
+    "brandUrl": null,
+    "name": "Mccoy Balihoo of Fountain Hills"
+  },
+  {
+    "locationId": "568503ee-33a0-4c64-98d0-7549fd1132da",
+    "locationKey": "2804082803-1",
+    "brandUrl": null,
+    "name": "Hanson Balihoo of Carmel"
+  },
+  {
+    "locationId": "e7744614-974d-49a0-bc25-03c8f8eaa967",
+    "locationKey": "816941189-2",
+    "brandUrl": null,
+    "name": "Garrett Balihoo of Johnson City"
+  },
+  {
+    "locationId": "8112e797-4473-4a3d-a581-c75ca9ed4a71",
+    "locationKey": "4293033657-2",
+    "brandUrl": null,
+    "name": "Peterson Balihoo of Toronto"
+  },
+  {
+    "locationId": "6190b853-b524-467c-9c7e-ac342bc0f78b",
+    "locationKey": "1318542445-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/moralesbalihooofmiramar1-33027/miramar-fl",
+    "name": "Morales Balihoo of Miramar"
+  },
+  {
+    "locationId": "86d36592-2474-4177-bd17-75e8a9f7d0fa",
+    "locationKey": "4004743437-2",
+    "brandUrl": null,
+    "name": "Rhodes Balihoo of Nanaimo"
+  },
+  {
+    "locationId": "d0fc7ff2-a7f7-4a39-84c2-e258ebfb8ce3",
+    "locationKey": "2527213973-1",
+    "brandUrl": null,
+    "name": "Shaw Balihoo of Boerne"
+  },
+  {
+    "locationId": "d81ecad5-4609-4b5e-9eda-3f695504d89e",
+    "locationKey": "592608853-2",
+    "brandUrl": null,
+    "name": "Bailey Balihoo of Roseland"
+  },
+  {
+    "locationId": "f9ae56a2-c064-4fc1-9c15-c4d27b9adcd0",
+    "locationKey": "1783808886-4",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/stanleybalihooofsouthlake4-76092/southlake-tx",
+    "name": "Stanley Balihoo of Southlake"
+  },
+  {
+    "locationId": "a43b1e6d-042f-4f14-bb07-bb5cbd02298e",
+    "locationKey": "1183562941-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/powellbalihooofloganville1-30052/loganville-ga",
+    "name": "Powell Balihoo of Loganville"
+  },
+  {
+    "locationId": "50a12571-8f5d-4e75-a877-aa41994d2bab",
+    "locationKey": "584845208-1",
+    "brandUrl": null,
+    "name": "Day Balihoo of Sherman Oaks"
+  },
+  {
+    "locationId": "156bf89f-59a3-4d9c-9e3d-705dd57b84d0",
+    "locationKey": "BMW-8",
+    "brandUrl": null,
+    "name": "BMW MidWest"
+  },
+  {
+    "locationId": "4904862b-9bb3-49a2-b732-d5ad3f9b74ff",
+    "locationKey": "1748018993-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/lynchbalihooofcanfield3-44406/canfield-oh",
+    "name": "Lynch Balihoo of Canfield"
+  },
+  {
+    "locationId": "4efbf53f-8345-46bb-85db-ff5738fdb9c4",
+    "locationKey": "2922286151-2",
+    "brandUrl": null,
+    "name": "Ruiz Balihoo of Miami"
+  },
+  {
+    "locationId": "e70d3adb-3342-4e84-9d8c-f1961445fccf",
+    "locationKey": "2021772161-1",
+    "brandUrl": null,
+    "name": "Brewer Balihoo of Luling"
+  },
+  {
+    "locationId": "0f6c81e3-9c4b-4d62-a7ed-d8fd7e80e207",
+    "locationKey": "616020238-1",
+    "brandUrl": null,
+    "name": "Bell Balihoo of Centennial"
+  },
+  {
+    "locationId": "99fbed44-ae6b-4b6d-a63a-0d386e4fc969",
+    "locationKey": "788849950-3",
+    "brandUrl": null,
+    "name": "Montgomery Balihoo of Honolulu"
+  },
+  {
+    "locationId": "b6cea224-93d4-41fd-90ec-0ae8f1d435ec",
+    "locationKey": "432403663-1",
+    "brandUrl": null,
+    "name": "Adams Balihoo of Port Saint Lucie"
+  },
+  {
+    "locationId": "46794453-d5fe-4f62-acaa-3d046125dce5",
+    "locationKey": "1492994533-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/raybalihooofcastlerock1-80104/castlerock-co",
+    "name": "Ray Balihoo of Castle Rock"
+  },
+  {
+    "locationId": "46b3464f-3bbe-43ae-8c9e-49b9b310a693",
+    "locationKey": "3401177122-1",
+    "brandUrl": null,
+    "name": "Day Balihoo of Cranberry Township"
+  },
+  {
+    "locationId": "9d96e000-7341-4ffd-8cb0-b627eaccb312",
+    "locationKey": "4076830323-1",
+    "brandUrl": null,
+    "name": "Phillips Balihoo of St. Charles"
+  },
+  {
+    "locationId": "25ae816b-e3cb-4c21-bb8e-dc395082ac19",
+    "locationKey": "1781905162-8",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/terrybalihooofbeaverton8-97007/beaverton-or",
+    "name": "Terry Balihoo of Beaverton"
+  },
+  {
+    "locationId": "0396c854-6f82-4640-9430-12da281906d1",
+    "locationKey": "395772167-1",
+    "brandUrl": null,
+    "name": "Robinson Balihoo of Billings"
+  },
+  {
+    "locationId": "97dccb13-2217-43a8-a116-0cb9d87677f9",
+    "locationKey": "190353940-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/gonzalezbalihooofscottsdale1-85262/scottsdale-az",
+    "name": "Gonzalez Balihoo of Scottsdale"
+  },
+  {
+    "locationId": "685ab21f-09b5-49c4-8e63-416482090276",
+    "locationKey": "3183405236-1",
+    "brandUrl": null,
+    "name": "Carr Balihoo of Greensburg"
+  },
+  {
+    "locationId": "d079a9d3-d15c-4083-bf0b-af031ee66055",
+    "locationKey": "2985781949-3",
+    "brandUrl": null,
+    "name": "Mason Balihoo of Plano"
+  },
+  {
+    "locationId": "e49ab3e9-5878-40bc-8aba-4d57b3fb64ca",
+    "locationKey": "1815355227-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/lopezbalihooofjerseycity1-07302/jerseycity-nj",
+    "name": "Lopez Balihoo of Jersey City"
+  },
+  {
+    "locationId": "e7dffe32-a1b2-4959-960e-377129bdcf22",
+    "locationKey": "3654430128-3",
+    "brandUrl": null,
+    "name": "Barnett Balihoo of Oklahoma City"
+  },
+  {
+    "locationId": "ffb26a27-8c05-40b6-a5e4-b065f0dc20ff",
+    "locationKey": "2160895349-3",
+    "brandUrl": null,
+    "name": "Caldwell Balihoo of Toronto"
+  },
+  {
+    "locationId": "0993d871-0689-495c-8594-ebf4510325b2",
+    "locationKey": "1534527914-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/knightbalihooofgallatin1-37066/gallatin-tn",
+    "name": "Knight Balihoo of Gallatin"
+  },
+  {
+    "locationId": "2b6ec9ef-b918-4012-a064-5f9afd4146ef",
+    "locationKey": "3800342631-2",
+    "brandUrl": null,
+    "name": "Young Balihoo of Oak Bluffs"
+  },
+  {
+    "locationId": "55d166fb-2c8d-4866-93fc-2b1f9efabe7b",
+    "locationKey": "3504298280-1",
+    "brandUrl": null,
+    "name": "Evans Balihoo of Surrey"
+  },
+  {
+    "locationId": "27e8521b-eb58-4715-9f6e-9d9ef95b6979",
+    "locationKey": "3570347386-2",
+    "brandUrl": null,
+    "name": "Martin Balihoo of Westborough"
+  },
+  {
+    "locationId": "d2d559cd-b75f-43d9-822a-0a4b016dc314",
+    "locationKey": "489850780-1",
+    "brandUrl": null,
+    "name": "Diaz Balihoo of Tamarac"
+  },
+  {
+    "locationId": "2a08dd94-5c4c-46c9-9a60-972084761078",
+    "locationKey": "2379706136-1",
+    "brandUrl": null,
+    "name": "Stanley Balihoo of Costa Mesa"
+  },
+  {
+    "locationId": "b1fe08ce-1de0-474a-ba8d-2f1962d05d8d",
+    "locationKey": "3886776358-2",
+    "brandUrl": null,
+    "name": "Kuhn Balihoo of Pompano Beach"
+  },
+  {
+    "locationId": "0fda4976-0af6-4b82-953d-0218f1252a6d",
+    "locationKey": "1969022914-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/burtonbalihooofapex2-27502/apex-nc",
+    "name": "Burton Balihoo of Apex"
+  },
+  {
+    "locationId": "86735820-f8f2-4879-92d6-f430ab885cf8",
+    "locationKey": "3981054952-0",
+    "brandUrl": null,
+    "name": "Morris Balihoo of Mequon"
+  },
+  {
+    "locationId": "34629ff3-6d99-4e9a-a43e-5de2d250ed23",
+    "locationKey": "1559537371-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/harrisonbalihooofsouthfield1-48076/southfield-mi",
+    "name": "Harrison Balihoo of Southfield"
+  },
+  {
+    "locationId": "d8d34487-2599-4d9c-b246-96050e376961",
+    "locationKey": "3497000040-2",
+    "brandUrl": null,
+    "name": "Walker Balihoo of Jenison"
+  },
+  {
+    "locationId": "4cae791d-0057-402f-b740-0731ef49f087",
+    "locationKey": "3570347386-3",
+    "brandUrl": null,
+    "name": "Rice Balihoo of Newton"
+  },
+  {
+    "locationId": "e9f134ca-b366-4399-bc28-0f63798a0e2c",
+    "locationKey": "1783808886-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/jonesbalihoooffortworth3-76102/fortworth-tx",
+    "name": "Jones Balihoo of Fort Worth"
+  },
+  {
+    "locationId": "f7822e5c-9889-41fa-b782-c2dedf669332",
+    "locationKey": "4003852508-2",
+    "brandUrl": null,
+    "name": "Ferguson Balihoo of Santa Ana"
+  },
+  {
+    "locationId": "dbcb7ee4-b3bb-42cb-b125-3dfd8d3c0011",
+    "locationKey": "2487730507-2",
+    "brandUrl": null,
+    "name": "Burton Balihoo of Naples"
+  },
+  {
+    "locationId": "b103dd86-6a30-4ac2-af96-6a5c250fbf3d",
+    "locationKey": "3815728473-2",
+    "brandUrl": null,
+    "name": "Gonzales Balihoo of Baton Rouge"
+  },
+  {
+    "locationId": "90a09965-f7fc-407b-87cd-9f741bc3cdee",
+    "locationKey": "2143313079-0",
+    "brandUrl": null,
+    "name": "Murphy Balihoo of Chicago"
+  },
+  {
+    "locationId": "f80c4588-f80e-4fd1-9180-b1bf2dfadc29",
+    "locationKey": "1932481838-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/barnesbalihooofcovington2-70433/covington-la",
+    "name": "Barnes Balihoo of Covington"
+  },
+  {
+    "locationId": "aea11c92-d898-42cd-8ea2-82c7ad82eb95",
+    "locationKey": "1783808886-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/parkerbalihooofgraford1-76449/graford-tx",
+    "name": "Parker Balihoo of Graford"
+  },
+  {
+    "locationId": "d2cafb51-541e-4daf-b79e-3d9b99e31313",
+    "locationKey": "2617810554-1",
+    "brandUrl": null,
+    "name": "Elliott Balihoo of North Potomac"
+  },
+  {
+    "locationId": "ae68accb-63d9-402b-850a-6102a06a69bf",
+    "locationKey": "2850949436-2",
+    "brandUrl": null,
+    "name": "Myers Balihoo of Penticton"
+  },
+  {
+    "locationId": "d6eaa73c-5235-4673-adf0-5b8082322a46",
+    "locationKey": "3828168132-1",
+    "brandUrl": null,
+    "name": "Austin Balihoo of Toronto"
+  },
+  {
+    "locationId": "7897e216-4386-4c92-8480-bd4e1d4e0ee4",
+    "locationKey": "3943673580-2",
+    "brandUrl": null,
+    "name": "Jacobs Balihoo of Wilton"
+  },
+  {
+    "locationId": "46fde206-db72-4674-a642-1f16d9d1ab61",
+    "locationKey": "3492141285-1",
+    "brandUrl": null,
+    "name": "Barnett Balihoo of Airdrie"
+  },
+  {
+    "locationId": "74261d15-6ac4-41b8-97cc-814d0874bee1",
+    "locationKey": "1404078488-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/lucasbalihooofwilmette1-60091/wilmette-il",
+    "name": "Lucas Balihoo of Wilmette"
+  },
+  {
+    "locationId": "97a4ed9f-6467-4093-a964-a7892bd296cd",
+    "locationKey": "2724837420-1",
+    "brandUrl": null,
+    "name": "Snyder Balihoo of Greeley"
+  },
+  {
+    "locationId": "862b1239-04be-4aaf-b4e8-dcc798f46d78",
+    "locationKey": "537781344-2",
+    "brandUrl": null,
+    "name": "Kelley Balihoo of Excelsior"
+  },
+  {
+    "locationId": "0630f7aa-62cd-4bc3-a8ad-fa739a9e145f",
+    "locationKey": "1027667945-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/rossbalihooofmooresville1-28117/mooresville-nc",
+    "name": "Ross Balihoo of Mooresville"
+  },
+  {
+    "locationId": "6ebd4641-6c96-4041-bdf8-a2cc6aaf5ad9",
+    "locationKey": "523736999-2",
+    "brandUrl": null,
+    "name": "Hawkins Balihoo of Winston-Salem"
+  },
+  {
+    "locationId": "9b1e7bfb-51ad-430f-a0c2-6abdabb7f845",
+    "locationKey": "4074059584-1",
+    "brandUrl": null,
+    "name": "May Balihoo of Birmingham"
+  },
+  {
+    "locationId": "af4ea824-d362-4133-9d39-bd096e60786d",
+    "locationKey": "1089858384-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/fordbalihooofhagerstown1-21742/hagerstown-md",
+    "name": "Ford Balihoo of Hagerstown"
+  },
+  {
+    "locationId": "6d52a077-3fe2-4f55-bb42-f66c4297c635",
+    "locationKey": "1993954882-2",
+    "brandUrl": null,
+    "name": "Wilson Balihoo of Birmingham"
+  },
+  {
+    "locationId": "3b6e389a-3084-4e2c-98cf-bb2dbea2f8a0",
+    "locationKey": "1811296201-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/davidsonbalihooofthunderbay1-p7b3z7/thunderbay-on",
+    "name": "Davidson Balihoo of Thunder Bay"
+  },
+  {
+    "locationId": "05279e9b-7dd4-4006-a478-e271fdfe2415",
+    "locationKey": "3683320377-1",
+    "brandUrl": null,
+    "name": "Gregory Balihoo of Parsippany"
+  },
+  {
+    "locationId": "0e575f05-b825-4713-be9f-f5ce764b453a",
+    "locationKey": "130322844-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/sanchezbalihooofharwich2-02645/harwich-ma",
+    "name": "Sanchez Balihoo of Harwich"
+  },
+  {
+    "locationId": "5ab2aa47-8879-4d34-b11f-6b4658ac83d2",
+    "locationKey": "1648387042-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/schmidtbalihooofcoloradosprings1-80903/coloradosprings-co",
+    "name": "Schmidt Balihoo of Colorado Springs"
+  },
+  {
+    "locationId": "b913939c-9877-43a6-8e5e-4ae21b4b20c1",
+    "locationKey": "2985781949-4",
+    "brandUrl": null,
+    "name": "Richards Balihoo of Frisco"
+  },
+  {
+    "locationId": "c1b62f61-6dfe-4108-9344-b2c0678bac58",
+    "locationKey": "3812684253-2",
+    "brandUrl": null,
+    "name": "Beck Balihoo of Whitehorse"
+  },
+  {
+    "locationId": "f9a29e96-5bac-48c1-a6d2-2ac14ed3d084",
+    "locationKey": "2636198914-2",
+    "brandUrl": null,
+    "name": "Douglas Balihoo of Oakland Park"
+  },
+  {
+    "locationId": "dc0393d6-f9e9-463c-be64-24c18082e0ce",
+    "locationKey": "367416766-1",
+    "brandUrl": null,
+    "name": "Brewer Balihoo of Boise"
+  },
+  {
+    "locationId": "0d60679e-4a30-42fd-9efd-d2c4279e94a1",
+    "locationKey": "3981054952-1",
+    "brandUrl": null,
+    "name": "Hanson Balihoo of Delafield"
+  },
+  {
+    "locationId": "100a1e07-a5bd-47d7-9743-3928df9f7fba",
+    "locationKey": "2883580935-2",
+    "brandUrl": null,
+    "name": "Cruz Balihoo of Pembroke Pines"
+  },
+  {
+    "locationId": "d253772a-f43d-40a3-b87b-9ca59eeb2783",
+    "locationKey": "2142343891-1",
+    "brandUrl": null,
+    "name": "Ferguson Balihoo of New York"
+  },
+  {
+    "locationId": "2933fe8e-732b-4b4f-b514-4c6745728447",
+    "locationKey": "4098945484-1",
+    "brandUrl": null,
+    "name": "Price Balihoo of Richmond Hill"
+  },
+  {
+    "locationId": "4d706e04-d8ab-47c9-8e5a-f140d3dc18de",
+    "locationKey": "365059225-1",
+    "brandUrl": null,
+    "name": "Gonzalez Balihoo of Petoskey"
+  },
+  {
+    "locationId": "2df01ceb-7451-4c97-a5f0-8270b88fb310",
+    "locationKey": "3788834672-2",
+    "brandUrl": null,
+    "name": "Davis Balihoo of Austin"
+  },
+  {
+    "locationId": "3725ffb0-d038-49c6-b948-3e8bf7df9274",
+    "locationKey": "1246218111-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/cruzbalihooofwaxahachie2-75167/waxahachie-tx",
+    "name": "Cruz Balihoo of Waxahachie"
+  },
+  {
+    "locationId": "2142b695-52db-4a83-93a2-97823ce220d1",
+    "locationKey": "1548396171-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/grantbalihooofglencove2-11542/glencove-ny",
+    "name": "Grant Balihoo of Glen Cove"
+  },
+  {
+    "locationId": "18a45c59-fee3-449c-b171-3f5dcfe7804b",
+    "locationKey": "1228660770-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/obrienbalihoooflakegrove2-11755/lakegrove-ny",
+    "name": "Obrien Balihoo of Lake Grove"
+  },
+  {
+    "locationId": "79bce801-86de-4bc9-93e5-ca5df12e72c8",
+    "locationKey": "3580790970-1",
+    "brandUrl": null,
+    "name": "Silva Balihoo of Montrose"
+  },
+  {
+    "locationId": "0c3c4828-c382-43a4-b3b5-62c1c2348c28",
+    "locationKey": "1223858000-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/fosterbalihooofhouston1-77057/houston-tx",
+    "name": "Foster Balihoo of Houston"
+  },
+  {
+    "locationId": "aa08f9be-74e1-4327-b7a2-d6e5f57f1e7c",
+    "locationKey": "4120033898-1",
+    "brandUrl": null,
+    "name": "Ward Balihoo of Hawkesbury"
+  },
+  {
+    "locationId": "1f85f3a6-9507-4ceb-b8ac-971adcedfca6",
+    "locationKey": "3001936633-2",
+    "brandUrl": null,
+    "name": "Edwards Balihoo of Cincinnati"
+  },
+  {
+    "locationId": "85043450-d6eb-486a-8a50-0cea13e27000",
+    "locationKey": "3449131178-2",
+    "brandUrl": null,
+    "name": "Willis Balihoo of Sturgeon Falls"
+  },
+  {
+    "locationId": "8f13371f-2b5b-4e33-b59d-4ec0f6eefc5d",
+    "locationKey": "1884463382-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/franklinbalihooofsudbury2-p3c3j3/sudbury-on",
+    "name": "Franklin Balihoo of Sudbury"
+  },
+  {
+    "locationId": "0283de7e-c7c4-4b00-978a-14793cc11183",
+    "locationKey": "1126361621-4",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/morenobalihooofwalpole4-02081/walpole-ma",
+    "name": "Moreno Balihoo of Walpole"
+  },
+  {
+    "locationId": "452e0dab-7e64-4121-ab0c-3ca3caebc751",
+    "locationKey": "3957608242-3",
+    "brandUrl": null,
+    "name": "Bishop Balihoo of Hardeeville"
+  },
+  {
+    "locationId": "172d415f-8c9d-463c-8d0b-059149c46196",
+    "locationKey": "485564255-1",
+    "brandUrl": null,
+    "name": "Lewis Balihoo of Mokena"
+  },
+  {
+    "locationId": "b7d305fa-618c-4ec9-b763-6360ba14ba57",
+    "locationKey": "4170168992-2",
+    "brandUrl": null,
+    "name": "Sutton Balihoo of Rockwood"
+  },
+  {
+    "locationId": "6ca427fa-22a0-44d6-91a3-c6c3c4da83d3",
+    "locationKey": "489850780-2",
+    "brandUrl": null,
+    "name": "Vargas Balihoo of Pembroke Pines"
+  },
+  {
+    "locationId": "368fc7bb-b2f6-46c4-bfb4-c8b53e880f8a",
+    "locationKey": "88477260-1",
+    "brandUrl": null,
+    "name": "Ryan Balihoo of Huachuca City"
+  },
+  {
+    "locationId": "f95e8dfe-dd89-49b9-b4e7-cc74dfa37dfb",
+    "locationKey": "1636231962-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/turnerbalihooofmckinney2-75071/mckinney-tx",
+    "name": "Turner Balihoo of McKinney"
+  },
+  {
+    "locationId": "d3863518-b3bd-4bfe-8605-0392001e9cba",
+    "locationKey": "1640458123-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/foxbalihooofstittsville3-k2s1s9/stittsville-on",
+    "name": "Fox Balihoo of Stittsville"
+  },
+  {
+    "locationId": "c627e1a9-a6b0-46c0-8524-471144d0e311",
+    "locationKey": "949511135-1",
+    "brandUrl": null,
+    "name": "Douglas Balihoo of Merrillville"
+  },
+  {
+    "locationId": "2c42abdc-c169-42b3-8a7a-63ca36f3286d",
+    "locationKey": "1689387146-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/grantbalihoooflewes3-19958/lewes-de",
+    "name": "Grant Balihoo of Lewes"
+  },
+  {
+    "locationId": "71ad7466-613e-4310-b179-046ce53c6b9c",
+    "locationKey": "2247642853-1",
+    "brandUrl": null,
+    "name": "Turner Balihoo of Traverse City"
+  },
+  {
+    "locationId": "5f2e43db-72ab-49d2-b460-8bcd1b462cd9",
+    "locationKey": "3134401709-2",
+    "brandUrl": null,
+    "name": "Hart Balihoo of Canyon Country"
+  },
+  {
+    "locationId": "df207e62-da50-48f7-9278-cf988b486723",
+    "locationKey": "2515809605-1",
+    "brandUrl": null,
+    "name": "Henderson Balihoo of Murfreesboro"
+  },
+  {
+    "locationId": "6df6bdfc-8baa-4b44-b428-a183f831810e",
+    "locationKey": "1182081232-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/warrenbalihoooflexington1-29073/lexington-sc",
+    "name": "Warren Balihoo of Lexington"
+  },
+  {
+    "locationId": "765f00db-cc10-496a-8d9e-faeaef41f20f",
+    "locationKey": "3916853102-1",
+    "brandUrl": null,
+    "name": "Cunningham Balihoo of Victoria"
+  },
+  {
+    "locationId": "1521ac6b-0dd2-4512-8ea7-864df83782c6",
+    "locationKey": "3309565745-2",
+    "brandUrl": null,
+    "name": "Brown Balihoo of Briarcliff"
+  },
+  {
+    "locationId": "29fbd519-b258-4f60-aaf5-8b3d9da7cb41",
+    "locationKey": "3517446488-2",
+    "brandUrl": null,
+    "name": "Thomas Balihoo of Reno"
+  },
+  {
+    "locationId": "3fe06e1a-9d79-4e84-a528-af6ff3c902b2",
+    "locationKey": "3049581326-0",
+    "brandUrl": null,
+    "name": "Martinez Balihoo of Appleton"
+  },
+  {
+    "locationId": "a2da7fc7-3767-4061-b114-44d9edead525",
+    "locationKey": "4030851543-2",
+    "brandUrl": null,
+    "name": "Ruiz Balihoo of Rapid City"
+  },
+  {
+    "locationId": "ae016d0b-0356-4c6c-a0f5-d69442eb0547",
+    "locationKey": "1229015226-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/beckbalihooofhudson2-54016/hudson-wi",
+    "name": "Beck Balihoo of Hudson"
+  },
+  {
+    "locationId": "102c14c0-81ba-40fd-8aad-5f08c7ed70d1",
+    "locationKey": "3433021978-3",
+    "brandUrl": null,
+    "name": "Martinez Balihoo of Round Rock"
+  },
+  {
+    "locationId": "a0250dfb-7ffe-4e86-93ea-3268a67541a4",
+    "locationKey": "1902979223-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/snyderbalihooofsantarosa1-95403/santarosa-ca",
+    "name": "Snyder Balihoo of Santa Rosa"
+  },
+  {
+    "locationId": "721b149e-d028-45a4-b7da-fafb4bc5786b",
+    "locationKey": "1451516424-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/larsonbalihooofwinterpark2-32789/winterpark-fl",
+    "name": "Larson Balihoo of Winter Park"
+  },
+  {
+    "locationId": "f6fad396-b328-45e3-be64-559d0f6bcc3c",
+    "locationKey": "601521431-1",
+    "brandUrl": null,
+    "name": "Burke Balihoo of Aurora"
+  },
+  {
+    "locationId": "4afef774-e243-4375-ba34-7266f511f884",
+    "locationKey": "2275500396-2",
+    "brandUrl": null,
+    "name": "Ortiz Balihoo of Shreveport"
+  },
+  {
+    "locationId": "129fa3ce-05da-43a3-bb65-21ea52c072ca",
+    "locationKey": "3349469416-1",
+    "brandUrl": null,
+    "name": "Edwards Balihoo of Santa Maria"
+  },
+  {
+    "locationId": "cc96cf59-da4a-432d-b5fb-5df6d161d9c6",
+    "locationKey": "2577580106-2",
+    "brandUrl": null,
+    "name": "Barnett Balihoo of Knoxville"
+  },
+  {
+    "locationId": "c270d941-7c36-4de9-b13b-d8647cef4fc4",
+    "locationKey": "3264230264-1",
+    "brandUrl": null,
+    "name": "Barnett Balihoo of Amarillo"
+  },
+  {
+    "locationId": "0e44cf22-713c-41a9-beb3-6ebefa6b8a78",
+    "locationKey": "1088125962-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/carpenterbalihooofcumming1-30040/cumming-ga",
+    "name": "Carpenter Balihoo of Cumming"
+  },
+  {
+    "locationId": "2855b1c9-10ce-47ad-867e-0d739b91bca6",
+    "locationKey": "3257807656-0",
+    "brandUrl": null,
+    "name": "Bradley Balihoo of South Lyon"
+  },
+  {
+    "locationId": "6226c3ac-d753-441c-b233-3dd3e9196ee8",
+    "locationKey": "2004309324-2",
+    "brandUrl": null,
+    "name": "Morgan Balihoo of Salem"
+  },
+  {
+    "locationId": "75c6d023-8537-421d-8426-de0ef2b8a331",
+    "locationKey": "2115693901-5",
+    "brandUrl": null,
+    "name": "Kuhn Balihoo of Dallas"
+  },
+  {
+    "locationId": "e851f91c-0503-4626-96e9-4ccb82b493e3",
+    "locationKey": "492172256-1",
+    "brandUrl": null,
+    "name": "Warren Balihoo of Dallas"
+  },
+  {
+    "locationId": "1dcff72f-29f7-45e3-9763-2afd3d659e8d",
+    "locationKey": "788849950-1",
+    "brandUrl": null,
+    "name": "Peterson Balihoo of Palm Desert"
+  },
+  {
+    "locationId": "ef88bbee-9513-4f79-b1e4-122ee88f42c5",
+    "locationKey": "996206998-3",
+    "brandUrl": null,
+    "name": "Kelly Balihoo of Jacksonville"
+  },
+  {
+    "locationId": "bbfd40a1-0293-480c-a78e-3309b54e4912",
+    "locationKey": "2115007328-3",
+    "brandUrl": null,
+    "name": "Henry Balihoo of Doylestown"
+  },
+  {
+    "locationId": "e7ee89d4-f20a-43f3-bf93-fb0d9cec8a20",
+    "locationKey": "2290524233-1",
+    "brandUrl": null,
+    "name": "Fisher Balihoo of Richmondhill"
+  },
+  {
+    "locationId": "6ead3479-bc38-419b-9bda-1a3dd6c82f27",
+    "locationKey": "3957408318-1",
+    "brandUrl": null,
+    "name": "Campbell Balihoo of Broomfield"
+  },
+  {
+    "locationId": "df509330-282c-44f5-9702-b16f18ce78ef",
+    "locationKey": "2985781949-2",
+    "brandUrl": null,
+    "name": "Weaver Balihoo of Dallas"
+  },
+  {
+    "locationId": "6a20b21b-7f20-4a61-98c6-570200fcc79e",
+    "locationKey": "2115693901-4",
+    "brandUrl": null,
+    "name": "Ray Balihoo of Plano"
+  },
+  {
+    "locationId": "7e0a151b-bd68-4c92-91f3-cc680a6718d1",
+    "locationKey": "2108240331-1",
+    "brandUrl": null,
+    "name": "Cruz Balihoo of Upton"
+  },
+  {
+    "locationId": "493a88f8-115c-4ebb-a65c-4d594925b575",
+    "locationKey": "1610156945-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/robinsonbalihooofburlington1-l7l6a5/burlington-on",
+    "name": "Robinson Balihoo of Burlington"
+  },
+  {
+    "locationId": "c125cb62-25c0-4693-925d-2c23ee904e96",
+    "locationKey": "3001936633-4",
+    "brandUrl": null,
+    "name": "Holmes Balihoo of Cincinnati"
+  },
+  {
+    "locationId": "08605721-b5ee-4fb3-83d2-a1b4718dc995",
+    "locationKey": "2445276159-1",
+    "brandUrl": null,
+    "name": "Armstrong Balihoo of Lewiston"
+  },
+  {
+    "locationId": "3b3ef8c9-689a-4448-b98b-9d0839147cb6",
+    "locationKey": "2663010349-1",
+    "brandUrl": null,
+    "name": "White Balihoo of Springfield"
+  },
+  {
+    "locationId": "816812fb-0441-4ae3-bdcc-29f91ebac28f",
+    "locationKey": "2350044417-1",
+    "brandUrl": null,
+    "name": "Lawson Balihoo of Albuquerque"
+  },
+  {
+    "locationId": "a5fa59cb-2c10-45a7-ba02-aff85a5b7497",
+    "locationKey": "792078317-1",
+    "brandUrl": null,
+    "name": "Meyer Balihoo of Bluffdale"
+  },
+  {
+    "locationId": "8268a3f5-ef01-4f59-b942-b8b5f67edd64",
+    "locationKey": "3749474666-1",
+    "brandUrl": null,
+    "name": "Wilson Balihoo of Inglewood"
+  },
+  {
+    "locationId": "ae27258f-ba2c-4624-af61-0c5ddb620eaa",
+    "locationKey": "961615021-1",
+    "brandUrl": null,
+    "name": "Holland Balihoo of Davison"
+  },
+  {
+    "locationId": "a03a5b09-baaa-4ff5-99cf-55687e79ee4a",
+    "locationKey": "2362117411-2",
+    "brandUrl": null,
+    "name": "Harris Balihoo of Atlanta"
+  },
+  {
+    "locationId": "112df230-941c-4ed4-8ab6-54678f652d61",
+    "locationKey": "1584820610-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/torresbalihooofwaukee1-50263/waukee-ia",
+    "name": "Torres Balihoo of Waukee"
+  },
+  {
+    "locationId": "9ca69505-59b7-477e-affb-2ff891bed6f3",
+    "locationKey": "3096052516-4",
+    "brandUrl": null,
+    "name": "Hudson Balihoo of Lakeland"
+  },
+  {
+    "locationId": "50b6d283-5db9-4a91-b943-2774fe331bcf",
+    "locationKey": "3054351524-3",
+    "brandUrl": null,
+    "name": "Price Balihoo of Sedona"
+  },
+  {
+    "locationId": "54ced170-75f4-44e6-819f-207accda71f9",
+    "locationKey": "2115007328-1",
+    "brandUrl": null,
+    "name": "Flores Balihoo of King of Prussia"
+  },
+  {
+    "locationId": "58de2767-96e6-49b4-84ef-2186fd57789b",
+    "locationKey": "2968128344-1",
+    "brandUrl": null,
+    "name": "Bell Balihoo of Franklin"
+  },
+  {
+    "locationId": "e143d1d6-bf02-4841-b5a1-b5f45f37ffd9",
+    "locationKey": "3054351524-2",
+    "brandUrl": null,
+    "name": "Powell Balihoo of Cave Creek"
+  },
+  {
+    "locationId": "3a7d7144-3ae1-47c8-9b2d-678ea5cb53d1",
+    "locationKey": "996206998-5",
+    "brandUrl": null,
+    "name": "Barrett Balihoo of Jacksonville"
+  },
+  {
+    "locationId": "d40cf97f-3a93-4035-a314-baa2579e3b71",
+    "locationKey": "1476646280-2",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/hortonbalihooofcalgary2-t3m0j8/calgary-ab",
+    "name": "Horton Balihoo of Calgary"
+  },
+  {
+    "locationId": "08ff9344-69cb-4bd3-a179-86b3e129ad82",
+    "locationKey": "296588036-1",
+    "brandUrl": null,
+    "name": "Grant Balihoo of Stratford"
+  },
+  {
+    "locationId": "f49fa63f-21cd-4d25-a96f-a4ebba9b05c5",
+    "locationKey": "122993082-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/armstrongbalihooofeastprovidence3-02914/eastprovidence-ri",
+    "name": "Armstrong Balihoo of East Providence"
+  },
+  {
+    "locationId": "68a6bc49-5d91-43ba-a474-7f38c97ae7c6",
+    "locationKey": "2937488869-1",
+    "brandUrl": null,
+    "name": "Fletcher Balihoo of Urbandale"
+  },
+  {
+    "locationId": "7c6dc629-9a0c-43d3-a14b-45af80b97b7b",
+    "locationKey": "2137473073-1",
+    "brandUrl": null,
+    "name": "Rodriquez Balihoo of San Diego"
+  },
+  {
+    "locationId": "073149e7-cc27-43d6-9c0f-6cf183c90678",
+    "locationKey": "14599566-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/reyesbalihoooftoronto1-m4m1r2/toronto-on",
+    "name": "Reyes Balihoo of Toronto"
+  },
+  {
+    "locationId": "e9ba9ca2-4e8c-4a1b-bad3-1195663bf551",
+    "locationKey": "522242869-1",
+    "brandUrl": null,
+    "name": "Bennett Balihoo of Markham"
+  },
+  {
+    "locationId": "69f85eda-03ee-4148-b99b-47ee688d5504",
+    "locationKey": "1916878554-4",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/watkinsbalihooofpompanobeach4-33069/pompanobeach-fl",
+    "name": "Watkins Balihoo of Pompano Beach"
+  },
+  {
+    "locationId": "ad64be24-8416-4a17-b4cd-85f4d1262cb4",
+    "locationKey": "2883712694-1",
+    "brandUrl": null,
+    "name": "Hill Balihoo of Mequon"
+  },
+  {
+    "locationId": "34c43b2c-5f1d-4d90-840e-5c6723083e3b",
+    "locationKey": "4203391643-5",
+    "brandUrl": null,
+    "name": "Jennings Balihoo of Addison"
+  },
+  {
+    "locationId": "b104bb4e-9903-4706-b799-f1703bd3a6e3",
+    "locationKey": "1536053196-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/kelleybalihooofcalgary1-t2t6b5/calgary-ab",
+    "name": "Kelley Balihoo of Calgary"
+  },
+  {
+    "locationId": "26e898ba-738e-4c1a-b524-8c029e94c08a",
+    "locationKey": "2588746622-1",
+    "brandUrl": null,
+    "name": "Hayes Balihoo of Merrillville"
+  },
+  {
+    "locationId": "560145b5-03ce-4742-b33a-b108e62074bf",
+    "locationKey": "2115693901-2",
+    "brandUrl": null,
+    "name": "Reed Balihoo of Richardson"
+  },
+  {
+    "locationId": "a63318c0-9d73-4493-ad0c-e0e9bab97312",
+    "locationKey": "737384013-1",
+    "brandUrl": null,
+    "name": "Hughes Balihoo of Ketchum"
+  },
+  {
+    "locationId": "0edfbd5d-328a-4ee6-a663-f410d1e02947",
+    "locationKey": "4178582993-2",
+    "brandUrl": null,
+    "name": "Bradley Balihoo of DeWitt"
+  },
+  {
+    "locationId": "f10304b6-ca0d-4d5f-b682-22bff600e2a9",
+    "locationKey": "2439586077-2",
+    "brandUrl": null,
+    "name": "Scott Balihoo of Saskatoon"
+  },
+  {
+    "locationId": "3a587049-fefc-4377-8f5b-aaa27bdf88a9",
+    "locationKey": "2007802214-1",
+    "brandUrl": null,
+    "name": "Cruz Balihoo of Superior"
+  },
+  {
+    "locationId": "81a1d70c-d4b2-483a-a8b1-6bb7c4b1b879",
+    "locationKey": "3767715-2",
+    "brandUrl": null,
+    "name": "Hill Balihoo of Fort Worth"
+  },
+  {
+    "locationId": "115b0a3e-a76b-4395-809c-86d04afcb8be",
+    "locationKey": "1007496591-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/garciabalihooofwilliston1-05495/williston-vt",
+    "name": "Garcia Balihoo of Williston"
+  },
+  {
+    "locationId": "d5959cb1-a92c-441c-914a-ed0a9dc37256",
+    "locationKey": "140538023-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/jimenezbalihooofanaheim3-92807/anaheim-ca",
+    "name": "Jimenez Balihoo of Anaheim"
+  },
+  {
+    "locationId": "35716be1-e6b3-4ae7-99ef-0ef0718cd138",
+    "locationKey": "1743490137-3",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/chavezbalihoooflancaster3-17601/lancaster-pa",
+    "name": "Chavez Balihoo of Lancaster"
+  },
+  {
+    "locationId": "59252c96-e4b2-437f-bea0-28a8a17e7535",
+    "locationKey": "2108240331-4",
+    "brandUrl": null,
+    "name": "Payne Balihoo of Waltham"
+  },
+  {
+    "locationId": "fdcab8b2-8dde-419d-b62a-39c1cf3b56e9",
+    "locationKey": "1107782017-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/bennettbalihooofjenison1-49428/jenison-mi",
+    "name": "Bennett Balihoo of Jenison"
+  },
+  {
+    "locationId": "76ba1b52-e67f-434f-8ab5-0a458531faa0",
+    "locationKey": "1353417026-1",
+    "brandUrl": "http://demo.microsites.balihoo-cloud.com.dev.balihoo-cloud.com/fowlerbalihooofsthubert1-j3z0b3/sthubert-qc",
+    "name": "Fowler Balihoo of St-Hubert"
+  }
+]
