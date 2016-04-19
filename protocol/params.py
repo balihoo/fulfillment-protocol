@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 
 class FunctionParams(object):
     def __init__(self, event):

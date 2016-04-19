@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 class SchemaParameter(object):
     def __init__(self, description, required=True, default=None, more_schema=None):
         self.description = description
@@ -123,9 +121,26 @@ class LooseObjectParameter(SchemaParameter):
             out[name] = self.value_type.parse(value[name])
         return out
 
+class StringMapParameter(SchemaParameter):
+    def __init__(self, description, **kwargs):
+        self.value_type = StringParameter("Value")
+        self.jsonType = "object"
+        add_schema = {
+            'additionalProperties': {
+                'type': 'string',
+                'description': "string values"
+            }
+        }
+
+        SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
+
+    def _parse(self, value):
+        return value
+
+
 class ArrayParameter(SchemaParameter):
     def __init__(self, description, element, min_items=0, max_items=None, unique=False, **kwargs):
-        add_schema = { 'items': element.to_schema() }
+        add_schema = {'items': element.to_schema()}
         if min_items > 0:
             add_schema["minItems"] = min_items
         if max_items:

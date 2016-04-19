@@ -5,7 +5,9 @@ from fulfillment_exception import (
 )
 
 from schema import ObjectParameter
+from datazipper import DataZipper
 import re
+import json
 
 #http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
 param_rex = re.compile('((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))')
@@ -14,6 +16,8 @@ def fix_param_name(name):
     return param_rex.sub(r'_\1', name.replace(' ', '_')).lower()
 
 class FulfillmentFunction(object):
+
+    SWF_LIMIT = 32768
 
     def __init__(self, description, parameters, result, handler, default_exception=FulfillmentFailedException):
         self._description = description
@@ -32,13 +36,18 @@ class FulfillmentFunction(object):
             'result': result,
             'status': status,
         }
-        if notes is not None:
+        if notes:
             response['notes'] = notes
-        if trace is not None:
+        if trace:
             response['trace'] = trace
-        if reason is not None:
+        if reason:
             response['reason'] = reason
-        return response
+
+        response_string = json.dumps(response)
+        if len(response_string) > FulfillmentFunction.SWF_LIMIT:
+            return DataZipper.deliver(response_string, FulfillmentFunction.SWF_LIMIT)
+        else:
+            return response
 
     def error_response(self, e):
         return self.make_response(e.response_code, notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
@@ -66,6 +75,9 @@ class FulfillmentFunction(object):
             return (self._result.parse(result), [])
 
     def handle(self, event, context):
+        if type(event) == str:
+            event = json.loads(DataZipper.receive(event))
+
         if 'RETURN_SCHEMA' in event:
             return self._schema
 
