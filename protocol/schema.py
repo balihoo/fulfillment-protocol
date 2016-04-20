@@ -46,10 +46,14 @@ class SchemaParameter(object):
         return value
 
 class StringParameter(SchemaParameter):
-    def __init__(self, description, pattern=None, **kwargs):
+    def __init__(self, description, pattern=None, min_length=None, max_length=None, **kwargs):
         add_schema = {}
         if pattern:
             add_schema['pattern'] = pattern
+        if max_length:
+            add_schema['maxLength'] = int(max_length)
+        if min_length:
+            add_schema['minLength'] = int(min_length)
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
 
     def _parse(self, value):
@@ -156,17 +160,27 @@ class ArrayParameter(SchemaParameter):
         return [self.element.parse(v) for v in value]
 
 class FloatParameter(SchemaParameter):
-    def __init__(self, description, **kwargs):
-        SchemaParameter.__init__(self, description, **kwargs)
+    def __init__(self, description, minimum=None, maximum=None, **kwargs):
         self.jsonType = "number"
+        add_schema = {}
+        if minimum:
+            add_schema["minimum"] = float(minimum)
+        if maximum:
+            add_schema["maximum"] = float(maximum)
+        SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
 
     def _parse(self, value):
         return float(value)
 
 class IntParameter(SchemaParameter):
-    def __init__(self, description, **kwargs):
-        SchemaParameter.__init__(self, description, **kwargs)
+    def __init__(self, description, minimum=None, maximum=None, **kwargs):
         self.jsonType = "integer"
+        add_schema = {}
+        if minimum:
+            add_schema["minimum"] = int(minimum)
+        if maximum:
+            add_schema["maximum"] = int(maximum)
+        SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
 
     def _parse(self, value):
         return int(value)

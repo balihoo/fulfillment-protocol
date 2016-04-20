@@ -45,6 +45,27 @@ class TestSchema(unittest.TestCase):
         self.assertEqual(optional.parse("fish"), "fish")
         self.assertEqual(optional.parse(None), "honey")
 
+    def test_StringParameterLength(self):
+        optional = StringParameter("Beta", min_length=5, max_length=10, default="honey")
+        s = optional.to_schema(True)
+        self.assertEquals(s, {
+            'default': 'honey',
+            'maxLength': 10,
+            'minLength': 5,
+            '$schema': 'http://json-schema.org/draft-04/schema',
+            'type': ['null', 'string'],
+            'description': 'Beta'})
+
+        validate("fishsticks", s)
+        validate(None, s)
+        self.assertRaises(ValidationError, lambda: validate("fish", s))
+        self.assertRaises(ValidationError, lambda: validate(1, s))
+        self.assertRaises(ValidationError, lambda: validate([1, 2, 3], s))
+        self.assertRaises(ValidationError, lambda: validate({"ape": "fur"}, s))
+
+        self.assertEqual(optional.parse("fish"), "fish")
+        self.assertEqual(optional.parse(None), "honey")
+
     def test_ObjectParameter(self):
         obj = ObjectParameter("Erbjerct", properties={
             "one": StringParameter("Uno"),
