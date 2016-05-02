@@ -2,7 +2,6 @@ import traceback
 import sys
 
 class FulfillmentException(Exception):
-    response_code = None
     def __init__(self, message, inner_exception=None, notes=None):
         self.notes = notes
         if inner_exception is not None:
@@ -21,22 +20,30 @@ class FulfillmentException(Exception):
         # return them concatenated, most recent last
         return self._trace + trace
 
+    def response_code(self):
+        raise Exception("Response Code Not Implemented!")
+
 class FulfillmentValidationException(FulfillmentException):
     """ Failure: A retry without fixing the input will not work """
-    response_code = "INVALID"
+    def response_code(self):
+        return "INVALID"
 
 class FulfillmentFatalException(FulfillmentException):
     """ Failure: A retry with the current input will not work """
-    response_code = "FATAL"
+    def response_code(self):
+        return "FATAL"
 
 class FulfillmentFailedException(FulfillmentException):
     """ Cancel: A retry might work """
-    response_code = "FAILED"
+    def response_code(self):
+        return "FAILED"
 
 class FulfillmentErrorException(FulfillmentException):
     """ Cancel: An error was encountered, retry might work """
-    response_code = "ERROR"
+    def response_code(self):
+        return "ERROR"
 
 class FulfillmentDeferException(FulfillmentException):
     """ Cancel: Result not yet available, retry """
-    response_code = "DEFER"
+    def response_code(self):
+        return "DEFER"

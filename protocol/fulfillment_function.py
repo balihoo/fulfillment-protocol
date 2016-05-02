@@ -50,7 +50,7 @@ class FulfillmentFunction(object):
             return response
 
     def error_response(self, e):
-        return self.make_response(e.response_code, notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
+        return self.make_response(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
 
     def success_response(self, result, notes):
         return self.make_response("SUCCESS", notes, result)
