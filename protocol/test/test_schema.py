@@ -3,9 +3,7 @@
 import unittest
 from schema import *
 from pprint import pprint
-from jsonschema import FormatChecker
-from jsonschema import ValidationError
-from jsonschema import validate
+from jsonschema import Draft4Validator
 
 
 class TestSchema(unittest.TestCase):
@@ -16,13 +14,14 @@ class TestSchema(unittest.TestCase):
     def test_StringParameter(self):
         req = StringParameter("Alpha")
         s = req.to_schema(True)
+        validator = Draft4Validator(s)
         self.assertEquals(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'type': 'string',
             'description': 'Alpha'})
 
-        validate("fish", s)
-        self.assertRaises(ValidationError, lambda: validate(None, s))
+        self.assertTrue(validator.is_valid("fish"))
+        self.assertFalse(validator.is_valid(None))
 
         self.assertEqual(req.parse("fish"), "fish")
         self.assertEqual(req.parse(" fish  "), "fish")
@@ -30,17 +29,18 @@ class TestSchema(unittest.TestCase):
     def test_StringParameterOptional(self):
         optional = StringParameter("Beta", required=False, default="honey")
         s = optional.to_schema(True)
+        validator = Draft4Validator(s)
         self.assertEquals(s, {
             'default': 'honey',
             '$schema': 'http://json-schema.org/draft-04/schema',
             'type': ['null', 'string'],
             'description': 'Beta'})
 
-        validate("fish", s)
-        validate(None, s)
-        self.assertRaises(ValidationError, lambda: validate(1, s))
-        self.assertRaises(ValidationError, lambda: validate([1, 2, 3], s))
-        self.assertRaises(ValidationError, lambda: validate({"ape": "fur"}, s))
+        self.assertTrue(validator.is_valid("fish"))
+        self.assertTrue(validator.is_valid(None))
+        self.assertFalse(validator.is_valid(1))
+        self.assertFalse(validator.is_valid([1, 2, 3]))
+        self.assertFalse(validator.is_valid({"ape": "fur"}))
 
         self.assertEqual(optional.parse("fish"), "fish")
         self.assertEqual(optional.parse(None), "honey")
@@ -48,6 +48,7 @@ class TestSchema(unittest.TestCase):
     def test_StringParameterLength(self):
         optional = StringParameter("Beta", min_length=5, max_length=10, default="honey")
         s = optional.to_schema(True)
+        validator = Draft4Validator(s)
         self.assertEquals(s, {
             'default': 'honey',
             'maxLength': 10,
@@ -56,12 +57,12 @@ class TestSchema(unittest.TestCase):
             'type': ['null', 'string'],
             'description': 'Beta'})
 
-        validate("fishsticks", s)
-        validate(None, s)
-        self.assertRaises(ValidationError, lambda: validate("fish", s))
-        self.assertRaises(ValidationError, lambda: validate(1, s))
-        self.assertRaises(ValidationError, lambda: validate([1, 2, 3], s))
-        self.assertRaises(ValidationError, lambda: validate({"ape": "fur"}, s))
+        self.assertTrue(validator.is_valid("fishsticks"))
+        self.assertTrue(validator.is_valid(None))
+        self.assertFalse(validator.is_valid("fish"))
+        self.assertFalse(validator.is_valid(1))
+        self.assertFalse(validator.is_valid([1, 2, 3]))
+        self.assertFalse(validator.is_valid({"ape": "fur"}))
 
         self.assertEqual(optional.parse("fish"), "fish")
         self.assertEqual(optional.parse(None), "honey")
@@ -73,6 +74,7 @@ class TestSchema(unittest.TestCase):
         })
 
         obj_schema = obj.to_schema()
+        validator = Draft4Validator(obj_schema)
 
         self.assertEquals(obj_schema, {'description': 'Erbjerct',
                                        'properties': {'one': {'description': 'Uno', 'type': 'string'},
@@ -85,10 +87,10 @@ class TestSchema(unittest.TestCase):
                    "two": " Soapstone    ",
                    "five": "Shouldn't match anything!"}
 
-        validate(input_1, obj_schema)
+        self.assertTrue(validator.is_valid(input_1))
         self.assertEquals(obj.parse(input_1), {"one": "Alabaster"})
 
-        validate(input_2, obj_schema)
+        self.assertTrue(validator.is_valid(input_2))
         self.assertEquals(obj.parse(input_2), {"one": "Alabaster",
                                                   "two": "Soapstone"})
 
@@ -101,6 +103,7 @@ class TestSchema(unittest.TestCase):
                              required=False)
 
         arr_schema = arr.to_schema()
+        validator = Draft4Validator(arr_schema)
 
         self.assertEquals(arr_schema, {'description': 'A list of same-type items..',
                                        'items': {'description': 'Fruit', 'type': 'string'},
@@ -112,19 +115,20 @@ class TestSchema(unittest.TestCase):
         input_1 = ["one", "two", "three", "four"]
         input_2 = ["one", "two ", "  three", "four"]
 
-        validate(input_1, arr_schema)
+        self.assertTrue(validator.is_valid(input_1))
         self.assertEquals(arr.parse(input_1), input_1)
 
-        validate(input_2, arr_schema)
+        self.assertTrue(validator.is_valid(input_2))
         self.assertEquals(arr.parse(input_2), input_1)
 
-        self.assertRaises(ValidationError, lambda: validate(1, arr_schema))
-        self.assertRaises(ValidationError, lambda: validate(["one", "two"], arr_schema))
-        self.assertRaises(ValidationError, lambda: validate({"one": "two"}, arr_schema))
+        self.assertFalse(validator.is_valid(1))
+        self.assertFalse(validator.is_valid(["one", "two"]))
+        self.assertFalse(validator.is_valid({"one": "two"}))
 
     def test_EnumParameter(self):
         req = EnumParameter("some options!", options=["fish", "cheese", "apple"])
         s = req.to_schema(True)
+        validator = Draft4Validator(s)
         self.assertEquals(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'description': 'some options!',
@@ -132,11 +136,11 @@ class TestSchema(unittest.TestCase):
             'type': 'string'
         })
 
-        validate("fish", s)
-        validate("cheese", s)
-        validate("apple", s)
-        self.assertRaises(ValidationError, lambda: validate("shark", s))
-        self.assertRaises(ValidationError, lambda: validate(None, s))
+        self.assertTrue(validator.is_valid("fish"))
+        self.assertTrue(validator.is_valid("cheese"))
+        self.assertTrue(validator.is_valid("apple"))
+        self.assertFalse(validator.is_valid("shark"))
+        self.assertFalse(validator.is_valid(None))
         self.assertRaises(Exception, lambda: req.parse("albatross"))
 
         self.assertEqual(req.parse("fish"), "fish")
@@ -145,6 +149,7 @@ class TestSchema(unittest.TestCase):
     def test_UriParameter(self):
         req = UriParameter("AN REsource out in the series of tubes")
         s = req.to_schema(True)
+        validator = Draft4Validator(s)
         self.assertEquals(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'description': 'AN REsource out in the series of tubes',
@@ -154,9 +159,69 @@ class TestSchema(unittest.TestCase):
         })
         # pprint(FormatChecker.checkers)
 
-        # validate("http://google.com/blah/stuff", s, format_checker=FormatChecker(formats=['uri']))
-        self.assertRaises(ValidationError, lambda: validate(15, s))
-        self.assertRaises(ValidationError, lambda: validate(None, s))
+        # self.assertTrue(validator.is_valid("http://google.com/blah/stuff", s, format_checker=FormatChecker(formats=['uri']))
+        self.assertFalse(validator.is_valid(15))
+        self.assertFalse(validator.is_valid(None))
+
+    def test_OneOfParameter(self):
+        req = OneOfParameter("Just one of these things is valid!", options=(
+            ArrayParameter("A list of junk", StringParameter("A String", min_length=5)),
+            IntParameter("Some number")
+        ))
+        s = req.to_schema(True)
+        validator = Draft4Validator(s)
+        self.assertEquals(s, {'$schema': 'http://json-schema.org/draft-04/schema',
+                              'description': 'Just one of these things is valid!',
+                              'oneOf': [{'description': 'A list of junk',
+                                         'items': {'description': 'A String',
+                                                   'minLength': 5,
+                                                   'type': 'string'},
+                                         'type': 'array'},
+                                        {'description': 'Some number', 'type': 'integer'}],
+                              'type': ['array', 'integer']})
+
+        self.assertTrue(validator.is_valid(12))
+        self.assertTrue(validator.is_valid(["hello"]))
+        self.assertTrue(validator.is_valid(["hello", "there"]))
+
+        self.assertFalse(validator.is_valid("hello"))
+        self.assertFalse(validator.is_valid(["hello", 1]))
+        self.assertFalse(validator.is_valid(1.2345))
+        for e in validator.iter_errors(1):
+            # print dir(e)
+            print e.message, e.instance,
+            print [c.message for c in e.context]
+        return True
+
+    def test_AnyOfParameter(self):
+        req = AnyOfParameter("Any of these things could be valid!", options=(
+            ArrayParameter("A list of junk", StringParameter("A String", min_length=5)),
+            IntParameter("Some number")
+        ))
+        s = req.to_schema(True)
+        validator = Draft4Validator(s)
+        self.assertEquals(s, {'$schema': 'http://json-schema.org/draft-04/schema',
+                              'description': 'Any of these things could be valid!',
+                              'anyOf': [{'description': 'A list of junk',
+                                         'items': {'description': 'A String',
+                                                   'minLength': 5,
+                                                   'type': 'string'},
+                                         'type': 'array'},
+                                        {'description': 'Some number', 'type': 'integer'}],
+                              'type': ['array', 'integer']})
+
+        self.assertTrue(validator.is_valid(12))
+        self.assertTrue(validator.is_valid(["hello"]))
+        self.assertTrue(validator.is_valid(["hello", "there"]))
+
+        self.assertFalse(validator.is_valid("hello"))
+        self.assertFalse(validator.is_valid(["hello", 1]))
+        self.assertFalse(validator.is_valid(1.2345))
+        for e in validator.iter_errors(1):
+            print dir(e), e.message, e.instance,
+            for c in e.context:
+                print c.message
+        return True
 
 
 if __name__ == '__main__':

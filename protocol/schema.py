@@ -128,7 +128,6 @@ class LooseObjectParameter(SchemaParameter):
 class StringMapParameter(SchemaParameter):
     def __init__(self, description, **kwargs):
         self.value_type = StringParameter("Value")
-        self.jsonType = "object"
         add_schema = {
             'additionalProperties': {
                 'type': 'string',
@@ -137,6 +136,7 @@ class StringMapParameter(SchemaParameter):
         }
 
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
+        self.jsonType = "object"
 
     def _parse(self, value):
         return value
@@ -161,26 +161,26 @@ class ArrayParameter(SchemaParameter):
 
 class FloatParameter(SchemaParameter):
     def __init__(self, description, minimum=None, maximum=None, **kwargs):
-        self.jsonType = "number"
         add_schema = {}
         if minimum:
             add_schema["minimum"] = float(minimum)
         if maximum:
             add_schema["maximum"] = float(maximum)
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
+        self.jsonType = "number"
 
     def _parse(self, value):
         return float(value)
 
 class IntParameter(SchemaParameter):
     def __init__(self, description, minimum=None, maximum=None, **kwargs):
-        self.jsonType = "integer"
         add_schema = {}
         if minimum:
             add_schema["minimum"] = int(minimum)
         if maximum:
             add_schema["maximum"] = int(maximum)
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
+        self.jsonType = "integer"
 
     def _parse(self, value):
         return int(value)
@@ -193,6 +193,23 @@ class NaiveIsoDateParameter(StringParameter):
     def __init__(self, description, **kwargs):
         StringParameter.__init__(self, description, **kwargs)
 
+
+class OneOfParameter(SchemaParameter):
+    def __init__(self, description, options, **kwargs):
+        add_schema = {
+            "oneOf": [o.to_schema() for o in options]
+        }
+        SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
+        self.jsonType = [o.jsonType for o in options]
+
+
+class AnyOfParameter(SchemaParameter):
+    def __init__(self, description, options, **kwargs):
+        add_schema = {
+            "anyOf": [o.to_schema() for o in options]
+        }
+        SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
+        self.jsonType = [o.jsonType for o in options]
 
 class JsonParameter(SchemaParameter):
     def __init__(self, description, **kwargs):
