@@ -15,6 +15,9 @@ class SchemaParameter(object):
         if more_schema is not None:
             self._schema.update(more_schema)
 
+    def simple(self):
+        return self.jsonType not in ('array', 'object')
+
     def is_required(self):
         return self.required
 
@@ -26,7 +29,7 @@ class SchemaParameter(object):
         elif self.jsonType:
             return ["null", self.jsonType]
         else:
-            raise Exception("BLARGH!")
+            raise Exception("Every Schema MUST have a jsonType! ='{}'".format(self.jsonType))
 
     def to_schema(self, include_version=False):
         self._schema['type'] = self._get_type()
@@ -102,8 +105,9 @@ class ObjectParameter(SchemaParameter):
     def _parse(self, value):
         out = {}
         for name, prop in self.properties.iteritems():
-            if name in value:
-                out[name] = prop.parse(value[name])
+            if name not in value and not prop.required:
+                continue
+            out[name] = prop.parse(value.get(name, None))
         return out
 
 class LooseObjectParameter(SchemaParameter):

@@ -20,4 +20,3 @@ class FunctionParams(object):
         if i in self._values:
             return self[i]
         return default
-
