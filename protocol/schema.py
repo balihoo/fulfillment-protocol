@@ -1,3 +1,5 @@
+from resolver import Resolver, ResolverContainer
+
 class SchemaParameter(object):
     def __init__(self, description, required=True, default=None, more_schema=None):
         self.description = description
@@ -105,10 +107,23 @@ class ObjectParameter(SchemaParameter):
     def _parse(self, value):
         out = {}
         for name, prop in self.properties.iteritems():
-            if name not in value and not prop.required:
-                continue
-            out[name] = prop.parse(value.get(name, None))
+            v = prop.parse(value.get(name, None))
+            if v is not None:
+                out[name] = v
         return out
+
+class ResolverObjectParameter(ObjectParameter):
+    def __init__(self, description, properties, resolver_class=Resolver, **kwargs):
+        self.resolver_class = resolver_class
+        ObjectParameter.__init__(self, description, properties, **kwargs)
+
+    def _parse(self, value):
+        out = ResolverContainer()
+        for name, prop in self.properties.iteritems():
+            out.add(name, value.get(name, None), self.resolver_class, prop.parse)
+        return out
+
+
 
 class LooseObjectParameter(SchemaParameter):
     def __init__(self, description, value_type, key_regex='.+', **kwargs):

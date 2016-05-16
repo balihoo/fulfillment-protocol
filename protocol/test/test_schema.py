@@ -223,6 +223,42 @@ class TestSchema(unittest.TestCase):
                 print c.message
         return True
 
+    def test_ResolverObjectParameter(self):
+        obj = ResolverObjectParameter("Erbjerct", properties={
+            "one": StringParameter("Uno"),
+            "two": StringParameter("Dos", required=False),
+            "tres": StringParameter("Tres", default="AMAZING")
+        })
+
+        obj_schema = obj.to_schema()
+        validator = Draft4Validator(obj_schema)
+
+        self.assertEquals(obj_schema, {'description': 'Erbjerct',
+                                       'properties': {'one': {'description': 'Uno', 'type': 'string'},
+                                                      'two': {'description': 'Dos', 'type': ['null', 'string']},
+                                                      'tres': {'default': 'AMAZING',
+                                                               'description': 'Tres',
+                                                               'type': ['null', 'string']},
+                                                      },
+                                       'required': ['one'],
+                                       'type': 'object'})
+
+        input_1 = {"one": "Alabaster"}
+        input_2 = {"one": "Alabaster  ",
+                   "two": "<( return 'alpha' + ' ' + 'omega' ",
+                   "five": "Shouldn't match anything!"}
+
+        self.assertTrue(validator.is_valid(input_1))
+        con1 = obj.parse(input_1)
+        self.assertEquals(con1["one"], "Alabaster")
+
+        self.assertTrue(validator.is_valid(input_2))
+        con2 = obj.parse(input_2)
+        self.assertEquals(con2["two"], "alpha omega")
+
+        self.assertRaises(Exception, lambda x: con2["tomato"])
+
+        self.assertEquals(con2["tres"], "AMAZING")
 
 if __name__ == '__main__':
     unittest.main()

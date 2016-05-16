@@ -46,6 +46,10 @@ class Resolver(object):
         return self.__execute(s[2:], self.evaluation_context)
 
     def __wrap_code(self, code, indentation=4):
+        # Sneak a return in here for single statement
+        if "return" not in code and "\n" not in code:
+            code = "return {}".format(code)
+
         exname = 'exec_return'
         fname = 'resolver_func'
         indent = ' ' * indentation
@@ -96,3 +100,45 @@ class Resolver(object):
             "needsEvaluation": self.needs_evaluation,
             "timeline": self.timeline.to_json()
         }
+
+
+class ResolverWrapper(object):
+    def __init__(self, value, transform=None):
+        self.value = value
+        self.transform = transform
+
+    def get(self, context):
+        if type(self.value) == Resolver:
+            self.value.evaluate()
+            if not self.value.is_resolvable():
+                raise Exception("Never gonna work! {}".format(context))
+            if not self.value.is_resolved():
+                raise Exception("Not resolved yet! {}".format(context))
+            self.value = self.value.get_result()
+
+        if self.transform:
+            return self.transform(self.value)
+        else:
+            return self.value
+
+
+class ResolverContainer(object):
+    def __init__(self):
+        self._items = {}
+
+    def add(self, key, value, resolver_class=Resolver, transform = None):
+        self._items[key] = ResolverWrapper(resolver_class(value) if Resolver.contains_code(value) else value, transform)
+
+    def __contains__(self, name):
+        v = self.__getattr__(name)
+        return v is not None
+
+    def __getitem__(self, name):
+        return self.__getattr__(name)
+
+    def __getattr__(self, name):
+        if name in self._items:
+            return self._items[name].get(name)
+        return None
+        # else:
+        #     raise Exception("Container has no '{}'!".format(name))
