@@ -34,6 +34,14 @@ class TestResolver(unittest.TestCase):
         r.evaluate()
         self.assertEqual(r.result, {"one two three": [1, 2, 3]})
 
+    def test_ExecError(self):
+        r = Resolver({"one two three": "<(return [1, 2, 3"})
+
+        self.assertFalse(r.evaluated)
+        r.evaluate()
+        self.assertEqual(r.timeline.to_json(), [{'eventType': 'ERROR', 'messages': 'Unexpected Exception! ', 'when': '--'}])
+        self.assertEqual(r.result, None)
+
     def test_ResolverContainer(self):
         r = ResolverContainer()
         r.add("stuff", "yes")
@@ -59,6 +67,63 @@ class TestResolver(unittest.TestCase):
         self.assertTrue("stuff" in r)
         self.assertTrue("whaaa_eval" in r)
         self.assertFalse("pickle" in r)
+
+        self.assertEqual(r.to_json(), {'stuff': 'yes', 'things': 'worm', 'whaaa': 'steel', 'whaaa_eval': 'steel'})
+
+        self.assertEqual(r.to_json(True), {'stuff': 'yes',
+                                           'things': {'evaluated': True,
+                                                      'input': "<( 'wo' + 'rm'",
+                                                      'needsEvaluation': True,
+                                                      'resolvable': True,
+                                                      'resolved': True,
+                                                      'result': 'worm',
+                                                      'timeline': []},
+                                           'whaaa': 'steel',
+                                           'whaaa_eval': {'evaluated': True,
+                                                          'input': "<( { 'a' : 'steel', 'b' : 'hammock' }['a']",
+                                                          'needsEvaluation': True,
+                                                          'resolvable': True,
+                                                          'resolved': True,
+                                                          'result': 'steel',
+                                                          'timeline': []}})
+
+    def test_ResolverCompound(self):
+        r = ResolverContainer()
+        r.add("stuff", "yes")
+
+        self.assertEqual(r.stuff, "yes")
+        self.assertEqual(r["stuff"], "yes")
+
+        r.add("things", "<( 'wo' + 'rm'")
+
+        self.assertEqual(r.things, "worm")
+        self.assertEqual(r["things"], "worm")
+
+        r2 = ResolverContainer()
+        r2.add("blue", "<( 5 + 27")
+
+        self.assertEqual(r2.blue, 32)
+
+        r.add("sub", r2)
+
+        self.assertEqual(r.to_json(), {'stuff': 'yes', 'sub': {'blue': 32}, 'things': 'worm'})
+
+        self.assertEqual(r.to_json(True), {'stuff': 'yes',
+                                           'sub': {'blue': {'evaluated': True,
+                                                            'input': '<( 5 + 27',
+                                                            'needsEvaluation': True,
+                                                            'resolvable': True,
+                                                            'resolved': True,
+                                                            'result': 32,
+                                                            'timeline': []}},
+                                           'things': {'evaluated': True,
+                                                      'input': "<( 'wo' + 'rm'",
+                                                      'needsEvaluation': True,
+                                                      'resolvable': True,
+                                                      'resolved': True,
+                                                      'result': 'worm',
+                                                      'timeline': []}})
+
 
 if __name__ == '__main__':
     unittest.main()

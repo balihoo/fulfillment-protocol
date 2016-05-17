@@ -104,30 +104,38 @@ class Resolver(object):
 
 class ResolverWrapper(object):
     def __init__(self, value, transform=None):
-        self.value = value
+        self.resolver = value if type(value) == Resolver else None
+        self.value = value if not self.resolver else None
         self.transform = transform
 
     def get(self, context):
-        if type(self.value) == Resolver:
-            self.value.evaluate()
-            if not self.value.is_resolvable():
+        if self.resolver:
+            self.resolver.evaluate()
+            if not self.resolver.is_resolvable():
                 raise Exception("Never gonna work! {}".format(context))
-            if not self.value.is_resolved():
+            if not self.resolver.is_resolved():
                 raise Exception("Not resolved yet! {}".format(context))
-            self.value = self.value.get_result()
+            self.value = self.resolver.get_result()
 
         if self.transform:
             return self.transform(self.value)
         else:
             return self.value
 
+    def to_json(self, detailed=False):
+        if detailed and self.resolver:
+            return self.resolver.to_json()
+        if hasattr(self.value, 'to_json'):
+            return self.value.to_json(detailed)
+        return self.value
+
 
 class ResolverContainer(object):
     def __init__(self):
         self._items = {}
 
-    def add(self, key, value, resolver_class=Resolver, transform = None):
-        self._items[key] = ResolverWrapper(resolver_class(value) if Resolver.contains_code(value) else value, transform)
+    def add(self, key, value, resolver_class=Resolver, transform=None, skip_resolver=False):
+        self._items[key] = ResolverWrapper(resolver_class(value) if Resolver.contains_code(value) and not skip_resolver else value, transform)
 
     def __contains__(self, name):
         v = self.__getattr__(name)
@@ -139,6 +147,23 @@ class ResolverContainer(object):
     def __getattr__(self, name):
         if name in self._items:
             return self._items[name].get(name)
+        print("Resolver container didn't have '{}'".format(name))
         return None
-        # else:
-        #     raise Exception("Container has no '{}'!".format(name))
+
+    def _resolvers(self):
+        return {name: wrapper.resolver for (name, wrapper) in self._items.iteritems() if wrapper.resolver}
+
+    def evaluate(self):
+        return [resolver.evaluate() for resolver in self._resolvers().itervalues()]
+
+    def all_resolved(self):
+        return not len(self.unresolved())
+
+    def unresolved(self):
+        return [n for n, p in self._resolvers().iteritems() if not p.is_resolved()]
+
+    def impossible(self):
+        return [n for n, p in self._resolvers().iteritems() if not p.is_resolvable()]
+
+    def to_json(self, detailed=False):
+        return {name: v.to_json(detailed) for (name, v) in self._items.iteritems()}

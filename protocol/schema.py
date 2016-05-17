@@ -120,9 +120,8 @@ class ResolverObjectParameter(ObjectParameter):
     def _parse(self, value):
         out = ResolverContainer()
         for name, prop in self.properties.iteritems():
-            out.add(name, value.get(name, None), self.resolver_class, prop.parse)
+            out.add(name, value.get(name, None), self.resolver_class, prop.parse, skip_resolver=type(prop) == ResolverObjectParameter)
         return out
-
 
 
 class LooseObjectParameter(SchemaParameter):
