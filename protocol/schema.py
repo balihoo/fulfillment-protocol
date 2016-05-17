@@ -113,7 +113,8 @@ class ObjectParameter(SchemaParameter):
         return out
 
 class ResolverObjectParameter(ObjectParameter):
-    def __init__(self, description, properties, resolver_class=Resolver, **kwargs):
+    def __init__(self, description, properties, resolver_class=Resolver, extra_type=None, **kwargs):
+        self.extra_type = extra_type
         self.resolver_class = resolver_class
         ObjectParameter.__init__(self, description, properties, **kwargs)
 
@@ -121,6 +122,10 @@ class ResolverObjectParameter(ObjectParameter):
         out = ResolverContainer()
         for name, prop in self.properties.iteritems():
             out.add(name, value.get(name, None), self.resolver_class, prop.parse, skip_resolver=type(prop) == ResolverObjectParameter)
+        if self.extra_type:
+            for name, val in value.iteritems():
+                if name not in out:
+                    out.add(name, val, self.resolver_class, self.extra_type.parse, skip_resolver=type(self.extra_type) == ResolverObjectParameter)
         return out
 
 

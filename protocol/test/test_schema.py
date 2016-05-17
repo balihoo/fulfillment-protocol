@@ -260,5 +260,19 @@ class TestSchema(unittest.TestCase):
 
         self.assertEquals(con2["tres"], "AMAZING")
 
+    def test_ResolverObjectParameterExtra(self):
+        obj = ResolverObjectParameter("Erbjerct", properties={
+            "one": StringParameter("Uno"),
+            "two": StringParameter("Dos", required=False),
+            "tres": StringParameter("Tres", default="AMAZING")
+        }, extra_type=StringParameter("Extra thing"))
+
+        obj_schema = obj.to_schema()
+        validator = Draft4Validator(obj_schema)
+
+        m = obj.parse({"flower": "<( 'apple'", "one": "fine"})
+        self.assertEquals(m.flower, "apple")
+
+
 if __name__ == '__main__':
     unittest.main()

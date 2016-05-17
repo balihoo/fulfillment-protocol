@@ -68,15 +68,17 @@ class Resolver(object):
 
     def evaluate(self):
         if self.evaluated:
-            return
+            return False
 
         self.evaluated = True
 
         try:
             self.result = self._evaluate(self.input)
+            return True
         except Exception, e:
             self.timeline.error("Unexpected Exception! {}".format(e.message))
             self.resolvable = False
+        return False
 
     def get_result(self):
         return self.result
@@ -107,20 +109,21 @@ class ResolverWrapper(object):
         self.resolver = value if type(value) == Resolver else None
         self.value = value if not self.resolver else None
         self.transform = transform
+        if self.transform and not self.resolver:
+            self.value = self.transform(self.value)
 
     def get(self, context):
         if self.resolver:
-            self.resolver.evaluate()
+            if self.resolver.evaluate() and self.resolver.is_resolved():
+                self.value = self.resolver.get_result()
+                if self.transform:
+                    self.value = self.transform(self.value)
             if not self.resolver.is_resolvable():
                 raise Exception("Never gonna work! {}".format(context))
             if not self.resolver.is_resolved():
                 raise Exception("Not resolved yet! {}".format(context))
-            self.value = self.resolver.get_result()
 
-        if self.transform:
-            return self.transform(self.value)
-        else:
-            return self.value
+        return self.value
 
     def to_json(self, detailed=False):
         if detailed and self.resolver:
@@ -138,6 +141,8 @@ class ResolverContainer(object):
         self._items[key] = ResolverWrapper(resolver_class(value) if Resolver.contains_code(value) and not skip_resolver else value, transform)
 
     def __contains__(self, name):
+        if name not in self._items:
+            return False
         v = self.__getattr__(name)
         return v is not None
 

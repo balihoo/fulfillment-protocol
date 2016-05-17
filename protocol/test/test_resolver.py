@@ -68,7 +68,7 @@ class TestResolver(unittest.TestCase):
         self.assertTrue("whaaa_eval" in r)
         self.assertFalse("pickle" in r)
 
-        self.assertEqual(r.to_json(), {'stuff': 'yes', 'things': 'worm', 'whaaa': 'steel', 'whaaa_eval': 'steel'})
+        self.assertEqual(r.to_json(), {'stuff': 'yes', 'things': 'worm', 'whaaa': 'steely', 'whaaa_eval': 'steely'})
 
         self.assertEqual(r.to_json(True), {'stuff': 'yes',
                                            'things': {'evaluated': True,
@@ -78,7 +78,7 @@ class TestResolver(unittest.TestCase):
                                                       'resolved': True,
                                                       'result': 'worm',
                                                       'timeline': []},
-                                           'whaaa': 'steel',
+                                           'whaaa': 'steely',
                                            'whaaa_eval': {'evaluated': True,
                                                           'input': "<( { 'a' : 'steel', 'b' : 'hammock' }['a']",
                                                           'needsEvaluation': True,
