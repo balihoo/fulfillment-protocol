@@ -39,7 +39,7 @@ class TimelineEventType(object):
 class TimelineEvent(object):
     def __init__(self, event_type, messages, when=None):
         self.event_type = event_type
-        self.messages = messages
+        self.messages = messages if type(messages) in (list, tuple) else [messages]
         self.when = when
 
     def to_json(self):
@@ -48,6 +48,9 @@ class TimelineEvent(object):
             "messages": self.messages,
             "when": self.when.isoformat() if self.when else "--"
         }
+
+    def __repr__(self):
+        return "{} {} {}".format(self.event_type, "\n\t".join(self.messages), self.when)
 
     def __cmp__(self, other):
         return self.messages == other.messages
