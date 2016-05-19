@@ -37,7 +37,7 @@ class Resolver(object):
             return {k: self._evaluate(v) for k, v in e.iteritems()}
         elif type(e) in (tuple, list):
             return (self._evaluate(v) for v in e)
-        elif type(e) == str and e.startswith("<("):
+        elif type(e) in (str, unicode) and e.startswith("<("):
             return self._evaluate_str(e)
         else:
             return e
@@ -106,18 +106,21 @@ class Resolver(object):
 
 class ResolverWrapper(object):
     def __init__(self, value, transform=None):
-        self.resolver = value if type(value) == Resolver else None
+        self.resolver = value if isinstance(value, Resolver) else None
         self.value = value if not self.resolver else None
-        self.transform = transform
-        if self.transform and not self.resolver:
-            self.value = self.transform(self.value)
+        self._transform = transform
+        if not self.resolver:
+            self.transform()
+
+    def transform(self):
+        if self._transform:
+            self.value = self._transform(self.value)
 
     def get(self, context):
         if self.resolver:
             if self.resolver.evaluate() and self.resolver.is_resolved():
                 self.value = self.resolver.get_result()
-                if self.transform:
-                    self.value = self.transform(self.value)
+                self.transform()
             if not self.resolver.is_resolvable():
                 raise Exception("Never gonna work! {}".format(context))
             if not self.resolver.is_resolved():

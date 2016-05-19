@@ -75,7 +75,7 @@ class FulfillmentFunction(object):
             return (self._result.parse(result), [])
 
     def handle(self, event, context):
-        if type(event) == str:
+        if type(event) in (str, unicode):
             event = json.loads(DataZipper.receive(event))
 
         if 'LOG_INPUT' in event:
