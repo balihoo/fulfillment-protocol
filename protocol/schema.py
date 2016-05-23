@@ -40,14 +40,14 @@ class SchemaParameter(object):
             schema['$schema'] = "http://json-schema.org/draft-04/schema"
         return schema
 
-    def parse(self, value):
+    def parse(self, value, context=""):
         if value is not None:
-            return self._parse(value)
+            return self._parse(value, context)
         if not self.is_required():
             return self.default
-        raise Exception("Missing required parameter: {}".format(self.description))
+        raise Exception("{}-Missing required parameter (description: {})".format(context, self.description[:40]))
 
-    def _parse(self, value):
+    def _parse(self, value, context):
         return value
 
 class StringParameter(SchemaParameter):
@@ -61,7 +61,7 @@ class StringParameter(SchemaParameter):
             add_schema['minLength'] = int(min_length)
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         return value.strip()
 
 class EnumParameter(SchemaParameter):
@@ -69,7 +69,7 @@ class EnumParameter(SchemaParameter):
         SchemaParameter.__init__(self, description, more_schema={'enum': options}, **kwargs)
         self.options = options
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         v = value.strip()
         if v not in self.options:
             raise Exception("{} is not a valid value for Enum!".format(v))
@@ -80,7 +80,7 @@ class BooleanParameter(SchemaParameter):
         SchemaParameter.__init__(self, description, **kwargs)
         self.jsonType = "boolean"
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         return bool(value)
 
 class UriParameter(SchemaParameter):
@@ -91,7 +91,7 @@ class UriParameter(SchemaParameter):
         }
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         return value.strip()
 
 class ObjectParameter(SchemaParameter):
@@ -104,10 +104,10 @@ class ObjectParameter(SchemaParameter):
         self.properties = properties
         self.jsonType = "object"
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         out = {}
         for name, prop in self.properties.iteritems():
-            v = prop.parse(value.get(name, None))
+            v = prop.parse(value.get(name, None), context+"[{}]".format(name))
             if v is not None:
                 out[name] = v
         return out
@@ -118,14 +118,18 @@ class ResolverObjectParameter(ObjectParameter):
         self.resolver_class = resolver_class
         ObjectParameter.__init__(self, description, properties, **kwargs)
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         out = ResolverContainer()
         for name, prop in self.properties.iteritems():
-            out.add(name, value.get(name, None), self.resolver_class, prop.parse, skip_resolver=type(prop) == ResolverObjectParameter)
+            out.add(name, value.get(name, None), self.resolver_class,
+                    lambda v: prop.parse(v, context+"[{}]".format(name)),
+                    skip_resolver=type(prop) == ResolverObjectParameter)
         if self.extra_type:
             for name, val in value.iteritems():
                 if name not in out:
-                    out.add(name, val, self.resolver_class, self.extra_type.parse, skip_resolver=type(self.extra_type) == ResolverObjectParameter)
+                    out.add(name, val, self.resolver_class,
+                            lambda v: self.extra_type.parse(v, context+"[{}]".format(name)),
+                            skip_resolver=type(self.extra_type) == ResolverObjectParameter)
         return out
 
 
@@ -142,10 +146,10 @@ class LooseObjectParameter(SchemaParameter):
         self.value_type = value_type
         self.jsonType = "object"
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         out = {}
         for name in value:
-            out[name] = self.value_type.parse(value[name])
+            out[name] = self.value_type.parse(value[name], context+"[{}]".format(name))
         return out
 
 class StringMapParameter(SchemaParameter):
@@ -161,7 +165,7 @@ class StringMapParameter(SchemaParameter):
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
         self.jsonType = "object"
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         return value
 
 
@@ -179,8 +183,8 @@ class ArrayParameter(SchemaParameter):
         self.element = element
         self.jsonType = "array"
 
-    def _parse(self, value):
-        return [self.element.parse(v) for v in value]
+    def _parse(self, value, context=""):
+        return [self.element.parse(v, context + "[{}/{}]".format(i, len(value))) for i, v in enumerate(value)]
 
 class FloatParameter(SchemaParameter):
     def __init__(self, description, minimum=None, maximum=None, **kwargs):
@@ -192,7 +196,7 @@ class FloatParameter(SchemaParameter):
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
         self.jsonType = "number"
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         return float(value)
 
 class IntParameter(SchemaParameter):
@@ -205,7 +209,7 @@ class IntParameter(SchemaParameter):
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
         self.jsonType = "integer"
 
-    def _parse(self, value):
+    def _parse(self, value, context=""):
         return int(value)
 
 class IsoDateParameter(StringParameter):
