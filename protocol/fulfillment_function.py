@@ -6,6 +6,7 @@ from fulfillment_exception import (
 
 from schema import ObjectParameter
 from datazipper import DataZipper
+from response import ActivityResponse, ActivityStatus
 import re
 import json
 
@@ -31,29 +32,13 @@ class FulfillmentFunction(object):
         }
         self._exception = default_exception
 
-    def make_response(self, status, notes=None, result=None, trace=None, reason=None):
-        response = {
-            'result': result,
-            'status': status,
-        }
-        if notes:
-            response['notes'] = notes
-        if trace:
-            response['trace'] = trace
-        if reason:
-            response['reason'] = reason
-
-        response_string = json.dumps(response)
-        if len(response_string) > FulfillmentFunction.SWF_LIMIT:
-            return DataZipper.deliver(response_string, FulfillmentFunction.SWF_LIMIT)
-        else:
-            return response
-
     def error_response(self, e):
-        return self.make_response(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
+        return DataZipper.deliver(ActivityResponse(e.response_code, notes=e.notes, result=e.message, trace=e.trace(), reason=e.message).serialize(),
+                                  FulfillmentFunction.SWF_LIMIT)
 
     def success_response(self, result, notes):
-        return self.make_response("SUCCESS", notes, result)
+        return DataZipper.deliver(ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes).serialize(),
+                                  FulfillmentFunction.SWF_LIMIT)
 
     def parse(self, event):
         kwargs = {}
