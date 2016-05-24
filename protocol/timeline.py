@@ -26,7 +26,10 @@ class Timeline(object):
         return [entry.to_json() for entry in self.events]
 
     def __str__(self):
-        return json.dumps(self.to_json)
+        return json.dumps(self.to_json())
+
+    def __len__(self):
+        return len(self.events)
 
 
 class TimelineEventType(object):
