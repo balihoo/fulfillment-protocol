@@ -28,6 +28,9 @@ class Timeline(object):
     def __str__(self):
         return json.dumps(self.to_json)
 
+    def __len__(self):
+        return len(self.events)
+
 
 class TimelineEventType(object):
     NOTE = "NOTE"
