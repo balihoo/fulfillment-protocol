@@ -39,7 +39,7 @@ class TestResolver(unittest.TestCase):
 
         self.assertFalse(r.evaluated)
         r.evaluate()
-        self.assertEqual(r.timeline.to_json(), [{'eventType': 'ERROR', 'messages': ['Unexpected Exception! '], 'when': '--'}])
+        self.assertEqual(r.timeline.events[0].messages, ['Unexpected Exception! '])
         self.assertEqual(r.result, None)
 
     def test_ResolverContainer(self):
