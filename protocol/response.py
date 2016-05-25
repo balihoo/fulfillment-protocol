@@ -37,7 +37,7 @@ class ActivityStatus(object):
 class ActivityResponse(object):
     def __init__(self, status, result=None, notes=None, trace=None, reason=None):
         self.status = status
-        self.activity_result = ActivityResult(result)
+        self.activity_result = result
 
         self.trace = trace or []
         self.notes = notes or []
@@ -69,7 +69,7 @@ class ActivityResponse(object):
         res["status"] = self.status
 
         if self.activity_result:
-            res["result"] = self.activity_result.result()
+            res["result"] = self.activity_result.result() if isinstance(self.activity_result, ActivityResult) else self.activity_result
 
         res["notes"] = self.notes
         res["trace"] = self.trace
