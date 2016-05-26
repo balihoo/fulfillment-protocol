@@ -119,16 +119,22 @@ class ResolverObjectParameter(ObjectParameter):
         ObjectParameter.__init__(self, description, properties, **kwargs)
 
     def _parse(self, value, context=""):
+
+        def wrap_parser(prop, name):
+            scontext = context+"[{}]".format(name)
+
+            def f(v):
+                return prop.parse(v, scontext)
+            return f
+
         out = ResolverContainer()
         for name, prop in self.properties.iteritems():
-            out.add(name, value.get(name, None), self.resolver_class,
-                    lambda v: prop.parse(v, context+"[{}]".format(name)),
+            out.add(name, value.get(name, None), self.resolver_class, wrap_parser(prop, name),
                     skip_resolver=type(prop) == ResolverObjectParameter)
         if self.extra_type:
             for name, val in value.iteritems():
                 if name not in out:
-                    out.add(name, val, self.resolver_class,
-                            lambda v: self.extra_type.parse(v, context+"[{}]".format(name)),
+                    out.add(name, val, self.resolver_class, wrap_parser(self.extra_type, name),
                             skip_resolver=type(self.extra_type) == ResolverObjectParameter)
         return out
 
@@ -223,20 +229,43 @@ class NaiveIsoDateParameter(StringParameter):
 
 class OneOfParameter(SchemaParameter):
     def __init__(self, description, options, **kwargs):
+        self.options = options
         add_schema = {
             "oneOf": [o.to_schema() for o in options]
         }
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
         self.jsonType = [o.jsonType for o in options]
 
+    def _parse(self, value, context):
+        if value is not None:
+            for option in self.options:
+                try:
+                    val = option.parse(value, context+":OneOf:")
+                    if val is not None:
+                        return val
+                except Exception, e:
+                    print("While parsing OneOf. {}:{}".format(e.message, option.description))
+        return False
 
 class AnyOfParameter(SchemaParameter):
     def __init__(self, description, options, **kwargs):
+        self.options = options
         add_schema = {
             "anyOf": [o.to_schema() for o in options]
         }
         SchemaParameter.__init__(self, description, more_schema=add_schema, **kwargs)
         self.jsonType = [o.jsonType for o in options]
+
+    def _parse(self, value, context):
+        if value is not None:
+            for option in self.options:
+                try:
+                    val = option.parse(value, context+":AnyOf:")
+                    if val is not None:
+                        return val
+                except Exception, e:
+                    print("While parsing AnyOf. {}:{}".format(e.message, option.description))
+        return False
 
 class JsonParameter(SchemaParameter):
     def __init__(self, description, **kwargs):

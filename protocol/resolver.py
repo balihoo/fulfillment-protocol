@@ -76,7 +76,7 @@ class Resolver(object):
             self.result = self._evaluate(self.input)
             return True
         except Exception, e:
-            self.timeline.error("Unexpected Exception! {}".format(e.message))
+            self.timeline.error("Unexpected Evaluation Exception! {}".format(e.message))
             self.resolvable = False
         return False
 
@@ -117,7 +117,9 @@ class ResolverWrapper(object):
             self.value = self._transform(self.value)
 
     def get(self, context):
-        if self.resolver:
+        if self.value:
+            return self.value
+        elif self.resolver:
             if self.resolver.evaluate() and self.resolver.is_resolved():
                 self.value = self.resolver.get_result()
                 self.transform()
@@ -141,13 +143,20 @@ class ResolverContainer(object):
         self._items = {}
 
     def add(self, key, value, resolver_class=Resolver, transform=None, skip_resolver=False):
-        self._items[key] = ResolverWrapper(resolver_class(value) if Resolver.contains_code(value) and not skip_resolver else value, transform)
+        if Resolver.contains_code(value) and not skip_resolver:
+            self._items[key] = ResolverWrapper(resolver_class(value), transform)
+            return
+        elif transform:
+            # Transform immediately.. keep any non-none values..
+            transformed = transform(value)
+            if transformed is not None:
+                self._items[key] = ResolverWrapper(transformed)
+                return
+        elif value is not None:
+            self._items[key] = ResolverWrapper(value)
 
     def __contains__(self, name):
-        if name not in self._items:
-            return False
-        v = self.__getattr__(name)
-        return v is not None
+        return self._items.get(name, None) is not None
 
     def __getitem__(self, name):
         return self.__getattr__(name)
