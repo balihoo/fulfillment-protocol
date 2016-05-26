@@ -68,8 +68,8 @@ class ActivityResponse(object):
         res = {}
         res["status"] = self.status
 
-        if self.activity_result:
-            res["result"] = self.activity_result.result() if isinstance(self.activity_result, ActivityResult) else self.activity_result
+        if self.activity_result is not None:
+            res["result"] = self.result()
 
         res["notes"] = self.notes
         res["trace"] = self.trace
@@ -99,8 +99,8 @@ class ActivityResponse(object):
         return json.dumps(self.to_json())
 
     def result(self):
-        if self.activity_result:
-            return self.activity_result.result
+        if self.activity_result is not None:
+            return self.activity_result.result() if isinstance(self.activity_result, ActivityResult) else self.activity_result
         raise Exception("Response has no Activity Result!")
 
     # def resultStringified:String = {
