@@ -33,7 +33,7 @@ class FulfillmentFunction(object):
         self._exception = default_exception
 
     def error_response(self, e):
-        return DataZipper.deliver(ActivityResponse(e.response_code, notes=e.notes, result=e.message, trace=e.trace(), reason=e.message).serialize(),
+        return DataZipper.deliver(ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message).serialize(),
                                   FulfillmentFunction.SWF_LIMIT)
 
     def success_response(self, result, notes):
