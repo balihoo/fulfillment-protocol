@@ -33,12 +33,20 @@ class FulfillmentFunction(object):
         self._exception = default_exception
 
     def error_response(self, e):
-        return DataZipper.deliver(ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message).serialize(),
-                                  FulfillmentFunction.SWF_LIMIT)
+        response = ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
+        response_json = response.to_json()
+        response_text = json.dumps(response_json)
+        if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
+            return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
+        return response_json
 
     def success_response(self, result, notes):
-        return DataZipper.deliver(ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes).serialize(),
-                                  FulfillmentFunction.SWF_LIMIT)
+        response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
+        response_json = response.to_json()
+        response_text = json.dumps(response_json)
+        if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
+            return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
+        return response_json
 
     def parse(self, event):
         kwargs = {}

@@ -110,7 +110,7 @@ class ActivityResponse(object):
     @classmethod
     def from_json(cls, obj):
         if type(obj) is not dict:
-            raise Exception("Invalid Response Format! (not an obj)")
+            raise Exception("Invalid Response Format! (not an obj was {})".format(type(obj)))
 
         if "status" not in obj:
             raise Exception("Invalid Response Format! (no status)")
