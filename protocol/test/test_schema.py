@@ -94,6 +94,34 @@ class TestSchema(unittest.TestCase):
         self.assertEquals(obj.parse(input_2), {"one": "Alabaster",
                                                   "two": "Soapstone"})
 
+        dobj = ObjectParameter("All defaults", properties={
+            "fruit": StringParameter("The name of a fruit", default="kiwi"),
+            "vegetable": StringParameter("The name of a vegetable", default="celery")
+        }, default={})
+
+        dobj_schema = dobj.to_schema()
+        dvalidator = Draft4Validator(dobj_schema)
+
+        self.assertEquals(dobj_schema, {'default': {},
+                                        'description': 'All defaults',
+                                        'properties': {'fruit': {'default': 'kiwi',
+                                                                 'description': 'The name of a fruit',
+                                                                 'type': ['null', 'string']},
+                                                       'vegetable': {'default': 'celery',
+                                                                     'description': 'The name of a vegetable',
+                                                                     'type': ['null', 'string']}},
+                                        'required': [],
+                                        'type': ['null', 'object']})
+
+        input_1 = None
+        input_2 = {"fruit": "blueberry"}
+
+        self.assertTrue(dvalidator.is_valid(input_1))
+        self.assertEquals(dobj.parse(input_1), {'fruit': 'kiwi', 'vegetable': 'celery'})
+
+        self.assertTrue(dvalidator.is_valid(input_2))
+        self.assertEquals(dobj.parse(input_2), {'fruit': 'blueberry', 'vegetable': 'celery'})
+
     def test_ArrayParameter(self):
         arr = ArrayParameter("A list of same-type items..",
                              element=StringParameter("Fruit"),

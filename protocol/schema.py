@@ -44,7 +44,7 @@ class SchemaParameter(object):
         if value is not None:
             return self._parse(value, context)
         if not self.is_required():
-            return self.default
+            return self._parse(self.default, context+"/-default-/") if self.default is not None else self.default
         raise Exception("{}-Missing required parameter (description: {})".format(context, self.description[:40]))
 
     def _parse(self, value, context):
