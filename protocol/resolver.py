@@ -131,10 +131,15 @@ class ResolverWrapper(object):
         return self.value
 
     def to_json(self, detailed=False):
-        if detailed and self.resolver:
-            return self.resolver.to_json()
+        if detailed:
+            if self.resolver:
+                return self.resolver.to_json()
+        if self.resolver and not self.resolver.is_resolved():
+            raise Exception("Value is unresolved!")
         if hasattr(self.value, 'to_json'):
             return self.value.to_json(detailed)
+        if self.value is None:
+            raise Exception("Value is NONE!!")
         return self.value
 
 
