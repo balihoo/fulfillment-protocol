@@ -1,4 +1,3 @@
-
 from timeline import Timeline
 
 
@@ -131,9 +130,8 @@ class ResolverWrapper(object):
         return self.value
 
     def to_json(self, detailed=False):
-        if detailed:
-            if self.resolver:
-                return self.resolver.to_json()
+        if detailed and self.resolver:
+           return self.resolver.to_json()
         if self.resolver and not self.resolver.is_resolved():
             raise Exception("Value is unresolved!")
         if hasattr(self.value, 'to_json'):
@@ -176,7 +174,7 @@ class ResolverContainer(object):
         return {name: wrapper.resolver for (name, wrapper) in self._items.iteritems() if wrapper.resolver}
 
     def evaluate(self):
-        return [resolver.evaluate() for resolver in self._resolvers().itervalues()]
+        return [item.get('evaluating') for item in self._items.itervalues()]
 
     def all_resolved(self):
         return not len(self.unresolved())
