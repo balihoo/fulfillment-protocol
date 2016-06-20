@@ -8,7 +8,7 @@ class FulfillmentException(Exception):
             #this is the trace of the inner exception
             exparms = sys.exc_info()
             self._trace = traceback.format_exception(*exparms)
-            message += ": " + str(inner_exception.message)
+            message = "{}: {}".format(message, inner_exception.message)
         else:
             self._trace = []
         super(FulfillmentException, self).__init__(message)
