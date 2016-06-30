@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# -*- coding: utf-8 -*-
 import json
 import pprint
 import unittest
@@ -59,7 +59,7 @@ class TestResolver(unittest.TestCase):
         self.assertEqual(r.whaaa, "steely")
         self.assertEqual(r["whaaa"], "steely")
 
-        r.add("whaaa_eval", "<( { 'a' : 'steel', 'b' : 'hammock' }['a']", transform=lambda x: x+"y")
+        r.add("whaaa_eval", "<( { 'a' : 'steel', 'b' : 'hammock®' }['a']", transform=lambda x: x+"y")
 
         self.assertEqual(r.whaaa_eval, "steely")
         self.assertEqual(r["whaaa_eval"], "steely")
@@ -80,7 +80,7 @@ class TestResolver(unittest.TestCase):
                                                       'timeline': []},
                                            'whaaa': 'steely',
                                            'whaaa_eval': {'evaluated': True,
-                                                          'input': "<( { 'a' : 'steel', 'b' : 'hammock' }['a']",
+                                                          'input': "<( { 'a' : 'steel', 'b' : 'hammock®' }['a']",
                                                           'needsEvaluation': True,
                                                           'resolvable': True,
                                                           'resolved': True,

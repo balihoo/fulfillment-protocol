@@ -9,16 +9,19 @@ class ReturnException(Exception):
 class Resolver(object):
 
     @classmethod
-    def is_code(cls, s):
-        return str(s).startswith("<(")
+    def _is_code(cls, s):
+        return s.startswith("<(")
 
     @classmethod
     def contains_code(cls, s):
-        if type(s) == dict:
+        t = type(s)
+        if t in (str, unicode):
+            return cls._is_code(s)
+        if t == dict:
             return any([cls.contains_code(i) for i in s.itervalues()])
-        if type(s) in (tuple, list):
+        if t in (tuple, list):
             return any([cls.contains_code(i) for i in s])
-        return cls.is_code(s)
+        return False
 
     def __init__(self, input):
         self.input = input
