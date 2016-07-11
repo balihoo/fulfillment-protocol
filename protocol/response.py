@@ -43,9 +43,9 @@ class ActivityResponse(object):
         self.notes = notes or []
         self.reason = reason
 
-        # self.cache_key = None
-        # self.cache_time = None
-        # self.cache_expiration = None
+        self.cache_key = None
+        self.cache_time = None
+        self.cache_expiration = None
 
         self.instance = None
         self.run_id = None
@@ -75,16 +75,15 @@ class ActivityResponse(object):
         res["trace"] = self.trace
         res["reason"] = self.reason
 
-        # if(cacheKey.isDefined) {
-        #     res("cache") = Json.obj(
-        #         "key" -> cacheKey.get,
-        #         "cached" -> cacheTime.get.toString,
-        #         "expires" -> cacheExpiration.get.toString,
-        #         "runId" -> Json.toJson(runId.getOrElse("--")),
-        #         "workflowId" -> Json.toJson(workflowId.getOrElse("--")),
-        #         "sectionName" -> Json.toJson(sectionName.getOrElse("--"))
-        #     )
-        # }
+        if self.cache_key:
+            res["cache"] = {
+                "key": self.cache_key,
+                "cached": str(self.cache_time),
+                "expires": str(self.cache_expiration),
+                "runId": self.run_id,
+                "workflowId": self.workflow_id,
+                "sectionName": self.section_name
+            }
 
         if self.instance:
             res["instance"] = self.instance
@@ -120,30 +119,20 @@ class ActivityResponse(object):
         if "result" in obj:
             response.activity_result = ActivityResult(obj["result"])
 
-        if "notes" in obj:
-            response.notes.extend(obj["notes"])
+        response.notes.extend(obj.get("notes", []))
 
-        if "trace" in obj:
-            response.trace.extend(obj["trace"])
+        response.trace.extend(obj.get("trace", []))
 
-        if "instance" in obj:
-            response.instance = obj["instance"]
+        response.instance = obj.get("instance", None)
 
-        # if(obj.value.contains("cache")) {
-        #     val cache = obj.value("cache").as[JsObject]
-        #     response.cacheKey = Some(cache.value("key").as[JsString].value)
-        #     response.cacheTime = Some(new DateTime(cache.value("cached").as[JsString].value))
-        #     response.cacheExpiration = Some(new DateTime(cache.value("expires").as[JsString].value))
-        #     if(cache.value.contains("runId")) {
-        #         response.runId = Some(cache.value("runId").as[JsString].value)
-        #     }
-        #     if(cache.value.contains("workflowId")) {
-        #         response.workflowId = Some(cache.value("workflowId").as[JsString].value)
-        #     }
-        #     if(cache.value.contains("sectionName")) {
-        #         response.sectionName = Some(cache.value("sectionName").as[JsString].value)
-        #     }
-        # }
+        if "cache" in obj:
+            cache = obj["cache"]
+            response.cache_key = cache["key"]
+            response.cache_time = cache["cached"]
+            response.cache_expiration = cache["expires"]
+            response.run_id = cache.get("runId", None)
+            response.workflow_id = cache.get("workflowId", None)
+            response.section_name = cache.get("sectionName", None)
 
         return response
 
