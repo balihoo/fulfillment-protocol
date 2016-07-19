@@ -1,5 +1,5 @@
 from timeline import Timeline
-
+import exec_functions
 
 class ReturnException(Exception):
     def __init__(self, value):
@@ -7,10 +7,11 @@ class ReturnException(Exception):
 
 
 class Resolver(object):
+    CODE_START = "<("
 
     @classmethod
     def _is_code(cls, s):
-        return s.startswith("<(")
+        return s.startswith(Resolver.CODE_START)
 
     @classmethod
     def contains_code(cls, s):
@@ -27,7 +28,7 @@ class Resolver(object):
         self.input = input
         self.timeline = Timeline()
         self.record = None
-        self.evaluation_context = {}
+        self.evaluation_context = exec_functions.json_utils
         self.needs_evaluation = self.contains_code(input)
 
         self.evaluated = not self.needs_evaluation
@@ -38,14 +39,15 @@ class Resolver(object):
         if type(e) == dict:
             return {k: self._evaluate(v) for k, v in e.iteritems()}
         elif type(e) in (tuple, list):
+            if e and e[0] == Resolver.CODE_START:
+                return self._evaluate("\n".join(e))
             return (self._evaluate(v) for v in e)
-        elif type(e) in (str, unicode) and e.startswith("<("):
+        elif type(e) in (str, unicode) and self._is_code(e):
             return self._evaluate_str(e)
-        else:
-            return e
+        return e
 
     def _evaluate_str(self, s):
-        return self.__execute(s[2:], self.evaluation_context)
+        return self.__execute(s[len(Resolver.CODE_START):], self.evaluation_context)
 
     def __wrap_code(self, code, indentation=4):
         # Sneak a return in here for single statement
@@ -64,6 +66,7 @@ class Resolver(object):
         wcode, exname = self.__wrap_code(code)
         # print(wcode)
         try:
+            outside_vars.update(dict(__builtins__={}))
             exec wcode in outside_vars, {exname: ReturnException}
         except ReturnException, e:
             return e.value
@@ -78,7 +81,7 @@ class Resolver(object):
             self.result = self._evaluate(self.input)
             return True
         except Exception, e:
-            self.timeline.error("Unexpected Evaluation Exception! {}".format(e.message))
+            self.timeline.error("Unexpected Evaluation Exception! {}".format(e))
             self.resolvable = False
         return False
 

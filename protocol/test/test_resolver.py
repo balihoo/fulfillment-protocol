@@ -27,6 +27,18 @@ class TestResolver(unittest.TestCase):
         r.evaluate()
         self.assertEqual(r.result, [1, 2, 3])
 
+    def test_ExecMultiLine(self):
+        r = Resolver([
+            "<(",
+            "def func(things):",
+            "  return s2j('[1,2,{}]'.format(things))",
+            "return func('3')"
+        ])
+
+        self.assertFalse(r.evaluated)
+        r.evaluate()
+        self.assertEqual(r.result, [1, 2, 3])
+
     def test_ExecCompound(self):
         r = Resolver({"one two three": "<(return [1, 2, 3]"})
 
@@ -39,7 +51,7 @@ class TestResolver(unittest.TestCase):
 
         self.assertFalse(r.evaluated)
         r.evaluate()
-        self.assertEqual(r.timeline.events[0].messages, ['Unexpected Evaluation Exception! '])
+        self.assertEqual(r.timeline.events[0].messages, ['Unexpected Evaluation Exception! invalid syntax (<string>, line 3)'])
         self.assertEqual(r.result, None)
 
     def test_ResolverContainer(self):
