@@ -1,10 +1,33 @@
 from timeline import Timeline
 import exec_functions
+import signal
+
+class TimeOut():
+    def __init__(self, seconds):
+        self.timeout = seconds
+        self.goahead = True
+
+    def __enter__(self):
+        def h(s,f):
+            raise Exception("TIMEOUT")
+
+        try:
+            self.oldh = signal.signal(signal.SIGALRM, h)
+        except ValueError as e:
+            self.goahead = False
+            print("running without timeout")
+
+        if self.goahead:
+            signal.setitimer(signal.ITIMER_REAL, self.timeout)
+
+    def __exit__(self, type, value, traceback):
+        if self.goahead:
+            signal.setitimer(signal.ITIMER_REAL, 0)
+            signal.signal(signal.SIGALRM, self.oldh)
 
 class ReturnException(Exception):
     def __init__(self, value):
         self.value = value
-
 
 class Resolver(object):
     CODE_START = "<("
@@ -24,16 +47,19 @@ class Resolver(object):
             return any([cls.contains_code(i) for i in s])
         return False
 
-    def __init__(self, input):
+    def __init__(self, input, timeout_sec=5):
+        self.timeout = timeout_sec
         self.input = input
         self.timeline = Timeline()
         self.record = None
-        self.evaluation_context = exec_functions.json_utils
+        self.evaluation_context = exec_functions.safe_builtins
+        self.evaluation_context.update(exec_functions.json_utils)
         self.needs_evaluation = self.contains_code(input)
 
         self.evaluated = not self.needs_evaluation
         self.result = input if self.evaluated else None
         self.resolvable = True
+        self.resolved = False
 
     def _evaluate(self, e):
         if type(e) == dict:
@@ -64,10 +90,11 @@ class Resolver(object):
 
     def __execute(self, code, outside_vars):
         wcode, exname = self.__wrap_code(code)
-        # print(wcode)
+        outside_vars.update(dict(__builtins__={}))
+
         try:
-            outside_vars.update(dict(__builtins__={}))
-            exec wcode in outside_vars, {exname: ReturnException}
+            with TimeOut(seconds=self.timeout):
+                exec wcode in outside_vars, {exname: ReturnException}
         except ReturnException, e:
             return e.value
 
@@ -79,17 +106,18 @@ class Resolver(object):
 
         try:
             self.result = self._evaluate(self.input)
-            return True
+            self.resolved = True
+            return self.result
         except Exception, e:
-            self.timeline.error("Unexpected Evaluation Exception! {}".format(e))
+            self.timeline.error("Error in script: {}".format(e))
             self.resolvable = False
-        return False
+            return None
 
     def get_result(self):
         return self.result
 
     def is_resolved(self):
-        return self.result is not None
+        return self.resolved
 
     def is_resolvable(self):
         return self.resolvable
@@ -108,6 +136,10 @@ class Resolver(object):
             "timeline": self.timeline.to_json()
         }
 
+    def first_msg(self):
+        evts = self.timeline.events
+        if evts and evts[0].messages:
+            return evts[0].messages[0]
 
 class ResolverWrapper(object):
     def __init__(self, value, transform=None):

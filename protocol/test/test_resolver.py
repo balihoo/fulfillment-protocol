@@ -17,27 +17,71 @@ class TestResolver(unittest.TestCase):
 
     def test_Basic(self):
         r = Resolver("stuff")
-
         self.assertTrue(r.evaluated)
 
     def test_ExecSimple(self):
         r = Resolver("<(return [1, 2, 3]")
-
         self.assertFalse(r.evaluated)
-        r.evaluate()
-        self.assertEqual(r.result, [1, 2, 3])
+        self.assertEqual(r.evaluate(), [1, 2, 3])
 
     def test_ExecMultiLine(self):
-        r = Resolver([
-            "<(",
+        r = Resolver(["<(",
             "def func(things):",
             "  return s2j('[1,2,{}]'.format(things))",
             "return func('3')"
-        ])
+        ]).evaluate()
+        self.assertEqual(r, [1, 2, 3])
 
-        self.assertFalse(r.evaluated)
-        r.evaluate()
-        self.assertEqual(r.result, [1, 2, 3])
+    def test_ExecBadBuiltins(self):
+        r = Resolver(["<(",
+            "with open('foo') as f:",
+            "  f.write('bar')"
+        ])
+        self.assertEqual(r.evaluate(), None)
+        self.assertEqual(r.first_msg(), "Error in script: global name 'open' is not defined")
+
+    def test_ExecImport(self):
+        r = Resolver("<(\nimport json")
+        self.assertEqual(r.evaluate(), None)
+        self.assertFalse(r.is_resolved())
+        self.assertEqual(r.first_msg(), "Error in script: __import__ not found")
+
+    def test_ExecGenerator(self):
+        res = Resolver(["<(",
+            "def fib(n):",
+            "    a, b = 0, 1",
+            "    for _ in xrange(n):",
+            "        yield a",
+            "        a, b = b, a + b",
+            "return list(fib(10))"
+        ]).evaluate()
+        self.assertEqual(res, [0, 1, 1, 2, 3, 5, 8, 13, 21, 34])
+
+    def test_ExecRecursion(self):
+        res = Resolver(["<(",
+            "def fib(n, a=0, b=1):",
+            "  return fib(n-1, b, a+b) if n > 0 else a",
+            "return fib(10)"
+        ]).evaluate()
+        self.assertEqual(res, 55)
+
+    def test_InfiniteLoop(self):
+        r = Resolver(["<(",
+            "while True:",
+            "  pass"
+        ], timeout_sec=1)
+        self.assertEqual(r.evaluate(), None)
+        self.assertFalse(r.is_resolved())
+        self.assertEqual(r.first_msg(), "Error in script: TIMEOUT")
+
+    def test_ExecException(self):
+        res = Resolver(["<(",
+            "try:",
+            "  return 0 / 0",
+            "except ZeroDivisionError as z:",
+            "  return 'divide by zero'"
+        ]).evaluate()
+        self.assertEqual(res, 'divide by zero')
 
     def test_ExecCompound(self):
         r = Resolver({"one two three": "<(return [1, 2, 3]"})
@@ -51,7 +95,7 @@ class TestResolver(unittest.TestCase):
 
         self.assertFalse(r.evaluated)
         r.evaluate()
-        self.assertEqual(r.timeline.events[0].messages, ['Unexpected Evaluation Exception! invalid syntax (<string>, line 3)'])
+        self.assertEqual(r.first_msg(), 'Error in script: invalid syntax (<string>, line 3)')
         self.assertEqual(r.result, None)
 
     def test_ResolverContainer(self):
