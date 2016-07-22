@@ -98,6 +98,18 @@ class TestResolver(unittest.TestCase):
         self.assertEqual(r.first_msg(), 'Error in script: invalid syntax (<string>, line 3)')
         self.assertEqual(r.result, None)
 
+    def test_ExecSectionGen(self):
+        res = Resolver(["<(",
+            "r = range(65,91)",
+            "names = [chr(a)+chr(b) for a in r for b in r]",
+            "def valsec(value):",
+            "  return { 'value': '#prefix#_{}'.format(value) }",
+            "return j2s({",
+            "  'sections': { name:valsec(name) for name in names }",
+            "})"
+        ]).evaluate()
+        self.assertEqual(len(res), 21646)
+
     def test_ResolverContainer(self):
         r = ResolverContainer()
         r.add("stuff", "yes")
