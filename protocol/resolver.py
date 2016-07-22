@@ -67,7 +67,8 @@ class Resolver(object):
             self.resolved = True
             return self.result
         except Exception, e:
-            self.timeline.error("Error in script: {}".format(e))
+            msg = "Error in script: {}".format(e)
+            self.timeline.error(msg)
             self.resolvable = False
             return None
 
