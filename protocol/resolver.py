@@ -161,7 +161,7 @@ class ResolverWrapper(object):
             if not self.resolver.is_resolved():
                 self.value = self.resolver.evaluate()
                 if not self.resolver.is_resolvable():
-                    raise Exception("Never gonna work! {}".format(context))
+                    raise Exception("Never gonna work! {}. Timeline: {}".format(context, self.resolver.timeline))
                 if not self.resolver.is_resolved():
                     raise Exception("Not resolved yet! {}".format(context))
                 self.transform()
