@@ -59,15 +59,25 @@ class Resolver(object):
         self.evaluated = not self.needs_evaluation
         self.result = input if self.evaluated else None
         self.resolvable = True
-        self.resolved = False
+        self.resolved = not self.needs_evaluation
 
     def _evaluate(self, e):
+        try:
+            self.result = self.__evaluate(e)
+            self.resolved = True
+            return self.result
+        except Exception, e:
+            self.timeline.error("Error in script: {}".format(e))
+            self.resolvable = False
+            return None
+
+    def __evaluate(self, e):
         if type(e) == dict:
-            return {k: self._evaluate(v) for k, v in e.iteritems()}
+            return {k: self.__evaluate(v) for k, v in e.iteritems()}
         elif type(e) in (tuple, list):
             if e and e[0] == Resolver.CODE_START:
-                return self._evaluate("\n".join(e))
-            return (self._evaluate(v) for v in e)
+                return self.__evaluate("\n".join(e))
+            return (self.__evaluate(v) for v in e)
         elif type(e) in (str, unicode) and self._is_code(e):
             return self._evaluate_str(e)
         return e
@@ -100,18 +110,10 @@ class Resolver(object):
 
     def evaluate(self):
         if self.evaluated:
-            return False
+            return self.result
 
         self.evaluated = True
-
-        try:
-            self.result = self._evaluate(self.input)
-            self.resolved = True
-            return self.result
-        except Exception, e:
-            self.timeline.error("Error in script: {}".format(e))
-            self.resolvable = False
-            return None
+        return self._evaluate(self.input)
 
     def get_result(self):
         return self.result
@@ -130,7 +132,7 @@ class Resolver(object):
             "input": self.input,
             "result": self.result,
             "resolvable": self.resolvable,
-            "resolved": self.result is not None,
+            "resolved": self.is_resolved(),
             "evaluated": self.evaluated,
             "needsEvaluation": self.needs_evaluation,
             "timeline": self.timeline.to_json()
@@ -154,17 +156,14 @@ class ResolverWrapper(object):
             self.value = self._transform(self.value)
 
     def get(self, context):
-        if self.value:
-            return self.value
-        elif self.resolver:
-            if self.resolver.evaluate() and self.resolver.is_resolved():
-                self.value = self.resolver.get_result()
-                self.transform()
-            if not self.resolver.is_resolvable():
-                raise Exception("Never gonna work! {}".format(context))
+        if self.resolver:
             if not self.resolver.is_resolved():
-                raise Exception("Not resolved yet! {}".format(context))
-
+                self.value = self.resolver.evaluate()
+                if not self.resolver.is_resolvable():
+                    raise Exception("Never gonna work! {}".format(context))
+                if not self.resolver.is_resolved():
+                    raise Exception("Not resolved yet! {}".format(context))
+                self.transform()
         return self.value
 
     def to_json(self, detailed=False):
