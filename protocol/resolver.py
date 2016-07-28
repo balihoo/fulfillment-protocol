@@ -52,7 +52,8 @@ class Resolver(object):
         self.input = input
         self.timeline = Timeline()
         self.record = None
-        self.evaluation_context = exec_functions.safe_builtins
+        self.evaluation_context = {}
+        self.evaluation_context.update(exec_functions.safe_builtins)
         self.evaluation_context.update(exec_functions.json_utils)
         self.needs_evaluation = self.contains_code(input)
 
