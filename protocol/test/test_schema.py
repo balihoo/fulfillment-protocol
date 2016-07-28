@@ -9,7 +9,7 @@ from jsonschema import Draft4Validator
 class TestSchema(unittest.TestCase):
 
     def setUp(self):
-        pass
+        self.maxDiff = None
 
     def test_StringParameter(self):
         req = StringParameter("Alpha")
@@ -252,7 +252,7 @@ class TestSchema(unittest.TestCase):
         return True
 
     def test_ResolverObjectParameter(self):
-        obj = ResolverObjectParameter("Erbjerct", properties={
+        obj = ResolverObjectParameter("Erbjerct", "Erbject description", properties={
             "one": StringParameter("Uno"),
             "two": StringParameter("Dos", required=False),
             "tres": StringParameter("Tres", default="AMAZING"),
@@ -265,7 +265,7 @@ class TestSchema(unittest.TestCase):
         obj_schema = obj.to_schema()
         validator = Draft4Validator(obj_schema)
 
-        self.assertEquals(obj_schema, {'description': 'Erbjerct',
+        self.assertEquals(obj_schema, {'description': 'Erbject description',
                                        'properties': {'one': {'description': 'Uno', 'type': 'string'},
                                                       'two': {'description': 'Dos', 'type': ['null', 'string']},
                                                       'tres': {'default': 'AMAZING',
@@ -310,16 +310,16 @@ class TestSchema(unittest.TestCase):
         except Exception, e:
             message = e.message
 
-        self.assertEqual("[one]-Missing required parameter (description: Uno)", message)
+        self.assertEqual("Erbjerct/[one]-Missing required parameter (description: Uno)", message)
 
         try:
             obj.parse(input_4)
         except Exception, e:
             message = e.message
-        self.assertEqual("[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", message)
+        self.assertEqual("Erbjerct/[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", message)
 
     def test_ResolverObjectParameterExtra(self):
-        obj = ResolverObjectParameter("Erbjerct", properties={
+        obj = ResolverObjectParameter("Erbjerct", "Erbjerct description", properties={
             "one": StringParameter("Uno"),
             "two": StringParameter("Dos", required=False),
             "tres": StringParameter("Tres", default="AMAZING")

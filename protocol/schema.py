@@ -113,21 +113,22 @@ class ObjectParameter(SchemaParameter):
         return out
 
 class ResolverObjectParameter(ObjectParameter):
-    def __init__(self, description, properties, resolver_class=Resolver, extra_type=None, **kwargs):
+    def __init__(self, context, description, properties, resolver_class=Resolver, extra_type=None, **kwargs):
         self.extra_type = extra_type
         self.resolver_class = resolver_class
+        self._context = context
         ObjectParameter.__init__(self, description, properties, **kwargs)
 
     def _parse(self, value, context=""):
 
         def wrap_parser(prop, name):
-            scontext = context+"[{}]".format(name)
+            scontext = "{}/{}[{}]".format(self._context, context, name)
 
             def f(v):
                 return prop.parse(v, scontext)
             return f
 
-        out = ResolverContainer()
+        out = ResolverContainer(self._context)
         for name, prop in self.properties.iteritems():
             out.add(name, value.get(name, None), self.resolver_class, wrap_parser(prop, name),
                     skip_resolver=type(prop) == ResolverObjectParameter)

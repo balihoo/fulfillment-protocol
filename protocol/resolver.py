@@ -160,15 +160,15 @@ class ResolverWrapper(object):
             if not self.resolver.is_resolved():
                 self.value = self.resolver.evaluate()
                 if not self.resolver.is_resolvable():
-                    raise Exception("Never gonna work! {}".format(context))
+                    raise Exception("{} is not resolvable!".format(context))
                 if not self.resolver.is_resolved():
-                    raise Exception("Not resolved yet! {}".format(context))
+                    raise Exception("{} is NOT resolved yet!".format(context))
                 self.transform()
         return self.value
 
     def to_json(self, detailed=False):
         if detailed and self.resolver:
-           return self.resolver.to_json()
+            return self.resolver.to_json()
         if self.resolver and not self.resolver.is_resolved():
             raise Exception("Value is unresolved!")
         if hasattr(self.value, 'to_json'):
@@ -179,8 +179,10 @@ class ResolverWrapper(object):
 
 
 class ResolverContainer(object):
-    def __init__(self):
+    def __init__(self, context=None):
         self._items = {}
+        self._context = context if context is not None else "-"
+        self.timeline = Timeline()
 
     def add(self, key, value, resolver_class=Resolver, transform=None, skip_resolver=False):
         if Resolver.contains_code(value) and not skip_resolver:
@@ -195,6 +197,9 @@ class ResolverContainer(object):
         elif value is not None:
             self._items[key] = ResolverWrapper(value)
 
+    def _build_context(self, c):
+        return "{}/{}".format(self._context, c)
+
     def __contains__(self, name):
         return self._items.get(name, None) is not None
 
@@ -203,15 +208,19 @@ class ResolverContainer(object):
 
     def __getattr__(self, name):
         if name in self._items:
-            return self._items[name].get(name)
-        print("Resolver container didn't have '{}'".format(name))
+            try:
+                return self._items[name].get(self._build_context(name))
+            except Exception, e:
+                self.timeline.error("Resolver Error! {}".format(e.message))
+        else:
+            self.timeline.warning("Resolver container ({}) didn't have '{}'".format(self._context, name))
         return None
 
     def _resolvers(self):
         return {name: wrapper.resolver for (name, wrapper) in self._items.iteritems() if wrapper.resolver}
 
     def evaluate(self):
-        return [item.get('evaluating') for item in self._items.itervalues()]
+        return [item.get(self._build_context('evaluating({})'.format(name))) for (name, item) in self._items.iteritems()]
 
     def all_resolved(self):
         return not len(self.unresolved())
