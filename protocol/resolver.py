@@ -1,6 +1,8 @@
 from timeline import Timeline
 import exec_functions
+import traceback
 import signal
+import sys
 
 class TimeOut():
     def __init__(self, seconds):
@@ -102,6 +104,7 @@ class Resolver(object):
 
     def __execute(self, code, outside_vars):
         wcode, exname = self.__wrap_code(code)
+        self.timeline.note(["Generated Code:", wcode])
         outside_vars.update(dict(__builtins__={}))
 
         try:
@@ -109,6 +112,16 @@ class Resolver(object):
                 exec wcode in outside_vars, {exname: ReturnException}
         except ReturnException, e:
             return e.value
+        except SyntaxError as err:
+            error_class = err.__class__.__name__
+            detail = "{} '{}'".format(err.args[0], err.text)
+            line_number = "{}:{}".format(err.lineno, err.offset)
+        except Exception as err:
+            error_class = err.__class__.__name__
+            detail = err.args[0]
+            cl, exc, tb = sys.exc_info()
+            line_number = traceback.extract_tb(tb)[-1][1]
+        raise Exception("{}(line {}) {}".format(error_class, line_number, detail))
 
     def evaluate(self):
         if self.evaluated:
@@ -121,7 +134,7 @@ class Resolver(object):
         return self.result
 
     def is_resolved(self):
-        return self.resolved
+        return self.resolvable and self.resolved
 
     def is_resolvable(self):
         return self.resolvable
@@ -140,10 +153,10 @@ class Resolver(object):
             "timeline": self.timeline.to_json()
         }
 
-    def first_msg(self):
+    def last_msg(self):
         evts = self.timeline.events
-        if evts and evts[0].messages:
-            return evts[0].messages[0]
+        if evts and evts[-1].messages:
+            return evts[-1].messages[0]
 
 class ResolverWrapper(object):
     def __init__(self, value, transform=None):

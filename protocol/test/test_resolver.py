@@ -9,7 +9,7 @@ from resolver import Resolver, ResolverContainer
 class TestResolver(unittest.TestCase):
 
     def setUp(self):
-        pass
+        self.maxDiff = None
 
     def test_Contains(self):
         r = Resolver("stuff")
@@ -38,13 +38,13 @@ class TestResolver(unittest.TestCase):
             "  f.write('bar')"
         ])
         self.assertEqual(r.evaluate(), None)
-        self.assertEqual(r.first_msg(), "Error in script: global name 'open' is not defined")
+        self.assertEqual(r.last_msg(), "Error in script: NameError(line 2) global name 'open' is not defined")
 
     def test_ExecImport(self):
         r = Resolver("<(\nimport json")
         self.assertEqual(r.evaluate(), None)
         self.assertFalse(r.is_resolved())
-        self.assertEqual(r.first_msg(), "Error in script: __import__ not found")
+        self.assertEqual(r.last_msg(), "Error in script: ImportError(line 2) __import__ not found")
 
     def test_ExecGenerator(self):
         res = Resolver(["<(",
@@ -72,7 +72,7 @@ class TestResolver(unittest.TestCase):
         ], timeout_sec=1)
         self.assertEqual(r.evaluate(), None)
         self.assertFalse(r.is_resolved())
-        self.assertEqual(r.first_msg(), "Error in script: TIMEOUT")
+        self.assertEqual(r.last_msg(), "Error in script: Exception(line 14) TIMEOUT")
 
     def test_ExecException(self):
         res = Resolver(["<(",
@@ -95,7 +95,7 @@ class TestResolver(unittest.TestCase):
 
         self.assertFalse(r.evaluated)
         r.evaluate()
-        self.assertEqual(r.first_msg(), 'Error in script: invalid syntax (<string>, line 3)')
+        self.assertEqual(r.last_msg(), "Error in script: SyntaxError(line 3:5) invalid syntax 'raise exec_return(resolver_func())\n'")
         self.assertEqual(r.result, None)
 
     def test_ExecSectionGen(self):
@@ -138,22 +138,35 @@ class TestResolver(unittest.TestCase):
 
         self.assertEqual(r.to_json(), {'stuff': 'yes', 'things': 'worm', 'whaaa': 'steely', 'whaaa_eval': 'steely'})
 
-        self.assertEqual(r.to_json(True), {'stuff': 'yes',
-                                           'things': {'evaluated': True,
-                                                      'input': "<( 'wo' + 'rm'",
-                                                      'needsEvaluation': True,
-                                                      'resolvable': True,
-                                                      'resolved': True,
-                                                      'result': 'worm',
-                                                      'timeline': []},
-                                           'whaaa': 'steely',
-                                           'whaaa_eval': {'evaluated': True,
-                                                          'input': "<( { 'a' : 'steel', 'b' : 'hammock®' }['a']",
-                                                          'needsEvaluation': True,
-                                                          'resolvable': True,
-                                                          'resolved': True,
-                                                          'result': 'steel',
-                                                          'timeline': []}})
+        expected = {'stuff': 'yes',
+                    'things': {'evaluated': True,
+                               'input': "<( 'wo' + 'rm'",
+                               'needsEvaluation': True,
+                               'resolvable': True,
+                               'resolved': True,
+                               'result': 'worm',
+                               'timeline': [{'eventType': 'NOTE',
+                                             'messages': ['Generated Code:',
+                                                          "def resolver_func():\n    return  'wo' + 'rm'\nraise exec_return(resolver_func())"],
+                                             'now': 'BLAH',
+                                             'when': '--'}]},
+                    'whaaa': 'steely',
+                    'whaaa_eval': {'evaluated': True,
+                                   'input': "<( { 'a' : 'steel', 'b' : 'hammock®' }['a']",
+                                   'needsEvaluation': True,
+                                   'resolvable': True,
+                                   'resolved': True,
+                                   'result': 'steel',
+                                   'timeline': [{'eventType': 'NOTE',
+                                                 'messages': ['Generated Code:',
+                                                              "def resolver_func():\n    return  { 'a' : 'steel', 'b' : 'hammock\xc2\xae' }['a']\nraise exec_return(resolver_func())"],
+                                                 'now': 'BLAH',
+                                                 'when': '--'}]}}
+        detailed = r.to_json(detailed=True)
+
+        detailed['things']['timeline'][0]['now'] = 'BLAH'
+        detailed['whaaa_eval']['timeline'][0]['now'] = 'BLAH'
+        self.assertEqual(expected, detailed)
 
     def test_ResolverCompound(self):
         r = ResolverContainer()
@@ -176,21 +189,34 @@ class TestResolver(unittest.TestCase):
 
         self.assertEqual(r.to_json(), {'stuff': 'yes', 'sub': {'blue': 32}, 'things': 'worm'})
 
-        self.assertEqual(r.to_json(True), {'stuff': 'yes',
-                                           'sub': {'blue': {'evaluated': True,
-                                                            'input': '<( 5 + 27',
-                                                            'needsEvaluation': True,
-                                                            'resolvable': True,
-                                                            'resolved': True,
-                                                            'result': 32,
-                                                            'timeline': []}},
-                                           'things': {'evaluated': True,
-                                                      'input': "<( 'wo' + 'rm'",
-                                                      'needsEvaluation': True,
-                                                      'resolvable': True,
-                                                      'resolved': True,
-                                                      'result': 'worm',
-                                                      'timeline': []}})
+        expected = {'stuff': 'yes',
+                    'sub': {'blue': {'evaluated': True,
+                                     'input': '<( 5 + 27',
+                                     'needsEvaluation': True,
+                                     'resolvable': True,
+                                     'resolved': True,
+                                     'result': 32,
+                                     'timeline': [{'eventType': 'NOTE',
+                                                   'messages': ['Generated Code:',
+                                                                'def resolver_func():\n    return  5 + 27\nraise exec_return(resolver_func())'],
+                                                   'now': 'BLAH',
+                                                   'when': '--'}]}},
+                    'things': {'evaluated': True,
+                               'input': "<( 'wo' + 'rm'",
+                               'needsEvaluation': True,
+                               'resolvable': True,
+                               'resolved': True,
+                               'result': 'worm',
+                               'timeline': [{'eventType': 'NOTE',
+                                             'messages': ['Generated Code:',
+                                                          "def resolver_func():\n    return  'wo' + 'rm'\nraise exec_return(resolver_func())"],
+                                             'now': 'BLAH',
+                                             'when': '--'}]}}
+        detailed = r.to_json(detailed=True)
+
+        detailed['sub']['blue']['timeline'][0]['now'] = 'BLAH'
+        detailed['things']['timeline'][0]['now'] = 'BLAH'
+        self.assertEqual(expected, detailed)
 
 
 if __name__ == '__main__':
