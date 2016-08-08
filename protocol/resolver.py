@@ -65,15 +65,9 @@ class Resolver(object):
         self.resolved = not self.needs_evaluation
 
     def _evaluate(self, e):
-        try:
-            self.result = self.__evaluate(e)
-            self.resolved = True
-            return self.result
-        except Exception, e:
-            msg = "Error in script: {}".format(e)
-            self.timeline.error(msg)
-            self.resolvable = False
-            return None
+        self.result = self.__evaluate(e)
+        self.resolved = True
+        return self.result
 
     def __evaluate(self, e):
         if type(e) == dict:
@@ -81,7 +75,7 @@ class Resolver(object):
         elif type(e) in (tuple, list):
             if e and e[0] == Resolver.CODE_START:
                 return self.__evaluate("\n".join(e))
-            return (self.__evaluate(v) for v in e)
+            return [self.__evaluate(v) for v in e]
         elif type(e) in (str, unicode) and self._is_code(e):
             return self._evaluate_str(e)
         return e
@@ -128,7 +122,13 @@ class Resolver(object):
             return self.result
 
         self.evaluated = True
-        return self._evaluate(self.input)
+        try:
+            return self._evaluate(self.input)
+        except Exception, e:
+            msg = "Error in script: {}".format(e)
+            self.timeline.error(msg)
+            self.resolvable = False
+        return None
 
     def get_result(self):
         return self.result
@@ -235,7 +235,11 @@ class ResolverContainer(object):
         return {name: wrapper.resolver for (name, wrapper) in self._items.iteritems() if wrapper.resolver}
 
     def evaluate(self):
-        return [item.get(self._build_context('evaluating({})'.format(name))) for (name, item) in self._items.iteritems()]
+        for (name, item) in self._items.iteritems():
+            try:
+                item.get(self._build_context('{}(while evaluating)'.format(name)))
+            except Exception, e:
+                self.timeline.error("Resolver Error! {}".format(e.message))
 
     def all_resolved(self):
         return not len(self.unresolved())
