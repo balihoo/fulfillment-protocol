@@ -95,8 +95,8 @@ class TestResolver(unittest.TestCase):
 
         self.assertFalse(r.evaluated)
         r.evaluate()
-        self.assertEqual(r.last_msg(), "Error in script: SyntaxError(line 3:5) invalid syntax 'raise exec_return(resolver_func())\n'")
-        self.assertEqual(r.result, None)
+        self.assertEqual(r.last_msg(), "SyntaxError(line 3:5) invalid syntax 'raise exec_return(resolver_func())\n'")
+        self.assertEqual(r.get_result(), None)
 
     def test_ExecSectionGen(self):
         res = Resolver(["<(",
@@ -145,11 +145,8 @@ class TestResolver(unittest.TestCase):
                                'resolvable': True,
                                'resolved': True,
                                'result': 'worm',
-                               'timeline': [{'eventType': 'NOTE',
-                                             'messages': ['Generated Code:',
-                                                          "def resolver_func():\n    return  'wo' + 'rm'\nraise exec_return(resolver_func())"],
-                                             'now': 'BLAH',
-                                             'when': '--'}]},
+                               'timeline': [],
+                               'code': "def resolver_func():\n    return  'wo' + 'rm'\nraise exec_return(resolver_func())"},
                     'whaaa': 'steely',
                     'whaaa_eval': {'evaluated': True,
                                    'input': "<( { 'a' : 'steel', 'b' : 'hammock®' }['a']",
@@ -157,15 +154,10 @@ class TestResolver(unittest.TestCase):
                                    'resolvable': True,
                                    'resolved': True,
                                    'result': 'steel',
-                                   'timeline': [{'eventType': 'NOTE',
-                                                 'messages': ['Generated Code:',
-                                                              "def resolver_func():\n    return  { 'a' : 'steel', 'b' : 'hammock\xc2\xae' }['a']\nraise exec_return(resolver_func())"],
-                                                 'now': 'BLAH',
-                                                 'when': '--'}]}}
+                                   'timeline': [],
+                                   'code': "def resolver_func():\n    return  { 'a' : 'steel', 'b' : 'hammock\xc2\xae' }['a']\nraise exec_return(resolver_func())"}}
         detailed = r.to_json(detailed=True)
 
-        detailed['things']['timeline'][0]['now'] = 'BLAH'
-        detailed['whaaa_eval']['timeline'][0]['now'] = 'BLAH'
         self.assertEqual(expected, detailed)
 
     def test_ResolverCompound(self):
@@ -196,26 +188,17 @@ class TestResolver(unittest.TestCase):
                                      'resolvable': True,
                                      'resolved': True,
                                      'result': 32,
-                                     'timeline': [{'eventType': 'NOTE',
-                                                   'messages': ['Generated Code:',
-                                                                'def resolver_func():\n    return  5 + 27\nraise exec_return(resolver_func())'],
-                                                   'now': 'BLAH',
-                                                   'when': '--'}]}},
+                                     'code': 'def resolver_func():\n    return  5 + 27\nraise exec_return(resolver_func())',
+                                     'timeline': []}},
                     'things': {'evaluated': True,
                                'input': "<( 'wo' + 'rm'",
                                'needsEvaluation': True,
                                'resolvable': True,
                                'resolved': True,
                                'result': 'worm',
-                               'timeline': [{'eventType': 'NOTE',
-                                             'messages': ['Generated Code:',
-                                                          "def resolver_func():\n    return  'wo' + 'rm'\nraise exec_return(resolver_func())"],
-                                             'now': 'BLAH',
-                                             'when': '--'}]}}
+                               'code': "def resolver_func():\n    return  'wo' + 'rm'\nraise exec_return(resolver_func())",
+                               'timeline': []}}
         detailed = r.to_json(detailed=True)
-
-        detailed['sub']['blue']['timeline'][0]['now'] = 'BLAH'
-        detailed['things']['timeline'][0]['now'] = 'BLAH'
         self.assertEqual(expected, detailed)
 
 

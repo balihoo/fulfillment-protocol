@@ -63,6 +63,7 @@ class Resolver(object):
         self.result = input if self.evaluated else None
         self.resolvable = True
         self.resolved = not self.needs_evaluation
+        self.code = None
 
     def _evaluate(self, e):
         self.result = self.__evaluate(e)
@@ -71,6 +72,9 @@ class Resolver(object):
 
     def __evaluate(self, e):
         if type(e) == dict:
+            offending_keys = [k for k in e.keys() if k.startswith(Resolver.CODE_START)]
+            if offending_keys:
+                raise Exception("Operators like '{}' are NOT supported!".format(", ".join(offending_keys)))
             return {k: self.__evaluate(v) for k, v in e.iteritems()}
         elif type(e) in (tuple, list):
             if e and e[0] == Resolver.CODE_START:
@@ -98,7 +102,8 @@ class Resolver(object):
 
     def __execute(self, code, outside_vars):
         wcode, exname = self.__wrap_code(code)
-        self.timeline.note(["Generated Code:", wcode])
+
+        self.code = wcode
         outside_vars.update(dict(__builtins__={}))
 
         try:
@@ -110,28 +115,29 @@ class Resolver(object):
             error_class = err.__class__.__name__
             detail = "{} '{}'".format(err.args[0], err.text)
             line_number = "{}:{}".format(err.lineno, err.offset)
-        except Exception as err:
-            error_class = err.__class__.__name__
-            detail = err.args[0]
-            cl, exc, tb = sys.exc_info()
-            line_number = traceback.extract_tb(tb)[-1][1]
-        raise Exception("{}(line {}) {}".format(error_class, line_number, detail))
+            msg = "{}(line {}) {}".format(error_class, line_number, detail)
+            self.timeline.error(msg)
+            self.resolvable = False
 
     def evaluate(self):
         if self.evaluated:
-            return self.result
+            return self.get_result()
 
         self.evaluated = True
         try:
             return self._evaluate(self.input)
-        except Exception, e:
-            msg = "Error in script: {}".format(e)
+        except Exception, err:
+            error_class = err.__class__.__name__
+            detail = err.args[0]
+            cl, exc, tb = sys.exc_info()
+            line_number = traceback.extract_tb(tb)[-1][1]
+            msg = "Error in script: {}(line {}) {}".format(error_class, line_number, detail)
             self.timeline.error(msg)
             self.resolvable = False
         return None
 
     def get_result(self):
-        return self.result
+        return self.result if self.is_resolved() else None
 
     def is_resolved(self):
         return self.resolvable and self.resolved
@@ -145,12 +151,13 @@ class Resolver(object):
     def to_json(self):
         return {
             "input": self.input,
-            "result": self.result,
+            "result": self.get_result(),
             "resolvable": self.resolvable,
             "resolved": self.is_resolved(),
             "evaluated": self.evaluated,
             "needsEvaluation": self.needs_evaluation,
-            "timeline": self.timeline.to_json()
+            "timeline": self.timeline.to_json(),
+            "code": self.code
         }
 
     def last_msg(self):
