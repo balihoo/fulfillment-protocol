@@ -46,6 +46,18 @@ class TestResolver(unittest.TestCase):
         self.assertFalse(r.is_resolved())
         self.assertEqual(r.last_msg(), "Error in script: ImportError(line 2) __import__ not found")
 
+    def test_ExecJson2String(self):
+        res = Resolver("<(j2s({ 'foo': 13 })").evaluate()
+        self.assertEqual(res, '{"foo": 13}')
+
+    def test_ExecString2Json(self):
+        res = Resolver("<(s2j('{ \"foo\": 13 }')").evaluate()
+        self.assertEqual(res, {"foo": 13})
+
+    def test_ExecUrlEncode(self):
+        res = Resolver("<(urlencode('string_of_characters_like_these:$#@=?%^Q^$')").evaluate()
+        self.assertEqual(res,'string_of_characters_like_these%3A%24%23%40%3D%3F%25%5EQ%5E%24')
+
     def test_ExecGenerator(self):
         res = Resolver(["<(",
             "def fib(n):",
