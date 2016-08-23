@@ -1,8 +1,10 @@
 import json
+from urllib import quote_plus
 
-json_utils = {
+utils = {
     "s2j": json.loads,
-    "j2s": json.dumps
+    "j2s": json.dumps,
+    "urlencode": quote_plus
 }
 
 safe_builtins = {
