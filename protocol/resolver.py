@@ -31,6 +31,14 @@ class ReturnException(Exception):
     def __init__(self, value):
         self.value = value
 
+class ResolverIncomplete(Exception):
+    def __init__(self, reason):
+        self.reason = reason
+
+class ResolverImpossible(Exception):
+    def __init__(self, reason):
+        self.reason = reason
+
 class Resolver(object):
     CODE_START = "<("
 
@@ -74,7 +82,7 @@ class Resolver(object):
         if type(e) == dict:
             offending_keys = [k for k in e.keys() if k.startswith(Resolver.CODE_START)]
             if offending_keys:
-                raise Exception("Operators like '{}' are NOT supported!".format(", ".join(offending_keys)))
+                raise ResolverImpossible("Operators like '{}' are NOT supported!".format(", ".join(offending_keys)))
             return {k: self.__evaluate(v) for k, v in e.iteritems()}
         elif type(e) in (tuple, list):
             if e and e[0] == Resolver.CODE_START:
@@ -182,9 +190,9 @@ class ResolverWrapper(object):
             if not self.resolver.is_resolved():
                 self.value = self.resolver.evaluate()
                 if not self.resolver.is_resolvable():
-                    raise Exception("{} is not resolvable!".format(context))
+                    raise ResolverImpossible("{} is not resolvable!".format(context))
                 if not self.resolver.is_resolved():
-                    raise Exception("{} is NOT resolved yet!".format(context))
+                    raise ResolverIncomplete("{} is NOT resolved yet!".format(context))
                 self.transform()
         return self.value
 
