@@ -231,10 +231,7 @@ class ResolverContainer(object):
 
     def __getattr__(self, name):
         if name in self._items:
-            try:
-                return self._items[name].get(self._build_context(name))
-            except Exception, e:
-                self.timeline.error("Resolver Error! {}".format(e.message))
+            return self._items[name].get(self._build_context(name))
         else:
             self.timeline.warning("Resolver container ({}) didn't have '{}'".format(self._context, name))
         return None
