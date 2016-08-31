@@ -245,7 +245,8 @@ class OneOfParameter(SchemaParameter):
                     if val is not None:
                         return val
                 except Exception, e:
-                    print("While parsing OneOf. {}:{}".format(e.message, option.description))
+                    # print("While parsing OneOf. {}:{}".format(e.message, option.description))
+                    pass
         return False
 
 class AnyOfParameter(SchemaParameter):
@@ -265,7 +266,8 @@ class AnyOfParameter(SchemaParameter):
                     if val is not None:
                         return val
                 except Exception, e:
-                    print("While parsing AnyOf. {}:{}".format(e.message, option.description))
+                    # print("While parsing AnyOf. {}:{}".format(e.message, option.description))
+                    pass
         return False
 
 class JsonParameter(SchemaParameter):
