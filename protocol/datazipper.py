@@ -47,7 +47,7 @@ class DataZipper(object):
         the_bytes = unicode(data, "utf-8")
         zipped = zlib.compress(the_bytes)
 
-        return cls.separator.join((cls.magick_zip, str(len(the_bytes)), base64.encodestring(zipped)))
+        return cls.separator.join((cls.magick_zip, str(len(the_bytes)), base64.b64encode(zipped)))
 
     @classmethod
     def _store_in_s3(cls, data):
@@ -94,5 +94,5 @@ class DataZipper(object):
         # parts would look like ("FF-ZIP", "56794", "blah blah blah...")
         header_length = len(cls.magick_zip) + len(length_string) + 2  # 2 separators
 
-        return zlib.decompress(base64.decodestring(zipped[header_length:]))
+        return zlib.decompress(base64.b64decode(zipped[header_length:]))
 
