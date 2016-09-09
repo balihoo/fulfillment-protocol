@@ -20,7 +20,15 @@ class FulfillmentFunction(object):
 
     SWF_LIMIT = 32768
 
-    def __init__(self, description, parameters, result, handler, default_exception=FulfillmentFailedException):
+    def __init__(
+            self,
+            description,
+            parameters,
+            result,
+            handler,
+            default_exception=FulfillmentFailedException,
+            disable_protocol=False
+    ):
         self._description = description
         self._params = parameters
         self._handler = handler
@@ -31,8 +39,12 @@ class FulfillmentFunction(object):
             'result': result.to_schema()
         }
         self._exception = default_exception
+        self._disable_protocol = disable_protocol # Allow the function author to disable the protocol (like Node)
 
-    def error_response(self, e):
+    def error_response(self, e, disable_protocol):
+        if disable_protocol:
+            raise e
+
         response = ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
@@ -40,7 +52,10 @@ class FulfillmentFunction(object):
             return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
         return response_json
 
-    def success_response(self, result, notes):
+    def success_response(self, result, notes, disable_protocol):
+        if disable_protocol:
+            return result
+
         response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
@@ -80,15 +95,18 @@ class FulfillmentFunction(object):
         if 'RETURN_SCHEMA' in event:
             return self._schema
 
+        # Always override _disable_protocol with the value in the event (if there is one)
+        disable_protocol = event.get("DISABLE_PROTOCOL", self._disable_protocol)
+
         try:
             kwargs = self.parse(event)
             result = self._handler(**kwargs)
             (valid_result, notes) = self.parse_result(result)
-            return self.success_response(valid_result, notes)
+            return self.success_response(valid_result, notes, disable_protocol)
         except FulfillmentException as e:
-            return self.error_response(e)
+            return self.error_response(e, disable_protocol)
         except Exception as e:
             wrapped = self._exception("unhandled exception", inner_exception=e)
-            return self.error_response(wrapped)
+            return self.error_response(wrapped, disable_protocol)
 
 
