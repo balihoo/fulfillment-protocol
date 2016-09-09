@@ -54,7 +54,7 @@ class TestDataZipper(unittest.TestCase):
             bigger_json = bigger_json_file.read()
 
             delivered = DataZipper.deliver(bigger_json, 30000)
-            self.assertTrue(delivered == "FF-URL:e5cc1ab85e5de887d3e20e8f04a2ea55:s3://balihoo.dev.fulfillment/retain_30_180/zipped-ff/e5cc1ab85e5de887d3e20e8f04a2ea55.ff")
+            self.assertTrue(delivered =="FF-URL:d76383593d9bb09835c4a248b3d42b22:s3://balihoo.dev.fulfillment/retain_30_180/zipped-ff/d76383593d9bb09835c4a248b3d42b22.ff")
 
             received = DataZipper.receive(delivered)
             self.assertTrue(len(received) == 394710)
