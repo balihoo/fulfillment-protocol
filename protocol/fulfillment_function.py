@@ -7,6 +7,7 @@ from fulfillment_exception import (
 from schema import ObjectParameter
 from datazipper import DataZipper
 from response import ActivityResponse, ActivityStatus
+from jsonschema import Draft4Validator
 import re
 import json
 
@@ -38,6 +39,7 @@ class FulfillmentFunction(object):
             'params': ObjectParameter("", properties=parameters).to_schema(),
             'result': result.to_schema()
         }
+        self._validator = Draft4Validator(ObjectParameter("", properties=parameters).to_schema(True))
         self._exception = default_exception
         self._disable_protocol = disable_protocol # Allow the function author to disable the protocol (like Node)
 
@@ -57,6 +59,17 @@ class FulfillmentFunction(object):
             return result
 
         response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
+        response_json = response.to_json()
+        response_text = json.dumps(response_json)
+        if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
+            return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
+        return response_json
+
+    def invalid_response(self, validation_errors, disable_protocol):
+        if disable_protocol:
+            return None
+
+        response = ActivityResponse(ActivityStatus.INVALID, notes=validation_errors)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
         if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
@@ -97,6 +110,12 @@ class FulfillmentFunction(object):
 
         # Always override _disable_protocol with the value in the event (if there is one)
         disable_protocol = event.get("DISABLE_PROTOCOL", self._disable_protocol)
+
+        validation_errors = ["Validation Error:{} @{}".format(str(err), err.absolute_path)
+                             for err in self._validator.iter_errors(event)]
+
+        if validation_errors:
+            return self.invalid_response(validation_errors, disable_protocol)
 
         try:
             kwargs = self.parse(event)
