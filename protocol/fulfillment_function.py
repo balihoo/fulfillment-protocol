@@ -22,13 +22,13 @@ class FulfillmentFunction(object):
     SWF_LIMIT = 32768
 
     def __init__(
-            self,
-            description,
-            parameters,
-            result,
-            handler,
-            default_exception=FulfillmentFailedException,
-            disable_protocol=False
+        self,
+        description,
+        parameters,
+        result,
+        handler,
+        default_exception=FulfillmentFailedException,
+        disable_protocol=False
     ):
         self._description = description
         self._params = parameters
@@ -43,10 +43,7 @@ class FulfillmentFunction(object):
         self._exception = default_exception
         self._disable_protocol = disable_protocol # Allow the function author to disable the protocol (like Node)
 
-    def error_response(self, e, disable_protocol):
-        if disable_protocol:
-            raise e
-
+    def error_response(self, e):
         response = ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
@@ -123,9 +120,15 @@ class FulfillmentFunction(object):
             (valid_result, notes) = self.parse_result(result)
             return self.success_response(valid_result, notes, disable_protocol)
         except FulfillmentException as e:
-            return self.error_response(e, disable_protocol)
+            if disable_protocol:
+                raise
+
+            return self.error_response(e)
         except Exception as e:
+            if disable_protocol:
+                raise
+
             wrapped = self._exception("unhandled exception", inner_exception=e)
-            return self.error_response(wrapped, disable_protocol)
+            return self.error_response(wrapped)
 
 
