@@ -79,7 +79,7 @@ class FulfillmentFunction(object):
             try:
                 value = event[name] if name in event else None
                 param_name = fix_param_name(name)
-                kwargs[param_name] = param.parse(value)
+                kwargs[param_name] = param.parse(value, name)
             except Exception as e:
                 msg = "Error parsing parameter '{}'".format(name)
                 raise FulfillmentValidationException(msg, inner_exception=e)
@@ -88,9 +88,9 @@ class FulfillmentFunction(object):
     def parse_result(self, result):
         if isinstance(result, tuple):
             (res, notes) = result
-            return (self._result.parse(res), notes)
+            return self._result.parse(res, "Parsing result:"), notes
         else:
-            return (self._result.parse(result), [])
+            return self._result.parse(result, "Parsing result:"), []
 
     def handle(self, event, context):
         if type(event) in (str, unicode):

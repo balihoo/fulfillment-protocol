@@ -310,13 +310,13 @@ class TestSchema(unittest.TestCase):
         except Exception, e:
             message = e.message
 
-        self.assertEqual("Erbjerct/[one]-Missing required parameter (description: Uno)", message)
+        self.assertEqual("Exception while parsing : Erbjerct/[one]-Missing required parameter (description: Uno)", message)
 
         try:
             obj.parse(input_4)
         except Exception, e:
             message = e.message
-        self.assertEqual("Erbjerct/[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", message)
+        self.assertEqual("Exception while parsing : Exception while parsing Erbjerct/[qqq]: Erbjerct/[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", message)
 
     def test_ResolverObjectParameterExtra(self):
         obj = ResolverObjectParameter("Erbjerct", "Erbjerct description", properties={

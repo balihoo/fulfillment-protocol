@@ -42,9 +42,17 @@ class SchemaParameter(object):
 
     def parse(self, value, context=""):
         if value is not None:
-            return self._parse(value, context)
+            if type(value) in (str, ):
+                value = unicode(value, 'utf-8')
+            try:
+                return self._parse(value, context)
+            except Exception, e:
+                raise Exception("Exception while parsing {}: {}".format(context, e))
         if not self.is_required():
-            return self._parse(self.default, context+"/-default-/") if self.default is not None else self.default
+            try:
+                return self._parse(self.default, context+"/-default-/") if self.default is not None else self.default
+            except Exception, e:
+                raise Exception("Exception while parsing {}: {}".format(context+"/-default-/", e))
         raise Exception("{}-Missing required parameter (description: {})".format(context, self.description[:40]))
 
     def _parse(self, value, context):
