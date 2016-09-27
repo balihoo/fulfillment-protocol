@@ -1,10 +1,14 @@
 import json
 from urllib import quote_plus
+import time
+from copy import deepcopy
 
 utils = {
     "s2j": json.loads,
     "j2s": json.dumps,
-    "urlencode": quote_plus
+    "urlencode": quote_plus,
+    "timestamp": time.time,
+    "copy": deepcopy
 }
 
 safe_builtins = {

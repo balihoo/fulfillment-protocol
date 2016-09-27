@@ -54,6 +54,21 @@ class TestResolver(unittest.TestCase):
         res = Resolver("<(s2j('{ \"foo\": 13 }')").evaluate()
         self.assertEqual(res, {"foo": 13})
 
+    def test_ExecTimeStamp(self):
+        res = Resolver("<( timestamp()").evaluate()
+        self.assertEqual(type(res), float)
+        #this test will fail on 2033-05-17 at 21:33:20
+        self.assertTrue(1475009657 < res < 2000000000)
+
+    def test_ExecDeepCopy(self):
+        res = Resolver([ "<(",
+        "d1 = {1:1, 2:2}",
+        "d2 = copy(d1)",
+        "d1[2] = 22",
+        "return d2"
+        ]).evaluate()
+        self.assertEqual(res, {1:1, 2:2})
+
     def test_ExecUrlEncode(self):
         res = Resolver("<(urlencode('string_of_characters_like_these:$#@=?%^Q^$')").evaluate()
         self.assertEqual(res,'string_of_characters_like_these%3A%24%23%40%3D%3F%25%5EQ%5E%24')
