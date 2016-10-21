@@ -7,6 +7,13 @@ import os
 from config import Config
 
 
+def to_unicode(data):
+    try:
+        return unicode(data, 'utf-8')
+    except:
+        pass
+    return data
+
 class DataZipper(object):
 
     retention_folders = ("retain_1_0",
@@ -44,15 +51,15 @@ class DataZipper(object):
 
     @classmethod
     def _zip_data(cls, data, limit):
-        the_bytes = unicode(data, "utf-8")
-        zipped = zlib.compress(the_bytes)
+        the_bytes = to_unicode(data)
+        zipped = zlib.compress(the_bytes.encode('utf-8'))
 
         return cls.separator.join((cls.magick_zip, str(len(the_bytes)), base64.b64encode(zipped)))
 
     @classmethod
     def _store_in_s3(cls, data):
         md5 = hashlib.md5()
-        result_bytes = unicode(data, "utf-8")
+        result_bytes = to_unicode(data)
         md5.update(result_bytes)
         md5_hash = md5.hexdigest()
 
@@ -94,5 +101,5 @@ class DataZipper(object):
         # parts would look like ("FF-ZIP", "56794", "blah blah blah...")
         header_length = len(cls.magick_zip) + len(length_string) + 2  # 2 separators
 
-        return zlib.decompress(base64.b64decode(zipped[header_length:]))
+        return zlib.decompress(base64.b64decode(zipped[header_length:])).decode('utf-8')
 
