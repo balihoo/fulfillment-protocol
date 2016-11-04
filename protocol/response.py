@@ -35,7 +35,7 @@ class ActivityStatus(object):
 # @param result the result of the task.. will not always be present
 #
 class ActivityResponse(object):
-    def __init__(self, status, result=None, notes=None, trace=None, reason=None):
+    def __init__(self, status, result=None, notes=None, trace=None, reason=None, validation_errors=None):
         self.status = status
         self.activity_result = result
 
@@ -52,17 +52,7 @@ class ActivityResponse(object):
         self.workflow_id = None
         self.section_name = None
 
-    # def addNote(note:String) = {
-    #     notes += note
-    # }
-    #
-    # def addTrace(line: String) = {
-    #     trace += line
-    # }
-    #
-    # def addTrace(exception: Exception) = {
-    #     trace ++= StackTraceFormatter.format(exception.getStackTrace)
-    # }
+        self.validation_errors = validation_errors
 
     def to_json(self):
         res = {}
@@ -88,11 +78,10 @@ class ActivityResponse(object):
         if self.instance:
             res["instance"] = self.instance
 
-        return res
+        if self.validation_errors:
+            res["validation_errors"] = self.validation_errors
 
-    # def summary() = {
-    #     notes.mkString("\n")+trace.mkString("\n", "\n", "")
-    # }
+        return res
 
     def serialize(self):
         return json.dumps(self.to_json())
@@ -101,10 +90,6 @@ class ActivityResponse(object):
         if self.activity_result is not None:
             return self.activity_result.result() if isinstance(self.activity_result, ActivityResult) else self.activity_result
         raise Exception("Response has no Activity Result!")
-
-    # def resultStringified:String = {
-    #     Json.stringify(result)
-    # }
 
     @classmethod
     def from_json(cls, obj):
@@ -124,6 +109,8 @@ class ActivityResponse(object):
         response.trace.extend(obj.get("trace", []))
 
         response.instance = obj.get("instance", None)
+
+        response.validation_errors = obj.get("validation_errors", None)
 
         if "cache" in obj:
             cache = obj["cache"]

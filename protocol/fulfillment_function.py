@@ -66,7 +66,7 @@ class FulfillmentFunction(object):
         if disable_protocol:
             return None
 
-        response = ActivityResponse(ActivityStatus.INVALID, notes=validation_errors)
+        response = ActivityResponse(ActivityStatus.INVALID, validation_errors=validation_errors)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
         if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
@@ -108,8 +108,18 @@ class FulfillmentFunction(object):
         # Always override _disable_protocol with the value in the event (if there is one)
         disable_protocol = event.get("DISABLE_PROTOCOL", self._disable_protocol)
 
-        validation_errors = ["Validation Error:{} @{}".format(str(err), err.absolute_path)
-                             for err in self._validator.iter_errors(event)]
+        validation_errors = []
+        for err in self._validator.iter_errors(event):
+            validation_errors.append({
+                'cause': err.cause,
+                'context': err.context,
+                'message': err.message,
+                'path': '/'.join(err.path),
+                'relative_path': '/'.join(err.relative_path),
+                'absolute_path': '/'.join(err.absolute_path),
+                'validator': err.validator,
+                'validator_value': err.validator_value
+            })
 
         if validation_errors:
             return self.invalid_response(validation_errors, disable_protocol)
