@@ -114,9 +114,9 @@ class FulfillmentFunction(object):
                 'cause': err.cause,
                 'context': err.context,
                 'message': err.message,
-                'path': '/'.join(err.path),
-                'relative_path': '/'.join(err.relative_path),
-                'absolute_path': '/'.join(err.absolute_path),
+                'path': '/'.join([str(p) for p in err.path]),
+                'relative_path': '/'.join([str(p) for p in err.relative_path]),
+                'absolute_path': '/'.join([str(p) for p in err.absolute_path]),
                 'validator': err.validator,
                 'validator_value': err.validator_value
             })
