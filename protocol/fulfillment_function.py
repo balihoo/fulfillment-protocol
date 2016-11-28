@@ -43,7 +43,8 @@ class FulfillmentFunction(object):
         self._exception = default_exception
         self._disable_protocol = disable_protocol # Allow the function author to disable the protocol (like Node)
 
-    def error_response(self, e):
+    @classmethod
+    def error_response(cls, e):
         response = ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
@@ -51,7 +52,8 @@ class FulfillmentFunction(object):
             return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
         return response_json
 
-    def success_response(self, result, notes, disable_protocol):
+    @classmethod
+    def success_response(cls, result, notes, disable_protocol):
         if disable_protocol:
             return result
 
@@ -62,7 +64,8 @@ class FulfillmentFunction(object):
             return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
         return response_json
 
-    def invalid_response(self, validation_errors, disable_protocol):
+    @classmethod
+    def invalid_response(cls, validation_errors, disable_protocol):
         if disable_protocol:
             return None
 
