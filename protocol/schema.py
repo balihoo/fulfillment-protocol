@@ -89,6 +89,8 @@ class BooleanParameter(SchemaParameter):
         self.jsonType = "boolean"
 
     def _parse(self, value, context=""):
+        if type(value) != bool:
+            raise Exception("Expected to parse a bool!")
         return bool(value)
 
 class UriParameter(SchemaParameter):
@@ -113,6 +115,8 @@ class ObjectParameter(SchemaParameter):
         self.jsonType = "object"
 
     def _parse(self, value, context=""):
+        if type(value) != dict:
+            raise Exception("Expected to parse a dict!")
         out = {}
         for name, prop in self.properties.iteritems():
             v = prop.parse(value.get(name, None), context+"[{}]".format(name))
@@ -162,6 +166,8 @@ class LooseObjectParameter(SchemaParameter):
         self.jsonType = "object"
 
     def _parse(self, value, context=""):
+        if type(value) != dict:
+            raise Exception("Expected to parse a dict!")
         out = {}
         for name in value:
             out[name] = self.value_type.parse(value[name], context+"[{}]".format(name))
@@ -181,6 +187,8 @@ class StringMapParameter(SchemaParameter):
         self.jsonType = "object"
 
     def _parse(self, value, context=""):
+        if type(value) != dict:
+            raise Exception("Expected to parse a dict!")
         return value
 
 
@@ -199,6 +207,8 @@ class ArrayParameter(SchemaParameter):
         self.jsonType = "array"
 
     def _parse(self, value, context=""):
+        if type(value) not in (list, tuple):
+            raise Exception("Expected to parse a list or tuple!")
         return [self.element.parse(v, context + "[{}/{}]".format(i, len(value))) for i, v in enumerate(value)]
 
 class FloatParameter(SchemaParameter):
