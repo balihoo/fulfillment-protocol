@@ -19,7 +19,7 @@ def fix_param_name(name):
 
 class FulfillmentFunction(object):
 
-    SWF_LIMIT = 32768
+    SWF_LIMIT = 32000
 
     def __init__(
         self,
