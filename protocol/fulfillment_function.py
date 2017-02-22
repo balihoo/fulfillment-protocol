@@ -27,12 +27,14 @@ class FulfillmentFunction(object):
         parameters,
         result,
         handler,
+        debug_handler=None,
         default_exception=FulfillmentFailedException,
         disable_protocol=False
     ):
         self._description = description
         self._params = parameters
         self._handler = handler
+        self._debug_handler = debug_handler
         self._result = result
         self._schema = {
             'description': description,
@@ -129,7 +131,10 @@ class FulfillmentFunction(object):
 
         try:
             kwargs = self.parse(event)
-            result = self._handler(**kwargs)
+            if 'DEBUG_MODE' in event:
+                result = self._debug_handler(debug_mode=event['DEBUG_MODE'], **kwargs)
+            else:
+                result = self._handler(**kwargs)
             (valid_result, notes) = self.parse_result(result)
             return self.success_response(valid_result, notes, disable_protocol)
         except FulfillmentException as e:
