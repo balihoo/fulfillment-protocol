@@ -104,6 +104,11 @@ class UriParameter(SchemaParameter):
     def _parse(self, value, context=""):
         return value.strip()
 
+class UuidParameter(StringParameter):
+    def __init__(self, description, **kwargs):
+        pattern = r"^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+        StringParameter.__init__(self, description, pattern=pattern, **kwargs)
+
 class ObjectParameter(SchemaParameter):
     def __init__(self, description, properties, **kwargs):
         add_schema = {
@@ -336,3 +341,7 @@ class JsonResult(JsonParameter):
 class UriResult(UriParameter):
     def __init__(self, description, **kwargs):
         UriParameter.__init__(self, description, **kwargs)
+
+class UuidResult(UuidParameter):
+    def __init__(self, description, **kwargs):
+        UuidParameter.__init__(self, description, **kwargs)

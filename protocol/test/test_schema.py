@@ -191,6 +191,26 @@ class TestSchema(unittest.TestCase):
         self.assertFalse(validator.is_valid(15))
         self.assertFalse(validator.is_valid(None))
 
+    def test_UuidParameter(self):
+        req = UuidParameter("02ef139a-417a-4328-9953-5996b9f36dae")
+        s = req.to_schema(True)
+        validator = Draft4Validator(s)
+        self.assertEquals(s, {
+            '$schema': 'http://json-schema.org/draft-04/schema',
+            'type': 'string',
+            'description': '02ef139a-417a-4328-9953-5996b9f36dae',
+            'pattern': '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
+        })
+
+        self.assertTrue(validator.is_valid("02ef139a-417a-4328-9953-5996b9f36dae"))
+        self.assertTrue(validator.is_valid("02EF139A-417A-4328-9953-5996B9F36DAE"))
+        self.assertTrue(validator.is_valid("02EF139A-417A-4328-9953-5996b9f36dae"))
+        self.assertFalse(validator.is_valid(None))
+        self.assertFalse(validator.is_valid("123-ABC"))
+        self.assertFalse(validator.is_valid(12345678-1234-1234-1234-123456789012))
+        self.assertFalse(validator.is_valid("02ef139a_417a-4328-9953-5996b9f36dae"))
+        self.assertFalse(validator.is_valid("X02ef139a-417a-4328-9953-5996b9f36dae"))
+
     def test_OneOfParameter(self):
         req = OneOfParameter("Just one of these things is valid!", options=(
             ArrayParameter("A list of junk", StringParameter("A String", min_length=5)),
