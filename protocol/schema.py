@@ -104,6 +104,11 @@ class UriParameter(SchemaParameter):
     def _parse(self, value, context=""):
         return value.strip()
 
+class UuidParameter(StringParameter):
+    def __init__(self, description, **kwargs):
+        pattern = r"^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+        StringParameter.__init__(self, description, pattern=pattern, **kwargs)
+
 class ObjectParameter(SchemaParameter):
     def __init__(self, description, properties, **kwargs):
         add_schema = {
@@ -243,6 +248,7 @@ class IsoDateParameter(StringParameter):
 
 class NaiveIsoDateParameter(StringParameter):
     def __init__(self, description, **kwargs):
+        pattern = r"^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6]))))$"
         StringParameter.__init__(self, description, **kwargs)
 
 class LocalIsoDateTimeParameter(StringParameter):
@@ -336,3 +342,7 @@ class JsonResult(JsonParameter):
 class UriResult(UriParameter):
     def __init__(self, description, **kwargs):
         UriParameter.__init__(self, description, **kwargs)
+
+class UuidResult(UuidParameter):
+    def __init__(self, description, **kwargs):
+        UuidParameter.__init__(self, description, **kwargs)
