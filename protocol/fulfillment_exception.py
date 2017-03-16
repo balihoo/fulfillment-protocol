@@ -14,11 +14,11 @@ class FulfillmentException(Exception):
         super(FulfillmentException, self).__init__(message)
 
     def trace(self):
-        # this is the trace from where this exception was thrown
-        exparms = sys.exc_info()
-        trace = traceback.format_exception(*exparms)
-        # return them concatenated, most recent last
-        return self._trace + trace
+        if not self._trace:
+            # this is the trace from where this exception was thrown
+            exparms = sys.exc_info()
+            self._trace = traceback.format_exception(*exparms)
+        return self._trace
 
     def response_code(self):
         raise Exception("Response Code Not Implemented!")
