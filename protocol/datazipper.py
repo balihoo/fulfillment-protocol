@@ -14,27 +14,19 @@ def to_unicode(data):
         pass
     return data
 
-class DataZipper(object):
 
-    retention_folders = ("retain_1_0",
-                         "retain_30_0",
-                         "retain_30_180",
-                         "retain_7_0",
-                         "retain_60_180",
-                         "retain_15_180",
-                         "")  # no sub folder (root dir)
+class DataZipper(object):
 
     s3 = boto3.resource('s3')
     bucket = Config.zipper_bucket
+    path = '/'.join(Config.zipper_path.split('/')[1:])
     magick_zip = "FF-ZIP"
     magick_url = "FF-URL"
     separator = ":"
-    zipper_folder = "zipped-ff"
-    s3_retention_policy = "retain_30_180"  # should be something like.. Config.retention_policy
 
     @classmethod
     def _make_key(cls, filename):
-        return os.path.join(cls.s3_retention_policy, cls.zipper_folder, filename)
+        return os.path.join(cls.path, filename)
 
     @classmethod
     def deliver(cls, data, limit):

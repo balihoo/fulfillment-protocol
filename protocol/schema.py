@@ -1,7 +1,8 @@
 from resolver import Resolver, ResolverContainer
 
+
 class SchemaParameter(object):
-    def __init__(self, description, required=True, default=None, more_schema=None):
+    def __init__(self, description, required=True, default=None, more_schema=None, example=None):
         self.description = description
         self.required = required if default is None else False
         self.jsonType = "string"
@@ -16,6 +17,8 @@ class SchemaParameter(object):
             self._schema['default'] = self.default
         if more_schema is not None:
             self._schema.update(more_schema)
+        if example is not None:
+            self._schema['x-example'] = example
 
     def simple(self):
         return self.jsonType not in ('array', 'object')

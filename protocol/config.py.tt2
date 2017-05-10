@@ -1,2 +1,3 @@
 class Config(object):
     zipper_bucket="[% ff.defaultBucket %]"
+    zipper_path="[% ff.dataZipperPath %]"

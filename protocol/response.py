@@ -61,8 +61,8 @@ class ActivityResponse(object):
         if self.activity_result is not None:
             res["result"] = self.result()
 
-        res["notes"] = self.notes
-        res["trace"] = self.trace
+        res["notes"] = ActivityResponse._ensure_list(self.notes)
+        res["trace"] = ActivityResponse._ensure_list(self.trace)
         res["reason"] = self.reason
 
         if self.cache_key:
@@ -91,6 +91,10 @@ class ActivityResponse(object):
             return self.activity_result.result() if isinstance(self.activity_result, ActivityResult) else self.activity_result
         raise Exception("Response has no Activity Result!")
 
+    @staticmethod
+    def _ensure_list(i):
+        return i if type(i) in (list, tuple) else [i]
+
     @classmethod
     def from_json(cls, obj):
         if type(obj) is not dict:
@@ -104,9 +108,11 @@ class ActivityResponse(object):
         if "result" in obj:
             response.activity_result = ActivityResult(obj["result"])
 
-        response.notes.extend(obj.get("notes", []))
+        response.notes.extend(
+            ActivityResponse._ensure_list(obj.get("notes", [])))
 
-        response.trace.extend(obj.get("trace", []))
+        response.trace.extend(
+            ActivityResponse._ensure_list(obj.get("trace", [])))
 
         response.instance = obj.get("instance", None)
 
