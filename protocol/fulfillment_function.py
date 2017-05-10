@@ -74,18 +74,13 @@ class FulfillmentFunction(object):
             return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
         return response_json
 
-    @classmethod
-    def fix_param_name(cls, name):
-        """ convert camel case names (with spaces) to normal python arg names """
-        # http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
-        return cls.param_rex.sub(r'_\1', name.replace(' ', '_')).lower()
-
     def parse(self, event):
         kwargs = {}
         for (name, param) in self._params.iteritems():
             try:
                 value = event[name] if name in event else None
-                param_name = FulfillmentFunction.fix_param_name(name)
+                # http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
+                param_name = FulfillmentFunction.param_rex.sub(r'_\1', name.replace(' ', '_')).lower()
                 kwargs[param_name] = param.parse(value, name)
             except Exception as e:
                 msg = "Error parsing parameter '{}'".format(name)

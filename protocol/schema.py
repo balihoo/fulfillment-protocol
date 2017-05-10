@@ -1,4 +1,6 @@
 from resolver import Resolver, ResolverContainer
+from jsonschema import Draft4Validator
+import pprint
 
 
 class SchemaParameter(object):
@@ -41,6 +43,15 @@ class SchemaParameter(object):
         schema = self._schema.copy()
         if include_version:
             schema['$schema'] = "http://json-schema.org/draft-04/schema"
+
+        # Make sure the provided example is valid for the given schema
+        if 'x-example' in self._schema:
+            validator = Draft4Validator(schema)
+            if not validator.is_valid(self._schema['x-example']):
+                problems = []
+                for err in validator.iter_errors(self._schema['x-example']):
+                    problems.append(err.message)
+                raise Exception("Schema example does not match! {}\n\n----- SCHEMA -----\n{}".format("\n".join(problems), pprint.pformat(schema)))
         return schema
 
     def parse(self, value, context=""):

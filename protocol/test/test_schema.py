@@ -273,7 +273,7 @@ class TestSchema(unittest.TestCase):
 
     def test_ResolverObjectParameter(self):
         obj = ResolverObjectParameter("Erbjerct", "Erbject description", properties={
-            "one": StringParameter("Uno", example={'Alpha': [False, 6]}),
+            "one": StringParameter("Uno", example='Alpha'),
             "two": StringParameter("Dos", required=False),
             "tres": StringParameter("Tres", default="AMAZING"),
             "qqq": ObjectParameter("Blerb", properties={
@@ -286,7 +286,7 @@ class TestSchema(unittest.TestCase):
         validator = Draft4Validator(obj_schema)
 
         self.assertEquals(obj_schema, {'description': 'Erbject description',
-                                       'properties': {'one': {'description': 'Uno', 'type': 'string', 'x-example': {'Alpha': [False, 6]}},
+                                       'properties': {'one': {'description': 'Uno', 'type': 'string', 'x-example': 'Alpha'},
                                                       'two': {'description': 'Dos', 'type': ['null', 'string']},
                                                       'tres': {'default': 'AMAZING',
                                                                'description': 'Tres',
