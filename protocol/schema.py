@@ -56,16 +56,16 @@ class SchemaParameter(object):
 
     def parse(self, value, context=""):
         if value is not None:
-            if type(value) in (str, ):
-                value = unicode(value, 'utf-8')
+            if isinstance(value, bytes):
+                value = str(value, 'utf-8')
             try:
                 return self._parse(value, context)
-            except Exception, e:
+            except Exception as e:
                 raise Exception("Exception while parsing {}: {}".format(context, e))
         if not self.is_required():
             try:
                 return self._parse(self.default, context+"/-default-/") if self.default is not None else self.default
-            except Exception, e:
+            except Exception as e:
                 raise Exception("Exception while parsing {}: {}".format(context+"/-default-/", e))
         raise Exception("{}-Missing required parameter (description: {})".format(context, self.description[:40]))
 
@@ -137,7 +137,7 @@ class ObjectParameter(SchemaParameter):
         if type(value) != dict:
             raise Exception("Expected to parse a dict!")
         out = {}
-        for name, prop in self.properties.iteritems():
+        for name, prop in self.properties.items():
             v = prop.parse(value.get(name, None), context+"[{}]".format(name))
             if v is not None:
                 out[name] = v
@@ -160,11 +160,11 @@ class ResolverObjectParameter(ObjectParameter):
             return f
 
         out = ResolverContainer(self._context)
-        for name, prop in self.properties.iteritems():
+        for name, prop in self.properties.items():
             out.add(name, value.get(name, None), self.resolver_class, wrap_parser(prop, name),
                     skip_resolver=type(prop) == ResolverObjectParameter)
         if self.extra_type:
-            for name, val in value.iteritems():
+            for name, val in value.items():
                 if name not in out:
                     out.add(name, val, self.resolver_class, wrap_parser(self.extra_type, name),
                             skip_resolver=type(self.extra_type) == ResolverObjectParameter)
@@ -286,8 +286,8 @@ class OneOfParameter(SchemaParameter):
                     val = option.parse(value, context+":OneOf:")
                     if val is not None:
                         return val
-                except Exception, e:
-                    # print("While parsing OneOf. {}:{}".format(e.message, option.description))
+                except Exception as e:
+                    # print("While parsing OneOf. {}:{}".format(e, option.description))
                     pass
         return False
 
@@ -307,8 +307,8 @@ class AnyOfParameter(SchemaParameter):
                     val = option.parse(value, context+":AnyOf:")
                     if val is not None:
                         return val
-                except Exception, e:
-                    # print("While parsing AnyOf. {}:{}".format(e.message, option.description))
+                except Exception as e:
+                    # print("While parsing AnyOf. {}:{}".format(e, option.description))
                     pass
         return False
 

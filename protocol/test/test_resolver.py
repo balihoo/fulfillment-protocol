@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import json
-import pprint
 import unittest
 from resolver import Resolver, ResolverContainer
 
@@ -38,7 +36,7 @@ class TestResolver(unittest.TestCase):
             "  f.write('bar')"
         ])
         self.assertEqual(r.evaluate(), None)
-        self.assertEqual(r.last_msg(), "Error in script: NameError(line 2) global name 'open' is not defined")
+        self.assertEqual(r.last_msg(), "Error in script: NameError(line 2) name 'open' is not defined")
 
     def test_ExecImport(self):
         r = Resolver("<(\nimport json")
@@ -77,7 +75,7 @@ class TestResolver(unittest.TestCase):
         res = Resolver(["<(",
             "def fib(n):",
             "    a, b = 0, 1",
-            "    for _ in xrange(n):",
+            "    for _ in range(n):",
             "        yield a",
             "        a, b = b, a + b",
             "return list(fib(10))"
@@ -182,7 +180,7 @@ class TestResolver(unittest.TestCase):
                                    'resolved': True,
                                    'result': 'steel',
                                    'timeline': [],
-                                   'code': "def resolver_func():\n    return  { 'a' : 'steel', 'b' : 'hammock\xc2\xae' }['a']\nraise exec_return(resolver_func())"}}
+                                   'code': "def resolver_func():\n    return  { 'a' : 'steel', 'b' : 'hammock®' }['a']\nraise exec_return(resolver_func())"}}
         detailed = r.to_json(detailed=True)
 
         self.assertEqual(expected, detailed)

@@ -134,9 +134,9 @@ class ActivityResponse(object):
         try:
             # We expect results to come back as legal JSON...
             return json.loads(result)
-        except Exception, e:
+        except Exception as e:
             # Wasn't json encoded, it's automatically a JSON string..
-            print "parse_result failed!", e.message, result
+            print("parse_result failed!", e, result)
             return result
 
 
@@ -155,5 +155,5 @@ class EncryptedResult(ActivityResult):
         # val crypter = new Crypter("config/crypto")
 
     def result(self):
-        print "IMPLEMENT DECRYPTION!!"
+        print("IMPLEMENT DECRYPTION!!")
         return self._result

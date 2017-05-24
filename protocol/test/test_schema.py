@@ -2,7 +2,6 @@
 
 import unittest
 from schema import *
-from pprint import pprint
 from jsonschema import Draft4Validator
 
 
@@ -15,7 +14,7 @@ class TestSchema(unittest.TestCase):
         req = StringParameter("Alpha")
         s = req.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {
+        self.assertEqual(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'type': 'string',
             'description': 'Alpha'})
@@ -30,7 +29,7 @@ class TestSchema(unittest.TestCase):
         optional = StringParameter("Beta", required=False, default="honey")
         s = optional.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {
+        self.assertEqual(s, {
             'default': 'honey',
             '$schema': 'http://json-schema.org/draft-04/schema',
             'type': ['null', 'string'],
@@ -49,7 +48,7 @@ class TestSchema(unittest.TestCase):
         optional = StringParameter("Beta", min_length=5, max_length=10, default="honey")
         s = optional.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {
+        self.assertEqual(s, {
             'default': 'honey',
             'maxLength': 10,
             'minLength': 5,
@@ -76,7 +75,7 @@ class TestSchema(unittest.TestCase):
         obj_schema = obj.to_schema()
         validator = Draft4Validator(obj_schema)
 
-        self.assertEquals(obj_schema, {'description': 'Erbjerct',
+        self.assertEqual(obj_schema, {'description': 'Erbjerct',
                                        'properties': {'one': {'description': 'Uno', 'type': 'string'},
                                                       'two': {'description': 'Dos', 'type': ['null', 'string']}},
                                        'required': ['one'],
@@ -88,10 +87,10 @@ class TestSchema(unittest.TestCase):
                    "five": "Shouldn't match anything!"}
 
         self.assertTrue(validator.is_valid(input_1))
-        self.assertEquals(obj.parse(input_1), {"one": "Alabaster"})
+        self.assertEqual(obj.parse(input_1), {"one": "Alabaster"})
 
         self.assertTrue(validator.is_valid(input_2))
-        self.assertEquals(obj.parse(input_2), {"one": "Alabaster",
+        self.assertEqual(obj.parse(input_2), {"one": "Alabaster",
                                                   "two": "Soapstone"})
 
         dobj = ObjectParameter("All defaults", properties={
@@ -102,7 +101,7 @@ class TestSchema(unittest.TestCase):
         dobj_schema = dobj.to_schema()
         dvalidator = Draft4Validator(dobj_schema)
 
-        self.assertEquals(dobj_schema, {'default': {},
+        self.assertEqual(dobj_schema, {'default': {},
                                         'description': 'All defaults',
                                         'properties': {'fruit': {'default': 'kiwi',
                                                                  'description': 'The name of a fruit',
@@ -117,10 +116,10 @@ class TestSchema(unittest.TestCase):
         input_2 = {"fruit": "blueberry"}
 
         self.assertTrue(dvalidator.is_valid(input_1))
-        self.assertEquals(dobj.parse(input_1), {'fruit': 'kiwi', 'vegetable': 'celery'})
+        self.assertEqual(dobj.parse(input_1), {'fruit': 'kiwi', 'vegetable': 'celery'})
 
         self.assertTrue(dvalidator.is_valid(input_2))
-        self.assertEquals(dobj.parse(input_2), {'fruit': 'blueberry', 'vegetable': 'celery'})
+        self.assertEqual(dobj.parse(input_2), {'fruit': 'blueberry', 'vegetable': 'celery'})
 
     def test_ArrayParameter(self):
         arr = ArrayParameter("A list of same-type items..",
@@ -133,7 +132,7 @@ class TestSchema(unittest.TestCase):
         arr_schema = arr.to_schema()
         validator = Draft4Validator(arr_schema)
 
-        self.assertEquals(arr_schema, {'description': 'A list of same-type items..',
+        self.assertEqual(arr_schema, {'description': 'A list of same-type items..',
                                        'items': {'description': 'Fruit', 'type': 'string'},
                                        'maxItems': 5,
                                        'minItems': 3,
@@ -144,10 +143,10 @@ class TestSchema(unittest.TestCase):
         input_2 = ["one", "two ", "  three", "four"]
 
         self.assertTrue(validator.is_valid(input_1))
-        self.assertEquals(arr.parse(input_1), input_1)
+        self.assertEqual(arr.parse(input_1), input_1)
 
         self.assertTrue(validator.is_valid(input_2))
-        self.assertEquals(arr.parse(input_2), input_1)
+        self.assertEqual(arr.parse(input_2), input_1)
 
         self.assertFalse(validator.is_valid(1))
         self.assertFalse(validator.is_valid(["one", "two"]))
@@ -157,7 +156,7 @@ class TestSchema(unittest.TestCase):
         req = EnumParameter("some options!", options=["fish", "cheese", "apple"])
         s = req.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {
+        self.assertEqual(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'description': 'some options!',
             'enum': ['fish', 'cheese', 'apple'],
@@ -178,7 +177,7 @@ class TestSchema(unittest.TestCase):
         req = UriParameter("AN REsource out in the series of tubes")
         s = req.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {
+        self.assertEqual(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'description': 'AN REsource out in the series of tubes',
             'format': 'uri',
@@ -195,7 +194,7 @@ class TestSchema(unittest.TestCase):
         req = UuidParameter("02ef139a-417a-4328-9953-5996b9f36dae")
         s = req.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {
+        self.assertEqual(s, {
             '$schema': 'http://json-schema.org/draft-04/schema',
             'type': 'string',
             'description': '02ef139a-417a-4328-9953-5996b9f36dae',
@@ -218,7 +217,7 @@ class TestSchema(unittest.TestCase):
         ))
         s = req.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {'$schema': 'http://json-schema.org/draft-04/schema',
+        self.assertEqual(s, {'$schema': 'http://json-schema.org/draft-04/schema',
                               'description': 'Just one of these things is valid!',
                               'oneOf': [{'description': 'A list of junk',
                                          'items': {'description': 'A String',
@@ -237,8 +236,8 @@ class TestSchema(unittest.TestCase):
         self.assertFalse(validator.is_valid(1.2345))
         for e in validator.iter_errors(1):
             # print dir(e)
-            print e.message, e.instance,
-            print [c.message for c in e.context]
+            print(e.message, e.instance, end=' ')
+            print([c.message for c in e.context])
         return True
 
     def test_AnyOfParameter(self):
@@ -248,7 +247,7 @@ class TestSchema(unittest.TestCase):
         ))
         s = req.to_schema(True)
         validator = Draft4Validator(s)
-        self.assertEquals(s, {'$schema': 'http://json-schema.org/draft-04/schema',
+        self.assertEqual(s, {'$schema': 'http://json-schema.org/draft-04/schema',
                               'description': 'Any of these things could be valid!',
                               'anyOf': [{'description': 'A list of junk',
                                          'items': {'description': 'A String',
@@ -266,9 +265,9 @@ class TestSchema(unittest.TestCase):
         self.assertFalse(validator.is_valid(["hello", 1]))
         self.assertFalse(validator.is_valid(1.2345))
         for e in validator.iter_errors(1):
-            print dir(e), e.message, e.instance,
+            print(dir(e), e.message, e.instance, end=' ')
             for c in e.context:
-                print c.message
+                print(c.message)
         return True
 
     def test_ResolverObjectParameter(self):
@@ -285,7 +284,7 @@ class TestSchema(unittest.TestCase):
         obj_schema = obj.to_schema()
         validator = Draft4Validator(obj_schema)
 
-        self.assertEquals(obj_schema, {'description': 'Erbject description',
+        self.assertEqual(obj_schema, {'description': 'Erbject description',
                                        'properties': {'one': {'description': 'Uno', 'type': 'string', 'x-example': 'Alpha'},
                                                       'two': {'description': 'Dos', 'type': ['null', 'string']},
                                                       'tres': {'default': 'AMAZING',
@@ -314,29 +313,23 @@ class TestSchema(unittest.TestCase):
 
         self.assertTrue(validator.is_valid(input_1))
         con1 = obj.parse(input_1)
-        self.assertEquals(con1["one"], "Alabaster")
+        self.assertEqual(con1["one"], "Alabaster")
 
         self.assertTrue(validator.is_valid(input_2))
         con2 = obj.parse(input_2)
-        self.assertEquals(con2["two"], "alpha omega")
+        self.assertEqual(con2["two"], "alpha omega")
 
         self.assertRaises(Exception, lambda x: con2["tomato"])
 
-        self.assertEquals(con2["tres"], "AMAZING")
+        self.assertEqual(con2["tres"], "AMAZING")
 
-        message = "NO MESSAGE"
-        try:
+        with self.assertRaises(Exception) as context:
             obj.parse(input_3)
-        except Exception, e:
-            message = e.message
+            self.assertEqual("Exception while parsing : Erbjerct/[one]-Missing required parameter (description: Uno)", context.exception)
 
-        self.assertEqual("Exception while parsing : Erbjerct/[one]-Missing required parameter (description: Uno)", message)
-
-        try:
+        with self.assertRaises(Exception) as context:
             obj.parse(input_4)
-        except Exception, e:
-            message = e.message
-        self.assertEqual("Exception while parsing : Exception while parsing Erbjerct/[qqq]: Erbjerct/[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", message)
+            self.assertEqual("Exception while parsing : Exception while parsing Erbjerct/[qqq]: Erbjerct/[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", context.exception)
 
     def test_ResolverObjectParameterExtra(self):
         obj = ResolverObjectParameter("Erbjerct", "Erbjerct description", properties={
@@ -349,7 +342,7 @@ class TestSchema(unittest.TestCase):
         validator = Draft4Validator(obj_schema)
 
         m = obj.parse({"flower": "<( 'apple'", "one": "fine"})
-        self.assertEquals(m.flower, "apple")
+        self.assertEqual(m.flower, "apple")
 
 
 if __name__ == '__main__':

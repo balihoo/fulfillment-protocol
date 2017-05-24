@@ -49,10 +49,10 @@ class Resolver(object):
     @classmethod
     def contains_code(cls, s):
         t = type(s)
-        if t in (str, unicode):
+        if t == str:
             return cls._is_code(s)
         if t == dict:
-            return any([cls.contains_code(i) for i in s.itervalues()])
+            return any([cls.contains_code(i) for i in s.values()])
         if t in (tuple, list):
             return any([cls.contains_code(i) for i in s])
         return False
@@ -80,15 +80,15 @@ class Resolver(object):
 
     def __evaluate(self, e):
         if type(e) == dict:
-            offending_keys = [k for k in e.keys() if k.startswith(Resolver.CODE_START)]
+            offending_keys = [k for k in list(e.keys()) if k.startswith(Resolver.CODE_START)]
             if offending_keys:
                 raise ResolverImpossible("Operators like '{}' are NOT supported!".format(", ".join(offending_keys)))
-            return {k: self.__evaluate(v) for k, v in e.iteritems()}
+            return {k: self.__evaluate(v) for k, v in e.items()}
         elif type(e) in (tuple, list):
             if e and e[0] == Resolver.CODE_START:
                 return self.__evaluate("\n".join(e))
             return [self.__evaluate(v) for v in e]
-        elif type(e) in (str, unicode) and self._is_code(e):
+        elif type(e) == str and self._is_code(e):
             return self._evaluate_str(e)
         return e
 
@@ -116,8 +116,8 @@ class Resolver(object):
 
         try:
             with TimeOut(seconds=self.timeout):
-                exec wcode in outside_vars, {exname: ReturnException}
-        except ReturnException, e:
+                exec(wcode, outside_vars, {exname: ReturnException})
+        except ReturnException as e:
             return e.value
         except SyntaxError as err:
             error_class = err.__class__.__name__
@@ -134,7 +134,7 @@ class Resolver(object):
         self.evaluated = True
         try:
             return self._evaluate(self.input)
-        except Exception, err:
+        except Exception as err:
             error_class = err.__class__.__name__
             detail = err.args[0]
             cl, exc, tb = sys.exc_info()
@@ -245,23 +245,23 @@ class ResolverContainer(object):
         return None
 
     def _resolvers(self):
-        return {name: wrapper.resolver for (name, wrapper) in self._items.iteritems() if wrapper.resolver}
+        return {name: wrapper.resolver for (name, wrapper) in self._items.items() if wrapper.resolver}
 
     def evaluate(self):
-        for (name, item) in self._items.iteritems():
+        for (name, item) in self._items.items():
             try:
                 item.get(self._build_context('{}(while evaluating)'.format(name)))
-            except Exception, e:
-                self.timeline.error("Resolver Error! {}".format(e.message))
+            except Exception as e:
+                self.timeline.error("Resolver Error! {}".format(e))
 
     def all_resolved(self):
         return not len(self.unresolved())
 
     def unresolved(self):
-        return [n for n, p in self._resolvers().iteritems() if not p.is_resolved()]
+        return [n for n, p in self._resolvers().items() if not p.is_resolved()]
 
     def impossible(self):
-        return [n for n, p in self._resolvers().iteritems() if not p.is_resolvable()]
+        return [n for n, p in self._resolvers().items() if not p.is_resolvable()]
 
     def to_json(self, detailed=False):
-        return {name: v.to_json(detailed) for (name, v) in self._items.iteritems()}
+        return {name: v.to_json(detailed) for (name, v) in self._items.items()}

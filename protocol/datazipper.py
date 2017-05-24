@@ -9,7 +9,7 @@ from config import Config
 
 def to_unicode(data):
     try:
-        return unicode(data, 'utf-8')
+        return str(data, 'utf-8')
     except:
         pass
     return data
@@ -46,13 +46,13 @@ class DataZipper(object):
         the_bytes = to_unicode(data)
         zipped = zlib.compress(the_bytes.encode('utf-8'))
 
-        return cls.separator.join((cls.magick_zip, str(len(the_bytes)), base64.b64encode(zipped)))
+        return cls.separator.join((cls.magick_zip, str(len(the_bytes)), to_unicode(base64.b64encode(zipped))))
 
     @classmethod
     def _store_in_s3(cls, data):
         md5 = hashlib.md5()
         result_bytes = to_unicode(data)
-        md5.update(result_bytes)
+        md5.update(result_bytes.encode('utf-8'))
         md5_hash = md5.hexdigest()
 
         s3_key = cls._make_key(md5_hash + ".ff")
@@ -76,7 +76,7 @@ class DataZipper(object):
         # sample ff url:
         # FF-URL:ca5c3877664255d120079fa323850b7f:s3://balihoo.dev.fulfillment/retain_30_180/zipped-ff/ca5c3877664255d120079fa323850b7f.ff
         s, h, proto, path = ff_url.split(cls.separator)
-        path_parts = filter(len, path.split('/'))
+        path_parts = list(filter(len, path.split('/')))
         bucket = path_parts[0]
         key = '/'.join(path_parts[1:])
         assert proto == "s3", "DataZipper only supports s3 protocol for fulfillment documents"

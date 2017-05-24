@@ -1,5 +1,5 @@
 import json
-from urllib import quote_plus
+from urllib.parse import quote_plus
 import time
 from copy import deepcopy
 
@@ -15,12 +15,11 @@ safe_builtins = {
     "abs": abs,
     "all": all,
     "any": any,
-    "basestring": basestring,
     "bin": bin,
     "bool": bool,
     "bytearray": bytearray,
+    "bytes": bytes,
     "chr": chr,
-    "cmp": cmp,
     "complex": complex,
     "dict": dict,
     "divmod": divmod,
@@ -35,7 +34,6 @@ safe_builtins = {
     "iter": iter,
     "len": len,
     "list": list,
-    "long": long,
     "map": map,
     "max": max,
     "min": min,
@@ -44,7 +42,6 @@ safe_builtins = {
     "ord": ord,
     "pow": pow,
     "range": range,
-    "reduce": reduce,
     "reversed": reversed,
     "round": round,
     "set": set,
@@ -53,9 +50,6 @@ safe_builtins = {
     "str": str,
     "sum": sum,
     "tuple": tuple,
-    "unichr": unichr,
-    "unicode": unicode,
-    "xrange": xrange,
     "zip": zip,
 
     "True": True,

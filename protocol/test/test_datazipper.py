@@ -2,7 +2,7 @@
 
 import os
 import unittest
-from datazipper import DataZipper
+from datazipper import DataZipper, to_unicode
 
 class MockS3Object(object):
     def __init__(self, bucket, key):
@@ -13,9 +13,10 @@ class MockS3Object(object):
     def _filename(self):
         return "test/{}_{}.outons3butnotreally".format(self.bucket, self.key)
 
-    def put(self, Body = None):
+    def put(self, Body = None) -> None:
         self._reset()
-        return open(self.filename, "w").write(Body)
+        with open(self.filename, "w") as f:
+            f.write(Body)
 
     def get(self):
         return {"Body" : open(self.filename, "r")}
@@ -35,7 +36,7 @@ class TestDataZipper(unittest.TestCase):
         DataZipper.s3 = MockS3()
 
     def test_simple(self):
-        self.assertEquals(DataZipper.deliver("Hello", 5000), "Hello")
+        self.assertEqual(DataZipper.deliver("Hello", 5000), "Hello")
 
     def test_zip(self):
         with open('test/bigTestData.json', 'r') as big_json_file:
@@ -60,6 +61,12 @@ class TestDataZipper(unittest.TestCase):
             self.assertTrue(len(received) == 394710)
 
             self.assertTrue(received == bigger_json)
+
+    def test_to_unicode(self):
+        as_unicode = "☃"  # snowman!
+        as_bytes = as_unicode.encode()
+        self.assertEqual(as_unicode, to_unicode(as_unicode))
+        self.assertEqual(as_unicode, to_unicode(as_bytes))
 
 if __name__ == '__main__':
     unittest.main()

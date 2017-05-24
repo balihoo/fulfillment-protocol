@@ -5,10 +5,10 @@ class FulfillmentException(Exception):
     def __init__(self, message, inner_exception=None, notes=None):
         self.notes = notes
         if inner_exception is not None:
-            #this is the trace of the inner exception
+            # this is the trace of the inner exception
             exparms = sys.exc_info()
             self._trace = traceback.format_exception(*exparms)
-            message = "{}: {}".format(message, inner_exception.message)
+            message = "{}: {}".format(message, str(inner_exception))
         else:
             self._trace = []
         super(FulfillmentException, self).__init__(message)

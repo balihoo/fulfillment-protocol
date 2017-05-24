@@ -89,3 +89,7 @@ ENV/
 .ropeproject
 
 # Created by .ignore support plugin (hsz.mobi)
+.idea/
+*.iml
+protocol/config.py
+protocol/test/*.outons3butnotreally

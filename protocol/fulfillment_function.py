@@ -1,3 +1,5 @@
+from typing import Union
+
 from fulfillment_exception import (
     FulfillmentException,
     FulfillmentValidationException,
@@ -43,7 +45,8 @@ class FulfillmentFunction(object):
 
     @classmethod
     def error_response(cls, e):
-        response = ActivityResponse(e.response_code(), notes=e.notes, result=e.message, trace=e.trace(), reason=e.message)
+        message = str(e)  # BaseException.message deprecated (see PEP-0352)
+        response = ActivityResponse(e.response_code(), notes=e.notes, result=message, trace=e.trace(), reason=message)
         response_json = response.to_json()
         response_text = json.dumps(response_json)
         if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
@@ -76,7 +79,7 @@ class FulfillmentFunction(object):
 
     def parse(self, event):
         kwargs = {}
-        for (name, param) in self._params.iteritems():
+        for (name, param) in self._params.items():
             try:
                 value = event[name] if name in event else None
                 # http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
@@ -94,15 +97,15 @@ class FulfillmentFunction(object):
         else:
             return self._result.parse(result, "Parsing result:"), []
 
-    def handle(self, event, context):
-        if type(event) in (str, unicode):
+    def handle(self, event: Union[str, dict], context):
+        if isinstance(event, str):
             event = json.loads(DataZipper.receive(event))
 
         if 'LOG_INPUT' in event:
-            print(json.dumps(event, indent=4))
+            print((json.dumps(event, indent=4)))
 
         if 'LOG_CONTEXT' in event:
-            print(json.dumps(context, indent=4))
+            print((json.dumps(context, indent=4)))
 
         if 'RETURN_SCHEMA' in event:
             return self._schema
