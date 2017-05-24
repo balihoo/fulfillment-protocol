@@ -102,10 +102,10 @@ class FulfillmentFunction(object):
             event = json.loads(DataZipper.receive(event))
 
         if 'LOG_INPUT' in event:
-            print((json.dumps(event, indent=4)))
+            print(json.dumps(event, indent=4))
 
         if 'LOG_CONTEXT' in event:
-            print((json.dumps(context, indent=4)))
+            print(json.dumps(context, indent=4))
 
         if 'RETURN_SCHEMA' in event:
             return self._schema
