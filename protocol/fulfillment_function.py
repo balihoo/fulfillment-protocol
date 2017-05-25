@@ -1,14 +1,14 @@
 from typing import Union
 
-from fulfillment_parser import parse_event, parse_result
-from fulfillment_exception import (
+from .fulfillment_parser import parse_event, parse_result
+from .fulfillment_exception import (
     FulfillmentException,
     FulfillmentFailedException
 )
 
-from schema import ObjectParameter
-from datazipper import DataZipper
-from response import ActivityResponse, ActivityStatus
+from .schema import ObjectParameter
+from .datazipper import DataZipper
+from .response import ActivityResponse, ActivityStatus
 from jsonschema import Draft4Validator
 import json
 

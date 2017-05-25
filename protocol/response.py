@@ -1,6 +1,6 @@
 
 import json
-from datazipper import DataZipper
+from .datazipper import DataZipper
 
 
 #

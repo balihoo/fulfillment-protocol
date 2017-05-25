@@ -2,15 +2,15 @@ import json
 import boto3
 from botocore.client import Config
 
-from fulfillment_parser import parse_event, parse_result
-from fulfillment_exception import (
+from .fulfillment_parser import parse_event, parse_result
+from .fulfillment_exception import (
     FulfillmentException,
     FulfillmentFailedException
 )
-from response import ActivityResponse, ActivityStatus
-from schema import ObjectParameter
-from datazipper import DataZipper
-from param_validator import ParamValidator
+from .response import ActivityResponse, ActivityStatus
+from .schema import ObjectParameter
+from .datazipper import DataZipper
+from .param_validator import ParamValidator
 
 
 def default_log(message):

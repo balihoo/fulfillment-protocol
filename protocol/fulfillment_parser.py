@@ -1,6 +1,6 @@
 import re
 
-from fulfillment_exception import (
+from .fulfillment_exception import (
     FulfillmentValidationException
 )
 
