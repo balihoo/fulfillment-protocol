@@ -40,7 +40,10 @@ class TestFulfillmentWorker(unittest.TestCase):
             swf_domain=SWF_DOMAIN
         )
         worker._swf.poll_for_activity_task = MagicMock(return_value={})
-        worker.run()
+
+        task_token = worker.run()
+
+        self.assertIsNone(task_token)
         worker._swf.poll_for_activity_task.assert_called_with(domain=SWF_DOMAIN, taskList=TASK_LIST)
         worker._handler.assert_not_called()
 
@@ -60,7 +63,7 @@ class TestFulfillmentWorker(unittest.TestCase):
         worker._swf.poll_for_activity_task = MagicMock(return_value=TASK)
         worker._swf.respond_activity_task_completed = MagicMock()
 
-        worker.run()
+        task_token = worker.run()
 
         expected = {
             'taskToken': TASK_TOKEN,
@@ -73,6 +76,7 @@ class TestFulfillmentWorker(unittest.TestCase):
             }
         }
 
+        self.assertEqual(task_token, TASK_TOKEN)
         worker._swf.poll_for_activity_task.assert_called_once_with(domain=SWF_DOMAIN, taskList=TASK_LIST)
         worker._handler.assert_called_once_with(stuff=INPUT['stuff'])
         worker._swf.respond_activity_task_completed.assert_called_once()
@@ -98,7 +102,7 @@ class TestFulfillmentWorker(unittest.TestCase):
         worker._swf.poll_for_activity_task = MagicMock(return_value=TASK)
         worker._swf.respond_activity_task_failed = MagicMock()
 
-        worker.run()
+        task_token = worker.run()
 
         expected = {
             'taskToken': TASK_TOKEN,
@@ -111,6 +115,7 @@ class TestFulfillmentWorker(unittest.TestCase):
             }
         }
 
+        self.assertEqual(task_token, TASK_TOKEN)
         worker._swf.respond_activity_task_failed.assert_called_once()
         call_args = worker._swf.respond_activity_task_failed.call_args[1]
         call_args['details'] = json.loads(call_args['details'])
@@ -135,7 +140,9 @@ class TestFulfillmentWorker(unittest.TestCase):
         worker._swf.poll_for_activity_task = MagicMock(return_value=TASK)
         worker._fail = MagicMock()
 
-        worker.run()
+        task_token = worker.run()
+
+        self.assertEqual(task_token, TASK_TOKEN)
         worker._fail.assert_called_once()
         call_args = worker._fail.call_args[0]
         self.assertEqual(call_args[0], TASK_TOKEN)
@@ -163,7 +170,7 @@ class TestFulfillmentWorker(unittest.TestCase):
 
         worker._swf.respond_activity_task_failed = MagicMock()
 
-        worker.run()
+        task_token = worker.run()
 
         expected = {
             'taskToken': TASK_TOKEN,
@@ -187,6 +194,7 @@ class TestFulfillmentWorker(unittest.TestCase):
             })
         }
 
+        self.assertEqual(task_token, TASK_TOKEN)
         call_args = worker._swf.respond_activity_task_failed.call_args[1]
         self.assertEqual(call_args, expected)
 

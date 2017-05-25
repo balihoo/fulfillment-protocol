@@ -30,8 +30,7 @@ class FulfillmentWorker(object):
         activity_name,
         activity_version,
         swf_domain,
-        default_exception=FulfillmentFailedException,
-        log=None
+        default_exception=FulfillmentFailedException
     ):
         self._description = description
         self._params = parameters
@@ -44,7 +43,6 @@ class FulfillmentWorker(object):
         }
         self._validator = ParamValidator(parameters)
         self._default_exception = default_exception
-        self._log = log if log else default_log
         self._activity = {
             'name': activity_name,
             'version': activity_version
@@ -64,8 +62,6 @@ class FulfillmentWorker(object):
         )
 
     def _poll(self):
-        self._log('polling')
-
         task = self._swf.poll_for_activity_task(
             domain=self._swf_domain,
             taskList=self._task_list
@@ -134,8 +130,5 @@ class FulfillmentWorker(object):
         print(event)
 
         if token:
-            self._log('task {}'.format(token))
             self._handle(token, event)
-        else:
-            self._log('No work to be done for {}/{}'.format(self._swf_domain, self._task_list['name']))
-
+            return token
