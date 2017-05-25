@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from schema import *
+from protocol.schema import *
 from jsonschema import Draft4Validator
 
 

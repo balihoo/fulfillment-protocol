@@ -1,5 +1,5 @@
 from .timeline import Timeline
-import exec_functions
+from . import exec_functions
 import traceback
 import signal
 import sys
