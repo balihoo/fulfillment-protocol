@@ -1,4 +1,4 @@
-from timeline import Timeline
+from .timeline import Timeline
 import exec_functions
 import traceback
 import signal
