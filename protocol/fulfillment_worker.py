@@ -104,10 +104,7 @@ class FulfillmentWorker(object):
             event = json.loads(DataZipper.receive(event))
 
         if 'LOG_INPUT' in event:
-            self._log(json.dumps(event, indent=4))
-
-        if 'RETURN_SCHEMA' in event:
-            return self._schema
+            print(json.dumps(event, indent=4))
 
         validation_error = self._validator.validate(event)
         if validation_error:
