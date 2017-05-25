@@ -124,7 +124,6 @@ class FulfillmentWorker(object):
 
     def run(self):
         event, token = self._poll()
-        print(event)
 
         if token:
             self._handle(token, event)
