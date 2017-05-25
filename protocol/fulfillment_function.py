@@ -1,6 +1,6 @@
 from typing import Union
 
-from parser import parse_event, parse_result
+from fulfillment_parser import parse_event, parse_result
 from fulfillment_exception import (
     FulfillmentException,
     FulfillmentFailedException

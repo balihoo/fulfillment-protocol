@@ -2,7 +2,7 @@ import json
 import boto3
 from botocore.client import Config
 
-from parser import parse_event, parse_result
+from fulfillment_parser import parse_event, parse_result
 from fulfillment_exception import (
     FulfillmentException,
     FulfillmentFailedException
