@@ -1,14 +1,14 @@
 from typing import Union
 
-from fulfillment_exception import (
+from .fulfillment_exception import (
     FulfillmentException,
     FulfillmentValidationException,
     FulfillmentFailedException
 )
 
-from schema import ObjectParameter
-from datazipper import DataZipper
-from response import ActivityResponse, ActivityStatus
+from .schema import ObjectParameter
+from .datazipper import DataZipper
+from .response import ActivityResponse, ActivityStatus
 from jsonschema import Draft4Validator
 import re
 import json

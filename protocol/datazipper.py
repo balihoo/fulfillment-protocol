@@ -4,7 +4,7 @@ import hashlib
 import base64
 import boto3
 import os
-from config import Config
+from .config import Config
 
 
 def to_unicode(data):

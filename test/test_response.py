@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
-import json
-import pprint
 import arrow
 import unittest
-from response import ActivityResult, ActivityResponse
+from protocol.response import ActivityResult, ActivityResponse
 
 
 class TestResponse(unittest.TestCase):

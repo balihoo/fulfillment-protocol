@@ -92,4 +92,4 @@ ENV/
 .idea/
 *.iml
 protocol/config.py
-protocol/test/*.outons3butnotreally
+test/*.outons3butnotreally

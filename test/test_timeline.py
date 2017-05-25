@@ -1,8 +1,7 @@
 #!/usr/bin/python
 
 import unittest
-from timeline import *
-from pprint import pprint
+from protocol.timeline import *
 
 
 class TestTimeline(unittest.TestCase):

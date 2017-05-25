@@ -2,7 +2,7 @@
 
 import os
 import unittest
-from datazipper import DataZipper, to_unicode
+from protocol.datazipper import DataZipper, to_unicode
 
 class MockS3Object(object):
     def __init__(self, bucket, key):

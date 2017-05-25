@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import unittest
-from resolver import Resolver, ResolverContainer
+from protocol.resolver import Resolver, ResolverContainer
 
 
 class TestResolver(unittest.TestCase):

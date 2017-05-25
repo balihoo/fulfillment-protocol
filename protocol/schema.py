@@ -1,4 +1,4 @@
-from resolver import Resolver, ResolverContainer
+from .resolver import Resolver, ResolverContainer
 from jsonschema import Draft4Validator
 import pprint
 
