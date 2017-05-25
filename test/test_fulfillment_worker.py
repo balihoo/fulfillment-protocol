@@ -3,10 +3,10 @@ import json
 import unittest
 from unittest.mock import Mock, MagicMock
 
-from fulfillment_worker import FulfillmentWorker
-from schema import StringParameter, StringResult
-from fulfillment_exception import FulfillmentFatalException
-from response import ActivityStatus
+from protocol.fulfillment_worker import FulfillmentWorker
+from protocol.schema import StringParameter, StringResult
+from protocol.fulfillment_exception import FulfillmentFatalException
+from protocol.response import ActivityStatus
 
 REGION = 'us-east-1'
 SWF_DOMAIN = 'fulfillment_test'

@@ -1,5 +1,5 @@
 from jsonschema import Draft4Validator
-from schema import ObjectParameter
+from .schema import ObjectParameter
 
 
 class ParamValidator(object):
