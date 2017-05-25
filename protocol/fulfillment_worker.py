@@ -1,24 +1,24 @@
-import re
 import json
 import boto3
 from botocore.client import Config
 
+from parser import parse_event, parse_result
 from fulfillment_exception import (
     FulfillmentException,
-    FulfillmentValidationException,
     FulfillmentFailedException
 )
 from response import ActivityResponse, ActivityStatus
 from schema import ObjectParameter
 from datazipper import DataZipper
-from jsonschema import Draft4Validator
+from param_validator import ParamValidator
+
 
 def default_log(message):
     print(message)
 
+
 class FulfillmentWorker(object):
     SWF_LIMIT = 32000
-    param_rex = re.compile('((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))')
 
     def __init__(
         self,
@@ -42,7 +42,7 @@ class FulfillmentWorker(object):
             'params': ObjectParameter('', properties=parameters).to_schema(),
             'result': result.to_schema()
         }
-        self._validator = Draft4Validator(ObjectParameter('', properties=parameters).to_schema(True))
+        self._validator = ParamValidator(parameters)
         self._default_exception = default_exception
         self._log = log if log else default_log
         self._activity = {
@@ -78,38 +78,9 @@ class FulfillmentWorker(object):
         # No task
         return None, None
 
-    def _parse(self, event):
-        kwargs = {}
-        for (name, param) in self._params.items():
-            try:
-                value = event[name] if name in event else None
-                # http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
-                param_name = FulfillmentWorker.param_rex.sub(r'_\1', name.replace(' ', '_')).lower()
-                kwargs[param_name] = param.parse(value, name)
-            except Exception as e:
-                msg = "Error parsing parameter '{}'".format(name)
-                raise FulfillmentValidationException(msg, inner_exception=e)
-        return kwargs
-
-    def _parse_result(self, result):
-        if isinstance(result, tuple):
-            (res, notes) = result
-            return self._result.parse(res, 'Parsing result:'), notes
-        else:
-            return self._result.parse(result, 'Parsing result:'), []
-
-    def _serialize_response(self, response):
-        response_json = response.to_json()
-        response_text = json.dumps(response_json)
-
-        if len(response_text) >= FulfillmentWorker.SWF_LIMIT:
-            return DataZipper.deliver(response_text, FulfillmentWorker.SWF_LIMIT)
-
-        return response_text
-
     def _success(self, token, result, notes):
         response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
-        self._swf.respond_activity_task_completed(taskToken=token, result=self._serialize_response(response))
+        self._swf.respond_activity_task_completed(taskToken=token, result=response.serialize())
 
     def _fail(self, token, e):
         error_message = str(e)
@@ -121,12 +92,16 @@ class FulfillmentWorker(object):
             trace=e.trace(),
             reason=error_message
         )
-        response_string = self._serialize_response(response)
+        response_string = response.serialize()
 
         if e.retry():
             self._swf.respond_activity_task_canceled(taskToken=token, details=response_string)
         else:
             self._swf.respond_activity_task_failed(taskToken=token, details=response_string)
+
+    def _invalid(self, token, validation_errors):
+        response = ActivityResponse(ActivityStatus.INVALID, validation_errors=validation_errors)
+        self._swf.respond_activity_task_failed(taskToken=token, details=response.serialize())
 
     def _handle(self, token, event):
         if isinstance(event, str):
@@ -138,39 +113,29 @@ class FulfillmentWorker(object):
         if 'RETURN_SCHEMA' in event:
             return self._schema
 
-        validation_errors = []
-        for err in self._validator.iter_errors(event):
-            validation_errors.append({
-                'cause': err.cause,
-                'context': err.context,
-                'message': err.message,
-                'path': '/'.join([str(p) for p in err.path]),
-                'relative_path': '/'.join([str(p) for p in err.relative_path]),
-                'absolute_path': '/'.join([str(p) for p in err.absolute_path]),
-                'validator': err.validator,
-                'validator_value': err.validator_value
-            })
-
-        if validation_errors:
-            return self._fail(token, ActivityResponse(ActivityStatus.INVALID, validation_errors=validation_errors))
+        validation_error = self._validator.validate(event)
+        if validation_error:
+            return self._invalid(token, validation_error)
 
         try:
-            kwargs = self._parse(event)
+            kwargs = parse_event(event, self._params)
             result = self._handler(**kwargs)
-            (valid_result, notes) = self._parse_result(result)
+            (valid_result, notes) = parse_result(result, self._result)
             self._success(token, valid_result, notes)
         except FulfillmentException as e:
             self._fail(token, e)
         except Exception as e:
+            print("default!")
             wrapped = self._default_exception('unhandled exception', inner_exception=e)
             self._fail(token, wrapped)
 
     def run(self):
-        input, token = self._poll()
+        event, token = self._poll()
+        print(event)
 
         if token:
             self._log('task {}'.format(token))
-            event = json.loads(DataZipper.receive(input))
             self._handle(token, event)
         else:
             self._log('No work to be done for {}/{}'.format(self._swf_domain, self._task_list['name']))
+
