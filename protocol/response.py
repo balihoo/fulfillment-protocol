@@ -1,5 +1,6 @@
 
 import json
+from datazipper import DataZipper
 
 
 #
@@ -35,6 +36,8 @@ class ActivityStatus(object):
 # @param result the result of the task.. will not always be present
 #
 class ActivityResponse(object):
+    SWF_LIMIT = 32000
+
     def __init__(self, status, result=None, notes=None, trace=None, reason=None, validation_errors=None):
         self.status = status
         self.activity_result = result
@@ -84,7 +87,13 @@ class ActivityResponse(object):
         return res
 
     def serialize(self):
-        return json.dumps(self.to_json())
+        response_json = self.to_json()
+        response_text = json.dumps(response_json)
+
+        if len(response_text) >= ActivityResponse.SWF_LIMIT:
+            return DataZipper.deliver(response_text, ActivityResponse.SWF_LIMIT)
+
+        return response_text
 
     def result(self):
         if self.activity_result is not None:

@@ -1,8 +1,8 @@
 from typing import Union
 
+from parser import parse_event, parse_result
 from fulfillment_exception import (
     FulfillmentException,
-    FulfillmentValidationException,
     FulfillmentFailedException
 )
 
@@ -10,14 +10,12 @@ from schema import ObjectParameter
 from datazipper import DataZipper
 from response import ActivityResponse, ActivityStatus
 from jsonschema import Draft4Validator
-import re
 import json
 
 
 class FulfillmentFunction(object):
 
     SWF_LIMIT = 32000
-    param_rex = re.compile('((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))')
 
     def __init__(
         self,
@@ -47,11 +45,7 @@ class FulfillmentFunction(object):
     def error_response(cls, e):
         message = str(e)  # BaseException.message deprecated (see PEP-0352)
         response = ActivityResponse(e.response_code(), notes=e.notes, result=message, trace=e.trace(), reason=message)
-        response_json = response.to_json()
-        response_text = json.dumps(response_json)
-        if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
-            return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
-        return response_json
+        return response.serialize()
 
     @classmethod
     def success_response(cls, result, notes, disable_protocol):
@@ -59,11 +53,7 @@ class FulfillmentFunction(object):
             return result
 
         response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
-        response_json = response.to_json()
-        response_text = json.dumps(response_json)
-        if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
-            return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
-        return response_json
+        return response.serialize()
 
     @classmethod
     def invalid_response(cls, validation_errors, disable_protocol):
@@ -71,31 +61,7 @@ class FulfillmentFunction(object):
             return None
 
         response = ActivityResponse(ActivityStatus.INVALID, validation_errors=validation_errors)
-        response_json = response.to_json()
-        response_text = json.dumps(response_json)
-        if len(response_text) >= FulfillmentFunction.SWF_LIMIT:
-            return DataZipper.deliver(response_text, FulfillmentFunction.SWF_LIMIT)
-        return response_json
-
-    def parse(self, event):
-        kwargs = {}
-        for (name, param) in self._params.items():
-            try:
-                value = event[name] if name in event else None
-                # http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-camel-case
-                param_name = FulfillmentFunction.param_rex.sub(r'_\1', name.replace(' ', '_')).lower()
-                kwargs[param_name] = param.parse(value, name)
-            except Exception as e:
-                msg = "Error parsing parameter '{}'".format(name)
-                raise FulfillmentValidationException(msg, inner_exception=e)
-        return kwargs
-
-    def parse_result(self, result):
-        if isinstance(result, tuple):
-            (res, notes) = result
-            return self._result.parse(res, "Parsing result:"), notes
-        else:
-            return self._result.parse(result, "Parsing result:"), []
+        return response.serialize()
 
     def handle(self, event: Union[str, dict], context):
         if isinstance(event, str):
@@ -113,29 +79,17 @@ class FulfillmentFunction(object):
         # Always override _disable_protocol with the value in the event (if there is one)
         disable_protocol = event.get("DISABLE_PROTOCOL", self._disable_protocol)
 
-        validation_errors = []
-        for err in self._validator.iter_errors(event):
-            validation_errors.append({
-                'cause': err.cause,
-                'context': err.context,
-                'message': err.message,
-                'path': '/'.join([str(p) for p in err.path]),
-                'relative_path': '/'.join([str(p) for p in err.relative_path]),
-                'absolute_path': '/'.join([str(p) for p in err.absolute_path]),
-                'validator': err.validator,
-                'validator_value': err.validator_value
-            })
-
+        validation_errors = self._validator.validate(event)
         if validation_errors:
             return self.invalid_response(validation_errors, disable_protocol)
 
         try:
-            kwargs = self.parse(event)
+            kwargs = parse_event(event, self._params)
             if 'DEBUG_MODE' in event:
                 result = self._debug_handler(debug_mode=event['DEBUG_MODE'], **kwargs)
             else:
                 result = self._handler(**kwargs)
-            (valid_result, notes) = self.parse_result(result)
+            (valid_result, notes) = parse_result(result, self._result)
             return self.success_response(valid_result, notes, disable_protocol)
         except FulfillmentException as e:
             if disable_protocol:
