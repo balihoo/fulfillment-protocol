@@ -86,14 +86,14 @@ class ActivityResponse(object):
 
         return res
 
-    def serialize(self):
+    def pack(self):
         response_json = self.to_json()
         response_text = json.dumps(response_json)
 
         if len(response_text) >= ActivityResponse.SWF_LIMIT:
             return DataZipper.deliver(response_text, ActivityResponse.SWF_LIMIT)
 
-        return response_text
+        return response_json
 
     def result(self):
         if self.activity_result is not None:

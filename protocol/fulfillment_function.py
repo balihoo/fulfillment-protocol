@@ -45,7 +45,7 @@ class FulfillmentFunction(object):
     def error_response(cls, e):
         message = str(e)  # BaseException.message deprecated (see PEP-0352)
         response = ActivityResponse(e.response_code(), notes=e.notes, result=message, trace=e.trace(), reason=message)
-        return response.serialize()
+        return response.pack()
 
     @classmethod
     def success_response(cls, result, notes, disable_protocol):
@@ -53,7 +53,7 @@ class FulfillmentFunction(object):
             return result
 
         response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
-        return response.serialize()
+        return response.pack()
 
     @classmethod
     def invalid_response(cls, validation_errors, disable_protocol):
@@ -61,7 +61,7 @@ class FulfillmentFunction(object):
             return None
 
         response = ActivityResponse(ActivityStatus.INVALID, validation_errors=validation_errors)
-        return response.serialize()
+        return response.pack()
 
     def handle(self, event: Union[str, dict], context):
         if isinstance(event, str):

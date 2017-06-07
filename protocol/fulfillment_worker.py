@@ -76,7 +76,7 @@ class FulfillmentWorker(object):
 
     def _success(self, token, result, notes):
         response = ActivityResponse(ActivityStatus.SUCCESS, result, notes=notes)
-        self._swf.respond_activity_task_completed(taskToken=token, result=response.serialize())
+        self._swf.respond_activity_task_completed(taskToken=token, result=json.dumps(response.pack()))
 
     def _fail(self, token, e):
         error_message = str(e)
@@ -88,7 +88,7 @@ class FulfillmentWorker(object):
             trace=e.trace(),
             reason=error_message
         )
-        response_string = response.serialize()
+        response_string = json.dumps(response.pack())
 
         if e.retry():
             self._swf.respond_activity_task_canceled(taskToken=token, details=response_string)
@@ -97,7 +97,7 @@ class FulfillmentWorker(object):
 
     def _invalid(self, token, validation_errors):
         response = ActivityResponse(ActivityStatus.INVALID, validation_errors=validation_errors)
-        self._swf.respond_activity_task_failed(taskToken=token, details=response.serialize())
+        self._swf.respond_activity_task_failed(taskToken=token, details=json.dumps(response.pack()))
 
     def _handle(self, token, event):
         if isinstance(event, str):
