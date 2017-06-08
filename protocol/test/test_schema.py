@@ -247,7 +247,7 @@ class TestSchema(unittest.TestCase):
             IntParameter("Some number")
         ))
         s = req.to_schema(True)
-        validator = Draft4Validator(s)
+        validator = req.to_validator(True)
         self.assertEquals(s, {'$schema': 'http://json-schema.org/draft-04/schema',
                               'description': 'Any of these things could be valid!',
                               'anyOf': [{'description': 'A list of junk',
@@ -270,86 +270,6 @@ class TestSchema(unittest.TestCase):
             for c in e.context:
                 print c.message
         return True
-
-    def test_ResolverObjectParameter(self):
-        obj = ResolverObjectParameter("Erbjerct", "Erbject description", properties={
-            "one": StringParameter("Uno", example='Alpha'),
-            "two": StringParameter("Dos", required=False),
-            "tres": StringParameter("Tres", default="AMAZING"),
-            "qqq": ObjectParameter("Blerb", properties={
-                "alpha": IntParameter("Number of ponies you've ever ridden"),
-                "bete": StringParameter("Name your ferocious fish")
-            }, required=False)
-        })
-
-        obj_schema = obj.to_schema()
-        validator = Draft4Validator(obj_schema)
-
-        self.assertEquals(obj_schema, {'description': 'Erbject description',
-                                       'properties': {'one': {'description': 'Uno', 'type': 'string', 'x-example': 'Alpha'},
-                                                      'two': {'description': 'Dos', 'type': ['null', 'string']},
-                                                      'tres': {'default': 'AMAZING',
-                                                               'description': 'Tres',
-                                                               'type': ['null', 'string']},
-                                                      'qqq': {'required': ['alpha', 'bete'],
-                                                              'type': ['null', 'object'],
-                                                              'description': 'Blerb',
-                                                              'properties':
-                                                                  {'alpha': {'type': 'integer', 'description': "Number of ponies you've ever ridden"},
-                                                                   'bete': {'type': 'string', 'description': 'Name your ferocious fish'}}}
-                                                      },
-                                       'required': ['one'],
-                                       'type': 'object'})
-
-        input_1 = {"one": "Alabaster"}
-        input_2 = {"one": "Alabaster  ",
-                   "two": "<( return 'alpha' + ' ' + 'omega' ",
-                   "five": "Shouldn't match anything!"}
-        input_3 = {"two": "<( return 'alpha' + ' ' + 'omega' ",
-                   "five": "Shouldn't match anything!"}
-        input_4 = {"one": "Alabaster",
-                   "qqq": {
-                       "alpha": 15
-                   }}
-
-        self.assertTrue(validator.is_valid(input_1))
-        con1 = obj.parse(input_1)
-        self.assertEquals(con1["one"], "Alabaster")
-
-        self.assertTrue(validator.is_valid(input_2))
-        con2 = obj.parse(input_2)
-        self.assertEquals(con2["two"], "alpha omega")
-
-        self.assertRaises(Exception, lambda x: con2["tomato"])
-
-        self.assertEquals(con2["tres"], "AMAZING")
-
-        message = "NO MESSAGE"
-        try:
-            obj.parse(input_3)
-        except Exception, e:
-            message = e.message
-
-        self.assertEqual("Exception while parsing : Erbjerct/[one]-Missing required parameter (description: Uno)", message)
-
-        try:
-            obj.parse(input_4)
-        except Exception, e:
-            message = e.message
-        self.assertEqual("Exception while parsing : Exception while parsing Erbjerct/[qqq]: Erbjerct/[qqq][bete]-Missing required parameter (description: Name your ferocious fish)", message)
-
-    def test_ResolverObjectParameterExtra(self):
-        obj = ResolverObjectParameter("Erbjerct", "Erbjerct description", properties={
-            "one": StringParameter("Uno"),
-            "two": StringParameter("Dos", required=False),
-            "tres": StringParameter("Tres", default="AMAZING")
-        }, extra_type=StringParameter("Extra thing"))
-
-        obj_schema = obj.to_schema()
-        validator = Draft4Validator(obj_schema)
-
-        m = obj.parse({"flower": "<( 'apple'", "one": "fine"})
-        self.assertEquals(m.flower, "apple")
 
 
 if __name__ == '__main__':
