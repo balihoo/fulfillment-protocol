@@ -112,7 +112,8 @@ class TestFulfillmentWorker(unittest.TestCase):
                 'reason': ERROR_MESSAGE,
                 'result': ERROR_MESSAGE,
                 'trace': error.trace()
-            }
+            },
+            'reason': ERROR_MESSAGE
         }
 
         self.assertEqual(task_token, TASK_TOKEN)
@@ -191,7 +192,8 @@ class TestFulfillmentWorker(unittest.TestCase):
                         "validator_value": "string"
                     }
                 ]
-            })
+            }),
+            'reason': '1 validation error(s)'
         }
 
         self.assertEqual(task_token, TASK_TOKEN)
