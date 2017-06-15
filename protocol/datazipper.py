@@ -51,8 +51,9 @@ class DataZipper(object):
     @classmethod
     def _store_in_s3(cls, data):
         md5 = hashlib.md5()
-        result_bytes = to_unicode(data)
-        md5.update(result_bytes.encode('utf-8'))
+        result_unicode = to_unicode(data)
+        result_bytes = result_unicode.encode('utf-8')
+        md5.update(result_bytes)
         md5_hash = md5.hexdigest()
 
         s3_key = cls._make_key(md5_hash + ".ff")
@@ -63,7 +64,7 @@ class DataZipper(object):
         return cls.separator.join((cls.magick_url, md5_hash, "s3://{}/{}".format(cls.bucket, s3_key)))
 
     @classmethod
-    def receive(cls, data):
+    def receive(cls, data: str):
         if data.startswith(cls.magick_zip):
             return cls._receive_zipped(data)
         elif data.startswith(cls.magick_url):
@@ -84,7 +85,7 @@ class DataZipper(object):
         s3_obj = cls.s3.Object(bucket, key)
         response = s3_obj.get()
 
-        return cls.receive(response['Body'].read())
+        return cls.receive(response['Body'].read().decode('utf8'))
 
     @classmethod
     def _receive_zipped(cls, zipped):

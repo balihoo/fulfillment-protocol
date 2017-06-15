@@ -15,11 +15,11 @@ class MockS3Object(object):
 
     def put(self, Body = None) -> None:
         self._reset()
-        with open(self.filename, "w") as f:
+        with open(self.filename, "wb") as f:
             f.write(Body)
 
     def get(self):
-        return {"Body" : open(self.filename, "r")}
+        return {"Body": open(self.filename, "rb")}
 
     def _reset(self):
         if os.path.exists(self.filename):
