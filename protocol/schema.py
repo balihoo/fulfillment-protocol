@@ -1,4 +1,3 @@
-from .resolver import Resolver, ResolverContainer
 from jsonschema import Draft4Validator
 import pprint
 
@@ -53,6 +52,9 @@ class SchemaParameter(object):
                     problems.append(err.message)
                 raise Exception("Schema example does not match! {}\n\n----- SCHEMA -----\n{}".format("\n".join(problems), pprint.pformat(schema)))
         return schema
+
+    def to_validator(self, include_version=False):
+        return Draft4Validator(self.to_schema(include_version=include_version))
 
     def parse(self, value, context=""):
         if value is not None:
@@ -142,34 +144,6 @@ class ObjectParameter(SchemaParameter):
             if v is not None:
                 out[name] = v
         return out
-
-class ResolverObjectParameter(ObjectParameter):
-    def __init__(self, context, description, properties, resolver_class=Resolver, extra_type=None, **kwargs):
-        self.extra_type = extra_type
-        self.resolver_class = resolver_class
-        self._context = context
-        ObjectParameter.__init__(self, description, properties, **kwargs)
-
-    def _parse(self, value, context=""):
-
-        def wrap_parser(prop, name):
-            scontext = "{}/{}[{}]".format(self._context, context, name)
-
-            def f(v):
-                return prop.parse(v, scontext)
-            return f
-
-        out = ResolverContainer(self._context)
-        for name, prop in self.properties.items():
-            out.add(name, value.get(name, None), self.resolver_class, wrap_parser(prop, name),
-                    skip_resolver=type(prop) == ResolverObjectParameter)
-        if self.extra_type:
-            for name, val in value.items():
-                if name not in out:
-                    out.add(name, val, self.resolver_class, wrap_parser(self.extra_type, name),
-                            skip_resolver=type(self.extra_type) == ResolverObjectParameter)
-        return out
-
 
 class LooseObjectParameter(SchemaParameter):
     def __init__(self, description, value_type, key_regex='.+', **kwargs):
