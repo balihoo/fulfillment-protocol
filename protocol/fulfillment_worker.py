@@ -99,7 +99,7 @@ class FulfillmentWorker(object):
         else:
             self._swf.respond_activity_task_failed(
                 taskToken=token,
-                reason=error_message,
+                reason=error_message[:256],  # boto has a length constraint
                 details=response_string
             )
 
