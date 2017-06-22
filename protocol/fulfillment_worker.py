@@ -93,7 +93,6 @@ class FulfillmentWorker(object):
         if e.retry():
             self._swf.respond_activity_task_canceled(
                 taskToken=token,
-                reason=error_message,
                 details=response_string
             )
         else:
