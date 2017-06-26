@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+pyenv install -s 3.6.1
+pyenv uninstall -f protocol
+pyenv virtualenv 3.6.1 protocol
+pyenv local protocol
+pip install -r requirements.txt
