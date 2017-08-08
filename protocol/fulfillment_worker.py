@@ -36,17 +36,18 @@ class FulfillmentWorker(object):
         self._params = parameters
         self._handler = handler
         self._result = result
-        self._schema = {
-            'description': description,
-            'params': ObjectParameter('', properties=parameters).to_schema(),
-            'result': result.to_schema()
-        }
-        self._validator = ParamValidator(parameters)
-        self._default_exception = default_exception
         self._activity = {
             'name': activity_name,
             'version': activity_version
         }
+        self._schema = {
+            'description': description,
+            'params': ObjectParameter('', properties=parameters).to_schema(),
+            'result': result.to_schema(),
+            'activity': self._activity
+        }
+        self._validator = ParamValidator(parameters)
+        self._default_exception = default_exception
         self._task_list = {'name': '{}{}'.format(activity_name, activity_version)}
         self._swf_domain = swf_domain
         self._activity_registered = False
@@ -110,12 +111,15 @@ class FulfillmentWorker(object):
             details=json.dumps(response.pack())
         )
 
-    def _handle(self, token, event):
+    def handle(self, token, event):
         if isinstance(event, str):
             event = json.loads(DataZipper.receive(event))
 
         if 'LOG_INPUT' in event:
             print(json.dumps(event, indent=4))
+
+        if 'RETURN_SCHEMA' in event:
+            return self._schema
 
         validation_error = self._validator.validate(event)
         if validation_error:
@@ -137,5 +141,5 @@ class FulfillmentWorker(object):
         event, token = self._poll()
 
         if token:
-            self._handle(token, event)
+            self.handle(token, event)
             return token

@@ -84,6 +84,17 @@ class TestFulfillmentWorker(unittest.TestCase):
         call_args['result'] = json.loads(call_args['result'])
         self.assertEqual(call_args, expected)
 
+        expected = {'activity': {'name': 'test', 'version': '1'},
+                    'description': 'This is a test worker',
+                    'params': {'description': '',
+                               'properties': {'stuff': {'description': 'some stuff',
+                                                        'type': 'string'}},
+                               'required': ['stuff'],
+                               'type': 'object'},
+                    'result': {'description': 'the result', 'type': 'string'}}
+
+        self.assertEqual(worker.handle(None, {'RETURN_SCHEMA': True}), expected)
+
     def test_fatal_error(self):
         error = FulfillmentFatalException(message=ERROR_MESSAGE)
 
