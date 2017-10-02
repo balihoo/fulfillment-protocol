@@ -25,7 +25,8 @@ class FulfillmentFunction(object):
         handler,
         debug_handler=None,
         default_exception=FulfillmentFailedException,
-        disable_protocol=False
+        disable_protocol=False,
+        rate_limit_url=None
     ):
         self._description = description
         self._params = parameters
@@ -37,6 +38,8 @@ class FulfillmentFunction(object):
             'params': ObjectParameter("", properties=parameters).to_schema(),
             'result': result.to_schema()
         }
+        if rate_limit_url:
+            self._schema['rate_limit_url'] = rate_limit_url
         self._validator = Draft4Validator(ObjectParameter("", properties=parameters).to_schema(True))
         self._exception = default_exception
         self._disable_protocol = disable_protocol # Allow the function author to disable the protocol (like Node)
