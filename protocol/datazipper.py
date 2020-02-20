@@ -17,12 +17,18 @@ def to_unicode(data):
 
 class DataZipper(object):
 
-    s3 = boto3.resource('s3')
+    _s3 = None
     bucket = Config.zipper_bucket
     path = '/'.join(Config.zipper_path.split('/')[1:])
     magick_zip = "FF-ZIP"
     magick_url = "FF-URL"
     separator = ":"
+
+    @classmethod
+    def _get_s3(cls):
+        if not cls._s3:
+            cls._s3 = boto3.resource('s3')
+        return cls._s3
 
     @classmethod
     def _make_key(cls, filename):
@@ -58,7 +64,7 @@ class DataZipper(object):
 
         s3_key = cls._make_key(md5_hash + ".ff")
 
-        s3_obj = cls.s3.Object(cls.bucket, s3_key)
+        s3_obj = cls._get_s3().Object(cls.bucket, s3_key)
         s3_obj.put(Body=result_bytes)
 
         return cls.separator.join((cls.magick_url, md5_hash, "s3://{}/{}".format(cls.bucket, s3_key)))
@@ -82,7 +88,7 @@ class DataZipper(object):
         key = '/'.join(path_parts[1:])
         assert proto == "s3", "DataZipper only supports s3 protocol for fulfillment documents"
 
-        s3_obj = cls.s3.Object(bucket, key)
+        s3_obj = cls._get_s3().Object(bucket, key)
         response = s3_obj.get()
 
         return cls.receive(response['Body'].read().decode('utf8'))
